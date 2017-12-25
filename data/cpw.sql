@@ -1,4 +1,4 @@
-/*==============================================================*/
+ï»¿/*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
 /* Created on:     2017/12/24 17:02:42                          */
 /*==============================================================*/
@@ -18,17 +18,17 @@ drop table if exists user_info;
 create table cable_customer
 (
    id                   int not null auto_increment,
-   customer_name        varchar(50) comment '¿Í»§¹«Ë¾Ãû',
-   customer_contact     varchar(50) comment '¿Í»§ÁªÏµÈË',
-   customer_tele        varchar(50) comment '¿Í»§ÁªÏµµç»°',
-   customer_address     varchar(50) comment '¿Í»§¹«Ë¾µØÖ·',
-   customer_warehouse   varchar(50) comment '¿Í»§²Ö¿âµØÖ·',
-   customer_desc        varchar(255) comment 'ÃèÊö',
+   customer_name        varchar(50) comment 'å®¢æˆ·å…¬å¸å',
+   customer_contact     varchar(50) comment 'å®¢æˆ·è”ç³»äºº',
+   customer_tele        varchar(50) comment 'å®¢æˆ·è”ç³»ç”µè¯',
+   customer_address     varchar(50) comment 'å®¢æˆ·å…¬å¸åœ°å€',
+   customer_warehouse   varchar(50) comment 'å®¢æˆ·ä»“åº“åœ°å€',
+   customer_desc        varchar(255) comment 'æè¿°',
    primary key (id)
 )
 ENGINE = InnoDB;
 
-alter table cable_customer comment '¿Í»§ĞÅÏ¢±í';
+alter table cable_customer comment 'å®¢æˆ·ä¿¡æ¯è¡¨';
 
 /*==============================================================*/
 /* Table: cable_info                                            */
@@ -36,14 +36,14 @@ alter table cable_customer comment '¿Í»§ĞÅÏ¢±í';
 create table cable_info
 (
    id                   int not null auto_increment,
-   cable_model          varchar(20) comment 'ÏßÀÂ¹æ¸ñ',
-   cable_spec           varchar(20) comment 'ÏßÀÂĞÍºÅ',
-   cable_desc           varchar(255) comment 'ÃèÊö',
+   cable_model          varchar(20) comment 'çº¿ç¼†è§„æ ¼',
+   cable_spec           varchar(20) comment 'çº¿ç¼†å‹å·',
+   cable_desc           varchar(255) comment 'æè¿°',
    primary key (id)
 )
 ENGINE = InnoDB;
 
-alter table cable_info comment 'ÏßÀÂĞÍºÅ';
+alter table cable_info comment 'çº¿ç¼†å‹å·';
 
 /*==============================================================*/
 /* Table: cable_provider                                        */
@@ -51,29 +51,29 @@ alter table cable_info comment 'ÏßÀÂĞÍºÅ';
 create table cable_provider
 (
    id                   int not null auto_increment,
-   provider_name        varchar(50) comment '¹©Ó¦ÉÌ¹«Ë¾Ãû',
-   provider_contact     varchar(50) comment 'ÁªÏµÈË',
-   provider_tele        varchar(50) comment 'ÁªÏµµç»°',
-   provider_address     varchar(50) comment '¹«Ë¾µØÖ·',
-   provider_warehouse   varchar(50) comment '²Ö¿âµØÖ·',
-   provider_desc        varchar(255) comment 'ÃèÊö',
+   provider_name        varchar(50) comment 'ä¾›åº”å•†å…¬å¸å',
+   provider_contact     varchar(50) comment 'è”ç³»äºº',
+   provider_tele        varchar(50) comment 'è”ç³»ç”µè¯',
+   provider_address     varchar(50) comment 'å…¬å¸åœ°å€',
+   provider_warehouse   varchar(50) comment 'ä»“åº“åœ°å€',
+   provider_desc        varchar(255) comment 'æè¿°',
    primary key (id)
 )
 ENGINE = InnoDB;
 
-alter table cable_provider comment '¹©Ó¦ÉÌĞÅÏ¢±í';
+alter table cable_provider comment 'ä¾›åº”å•†ä¿¡æ¯è¡¨';
 
 /*==============================================================*/
 /* Table: user_info                                             */
 /*==============================================================*/
 create table user_info
 (
-   id                   int(11) not null auto_increment comment 'ÓÃ»§id',
-   user_name            varchar(20) comment 'ÓÃ»§Ãû',
-   user_pass            varchar(20) comment 'ÃÜÂë',
+   id                   int(11) not null auto_increment comment 'ç”¨æˆ·id',
+   user_name            varchar(20) comment 'ç”¨æˆ·å',
+   user_pass            varchar(20) comment 'å¯†ç ',
    primary key (id)
 )
 ENGINE = InnoDB;
 
-alter table user_info comment 'ÓÃ»§±í';
+alter table user_info comment 'ç”¨æˆ·è¡¨';
 
