@@ -16,11 +16,19 @@
 </head>
 <body>
 <div id="main">
-	<div id="toolbar">
-		<a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增角色</a>
-		<a class="waves-effect waves-button" href="javascript:;" onclick="updateAction()"><i class="zmdi zmdi-edit"></i> 编辑角色</a>
-		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除角色</a>
-		<a class="waves-effect waves-button" href="javascript:;" onclick="permissionAction()"><i class="zmdi zmdi-key"></i> 角色权限</a>
+	<div id="toolbar" class="form-inline">
+		<a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增线缆</a>
+		<a class="waves-effect waves-button" href="javascript:;" onclick="updateAction()"><i class="zmdi zmdi-edit"></i> 编辑信息</a>
+		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除信息</a>
+        <div class="form-group">
+            <label class="sr-only" for="exampleInputEmail3">线缆型号</label>
+            <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="exampleInputPassword3">线缆规格</label>
+            <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-default">查找</button>
 	</div>
 	<table id="table"></table>
 </div>
@@ -33,8 +41,8 @@ $(function() {
 		//url: '${basePath}/manage/role/list',
 		height: getHeight(),
 		striped: true,
-		search: true,
-		showRefresh: true,
+		//search: true,
+		//showRefresh: true,
 		showColumns: true,
 		minimumCountColumns: 2,
 		clickToSelect: true,
@@ -43,7 +51,7 @@ $(function() {
 		pagination: true,
 		paginationLoop: false,
 		sidePagination: 'server',
-		silentSort: false,
+		//silentSort: false,
 		smartDisplay: false,
 		escape: true,
 		searchOnEnterKey: true,
@@ -57,6 +65,11 @@ $(function() {
 			{field: 'title', title: '角色标题'},
             {field: 'description', title: '角色描述'},
 			{field: 'action', title: '操作', align: 'center', formatter: 'actionFormatter', events: 'actionEvents', clickToSelect: false}
+		],
+		data:[
+			{roleId:"1",name:"2",title:"3",description:"4"},
+            {roleId:"2",name:"2",title:"5",description:"4"},
+            {roleId:"3",name:"2",title:"6",description:"4"}
 		]
 	});
 });
@@ -73,7 +86,7 @@ function createAction() {
 	createDialog = $.dialog({
 		animationSpeed: 300,
 		title: '新增角色',
-		content: 'url:${basePath}/manage/role/create',
+		content: 'url:${basePath}/mate/cable/create',
 		onContentReady: function () {
 			initMaterialInput();
 		}
@@ -202,37 +215,6 @@ function deleteAction() {
 					text: '取消',
 					btnClass: 'waves-effect waves-button'
 				}
-			}
-		});
-	}
-}
-// 角色权限
-var permissionDialog;
-var roleId;
-function permissionAction() {
-	var rows = $table.bootstrapTable('getSelections');
-	if (rows.length != 1) {
-		$.confirm({
-			title: false,
-			content: '请选择一条记录！',
-			autoClose: 'cancel|3000',
-			backgroundDismiss: true,
-			buttons: {
-				cancel: {
-					text: '取消',
-					btnClass: 'waves-effect waves-button'
-				}
-			}
-		});
-	} else {
-		roleId = rows[0].roleId;
-		permissionDialog = $.dialog({
-			animationSpeed: 300,
-			title: '角色权限',
-			content: 'url:${basePath}/manage/role/permission/' + roleId,
-			onContentReady: function () {
-				initMaterialInput();
-				initTree();
 			}
 		});
 	}

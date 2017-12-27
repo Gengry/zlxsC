@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhonglianxs.erp.cpw.mapper.CableInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zhonglianxs.erp.cpw.bean.CableInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cable_model" property="cableModel" jdbcType="VARCHAR" />
+    <result column="cable_spec" property="cableSpec" jdbcType="VARCHAR" />
+    <result column="cable_desc" property="cableDesc" jdbcType="VARCHAR" />
+    <result column="cable_delete" property="cableDelete" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, cable_model, cable_spec, cable_desc, cable_delete
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhonglianxs.erp.cpw.bean.CableInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from cable_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cable_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cable_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhonglianxs.erp.cpw.bean.CableInfoExample" >
+    delete from cable_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhonglianxs.erp.cpw.bean.CableInfo" >
+    insert into cable_info (id, cable_model, cable_spec, 
+      cable_desc, cable_delete)
+    values (#{id,jdbcType=INTEGER}, #{cableModel,jdbcType=VARCHAR}, #{cableSpec,jdbcType=VARCHAR}, 
+      #{cableDesc,jdbcType=VARCHAR}, #{cableDelete,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableInfo" >
+    insert into cable_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cableModel != null" >
+        cable_model,
+      </if>
+      <if test="cableSpec != null" >
+        cable_spec,
+      </if>
+      <if test="cableDesc != null" >
+        cable_desc,
+      </if>
+      <if test="cableDelete != null" >
+        cable_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cableModel != null" >
+        #{cableModel,jdbcType=VARCHAR},
+      </if>
+      <if test="cableSpec != null" >
+        #{cableSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="cableDesc != null" >
+        #{cableDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="cableDelete != null" >
+        #{cableDelete,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhonglianxs.erp.cpw.bean.CableInfoExample" resultType="java.lang.Integer" >
+    select count(*) from cable_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cable_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.cableModel != null" >
+        cable_model = #{record.cableModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cableSpec != null" >
+        cable_spec = #{record.cableSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cableDesc != null" >
+        cable_desc = #{record.cableDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cableDelete != null" >
+        cable_delete = #{record.cableDelete,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cable_info
+    set id = #{record.id,jdbcType=INTEGER},
+      cable_model = #{record.cableModel,jdbcType=VARCHAR},
+      cable_spec = #{record.cableSpec,jdbcType=VARCHAR},
+      cable_desc = #{record.cableDesc,jdbcType=VARCHAR},
+      cable_delete = #{record.cableDelete,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableInfo" >
+    update cable_info
+    <set >
+      <if test="cableModel != null" >
+        cable_model = #{cableModel,jdbcType=VARCHAR},
+      </if>
+      <if test="cableSpec != null" >
+        cable_spec = #{cableSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="cableDesc != null" >
+        cable_desc = #{cableDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="cableDelete != null" >
+        cable_delete = #{cableDelete,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhonglianxs.erp.cpw.bean.CableInfo" >
+    update cable_info
+    set cable_model = #{cableModel,jdbcType=VARCHAR},
+      cable_spec = #{cableSpec,jdbcType=VARCHAR},
+      cable_desc = #{cableDesc,jdbcType=VARCHAR},
+      cable_delete = #{cableDelete,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
+

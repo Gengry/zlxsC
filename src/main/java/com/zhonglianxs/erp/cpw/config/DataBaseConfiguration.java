@@ -74,7 +74,7 @@ public class DataBaseConfiguration implements EnvironmentAware{
         pageInterceptor.setProperties(props);
         sqlSessionFactoryBean.setPlugins(new Interceptor[]{pageInterceptor});
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:com/zhonglianxs/erp/cpw/mapping/*Mapper.xml"));
+        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:com/zhonglianxs/erp/cpw/mapping/*.xml"));
         return sqlSessionFactoryBean.getObject();
     }
     @Bean public PlatformTransactionManager transactionManager() throws SQLException {

@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -14,6 +15,7 @@ import java.util.Map;
  * spring容器初始化完成事件
  * Created by shuzheng on 2017/1/7.
  */
+@Component
 public class ApplicationContextListener implements ApplicationListener<ContextRefreshedEvent> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationContextListener.class);
