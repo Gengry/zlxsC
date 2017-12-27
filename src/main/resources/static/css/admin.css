@@ -74,7 +74,8 @@ a, a:hover, a:active, a:focus {text-decoration: none; -webkit-user-drag: none;}
 .sub-menu ul>li:first-child>a{padding-top:14px}
 .sub-menu ul>li:last-child>a{padding-bottom:16px}
 .sub-menu ul>li>a{padding:8px 20px 8px 65px;font-weight:500;display:block;color:#989898}
-.sub-menu.toggled>ul{display:block}
+/*.sub-menu.toggled>ul{display:block}*/
+.sub-menu.toggled>ul{display:none}
 .sub-menu>a:after,.sub-menu>a:before{position:absolute;top:50%;margin-top:-11px;font-family:Material-Design-Iconic-Font;font-size:17px;right:15px;-webkit-transition:all;-o-transition:all;transition:all;-webkit-transition-duration:250ms;transition-duration:250ms}
 .sub-menu>a:before{content:"\f278";-webkit-transform:scale(1);-ms-transform:scale(1);-o-transform:scale(1);transform:scale(1)}
 .sub-menu.toggled>a:before{content:"\f278";-webkit-transform:scale(0);-ms-transform:scale(0);-o-transform:scale(0);transform:scale(0)}

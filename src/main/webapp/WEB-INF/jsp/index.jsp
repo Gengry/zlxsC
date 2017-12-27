@@ -79,11 +79,33 @@
 			</li>
 			<li class="sub-menu system_menus system_1 0" style="display: list-item;">
 				<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts-list"></i> 元数据管理</a>
-				<ul style="display: none;">
-					<li><a class="waves-effect" href="javascript:Tab.addTab('线缆信息', 'crud1.html');">线缆信息</a></li>
+				<ul>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('线缆信息', '/mate/cableIndex');">线缆信息</a></li>
 					<li><a class="waves-effect" href="javascript:Tab.addTab('颜色信息', 'crud2.html');">颜色信息</a></li>
                     <li><a class="waves-effect" href="javascript:Tab.addTab('计量单位', 'crud3.html');">计量单位</a></li>
                     <li><a class="waves-effect" href="javascript:Tab.addTab('质量标准', 'crud4.html');">质量标准</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('仓库管理', 'crud5.html');">仓库管理</a></li>
+				</ul>
+			</li>
+			<li class="sub-menu system_menus system_1 0" style="display: list-item;">
+				<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts-list"></i> 客户管理</a>
+				<ul>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('线缆信息', 'crud6.html');">供应商管理</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('颜色信息', 'crud7.html');">客户管理</a></li>
+				</ul>
+			</li>
+			<li class="sub-menu system_menus system_1 0" style="display: list-item;">
+				<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts-list"></i> 订单管理</a>
+				<ul>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('线缆信息', 'crud8.html');">订购</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('颜色信息', 'crud9.html');">销售</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('计量单位', 'crud10.html');">订单列表</a></li>
+				</ul>
+			</li>
+			<li class="sub-menu system_menus system_1 0" style="display: list-item;">
+				<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts-list"></i> 库存管理</a>
+				<ul>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('线缆信息', 'crud11.html');">库存盘点</a></li>
 				</ul>
 			</li>
 			<li>
