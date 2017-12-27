@@ -15,16 +15,11 @@ public class MateInfoController {
 
     @Autowired
     private CableInfoService cableInfoService;
-    @Autowired
-    private CableInfoMapper cableInfoMapper;
-    @Autowired
-    private SqlSessionFactory sqlSessionFactory;
 
     @RequestMapping("/cableIndex")
     public String cableInfoIndex(){
-        //CableInfo cableInfo = cableInfoService.selectByPrimaryKey(1);
-        cableInfoMapper.selectByPrimaryKey(1);
-       // sqlSessionFactory.openSession().
+        CableInfo cableInfo = cableInfoService.selectByPrimaryKey(1);
+
         return "mate/cable/index";
     }
 
