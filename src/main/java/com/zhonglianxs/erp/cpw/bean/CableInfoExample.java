@@ -1,5 +1,6 @@
 package com.zhonglianxs.erp.cpw.bean;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -161,6 +162,66 @@ public class CableInfoExample {
 
         public Criteria andIdNotBetween(Integer value1, Integer value2) {
             addCriterion("id not between", value1, value2, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableUserIdIsNull() {
+            addCriterion("cable_user_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableUserIdIsNotNull() {
+            addCriterion("cable_user_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableUserIdEqualTo(Integer value) {
+            addCriterion("cable_user_id =", value, "cableUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableUserIdNotEqualTo(Integer value) {
+            addCriterion("cable_user_id <>", value, "cableUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableUserIdGreaterThan(Integer value) {
+            addCriterion("cable_user_id >", value, "cableUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableUserIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("cable_user_id >=", value, "cableUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableUserIdLessThan(Integer value) {
+            addCriterion("cable_user_id <", value, "cableUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableUserIdLessThanOrEqualTo(Integer value) {
+            addCriterion("cable_user_id <=", value, "cableUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableUserIdIn(List<Integer> values) {
+            addCriterion("cable_user_id in", values, "cableUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableUserIdNotIn(List<Integer> values) {
+            addCriterion("cable_user_id not in", values, "cableUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableUserIdBetween(Integer value1, Integer value2) {
+            addCriterion("cable_user_id between", value1, value2, "cableUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableUserIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("cable_user_id not between", value1, value2, "cableUserId");
             return (Criteria) this;
         }
 
@@ -371,6 +432,66 @@ public class CableInfoExample {
 
         public Criteria andCableDescNotBetween(String value1, String value2) {
             addCriterion("cable_desc not between", value1, value2, "cableDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCablePriceIsNull() {
+            addCriterion("cable_price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCablePriceIsNotNull() {
+            addCriterion("cable_price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCablePriceEqualTo(BigDecimal value) {
+            addCriterion("cable_price =", value, "cablePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCablePriceNotEqualTo(BigDecimal value) {
+            addCriterion("cable_price <>", value, "cablePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCablePriceGreaterThan(BigDecimal value) {
+            addCriterion("cable_price >", value, "cablePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCablePriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("cable_price >=", value, "cablePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCablePriceLessThan(BigDecimal value) {
+            addCriterion("cable_price <", value, "cablePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCablePriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("cable_price <=", value, "cablePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCablePriceIn(List<BigDecimal> values) {
+            addCriterion("cable_price in", values, "cablePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCablePriceNotIn(List<BigDecimal> values) {
+            addCriterion("cable_price not in", values, "cablePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCablePriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("cable_price between", value1, value2, "cablePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCablePriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("cable_price not between", value1, value2, "cablePrice");
             return (Criteria) this;
         }
 

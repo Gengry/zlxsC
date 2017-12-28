@@ -85,12 +85,6 @@
 			<artifactId>commons-lang</artifactId>
 			<version>2.6</version>
 		</dependency>
-		<!-- fluent-validator -->
-		<dependency>
-			<groupId>com.baidu.unbiz</groupId>
-			<artifactId>fluent-validator</artifactId>
-			<version>1.0.6</version>
-		</dependency>
 	</dependencies>
 
 	<build>

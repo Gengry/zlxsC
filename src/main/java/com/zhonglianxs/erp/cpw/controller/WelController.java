@@ -8,6 +8,6 @@ public class WelController {
 
     @RequestMapping("/")
     public String welcome(){
-        return "login";
+        return "login.jsp";
     }
 }

@@ -8,12 +8,16 @@
 <div id="createDialog" class="crudDialog">
     <form id="createForm" method="post">
         <div class="form-group">
-            <label for="cableModel">线缆型号</label>
-            <input id="cableModel" type="text" class="form-control" name="cableModel" maxlength="20" value="${cableModel}">
+            <label for="cableModelCreate">线缆型号</label>
+            <input id="cableModelCreate" type="text" class="form-control" name="cableModel" maxlength="20" value="${cableModel}">
         </div>
         <div class="form-group">
-            <label for="cableSpec">线缆规格</label>
-            <input id="cableSpec" type="text" class="form-control" name="cableSpec" maxlength="20">
+            <label for="cableSpecCreate">线缆规格</label>
+            <input id="cableSpecCreate" type="text" class="form-control" name="cableSpec" maxlength="20">
+        </div>
+        <div class="form-group">
+            <label for="cablePriceCreate">推荐价格</label>
+            <input id="cablePriceCreate" type="text" class="form-control" name="cablePrice" maxlength="300">
         </div>
         <div class="form-group">
             <label for="cableDesc">描述</label>
@@ -27,7 +31,38 @@
 </div>
 <script>
     function createSubmit() {
-        $table.bootstrapTable('remove', {field: 'id', values: [1]});
+        if(isEmpty($("#cableModelCreate").val())){
+            $.confirm({
+                theme: 'dark',
+                animation: 'rotateX',
+                closeAnimation: 'rotateX',
+                title: false,
+                content: '线缆型号不能为空',
+                buttons: {
+                    confirm: {
+                        text: '确认',
+                        btnClass: 'waves-effect waves-button waves-light'
+                    }
+                }
+            });
+            return false;
+        }
+        if(isEmpty($("#cableSpecCreate").val())){
+            $.confirm({
+                theme: 'dark',
+                animation: 'rotateX',
+                closeAnimation: 'rotateX',
+                title: false,
+                content: '线缆规格不能为空',
+                buttons: {
+                    confirm: {
+                        text: '确认',
+                        btnClass: 'waves-effect waves-button waves-light'
+                    }
+                }
+            });
+            return false;
+        }
         $.ajax({
             type: 'post',
             url: '${basePath}/mate/cable/create',

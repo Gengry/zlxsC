@@ -16,3 +16,4 @@
 <script src="${basePath}/plugins/zTree_v3/js/jquery.ztree.all.min.js"></script>
 <script src="${basePath}/plugins/webuploader-0.1.5/webuploader.min.js"></script>
 <script src="${basePath}/js/common.js"></script>
+<script src="${basePath}/js/check.js"></script>

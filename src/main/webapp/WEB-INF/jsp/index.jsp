@@ -97,15 +97,15 @@
 			<li class="sub-menu system_menus system_1 0" style="display: list-item;">
 				<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts-list"></i> 订单管理</a>
 				<ul>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('线缆信息', 'crud8.html');">订购</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('颜色信息', 'crud9.html');">销售</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('计量单位', 'crud10.html');">订单列表</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('订购', 'crud8.html');">订购</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('销售', 'crud9.html');">销售</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('订单列表', 'crud10.html');">订单列表</a></li>
 				</ul>
 			</li>
 			<li class="sub-menu system_menus system_1 0" style="display: list-item;">
 				<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts-list"></i> 库存管理</a>
 				<ul>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('线缆信息', 'crud11.html');">库存盘点</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('库存盘点', 'crud11.html');">库存盘点</a></li>
 				</ul>
 			</li>
 			<li>

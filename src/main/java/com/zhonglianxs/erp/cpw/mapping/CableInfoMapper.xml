@@ -3,9 +3,11 @@
 <mapper namespace="com.zhonglianxs.erp.cpw.mapper.CableInfoMapper" >
   <resultMap id="BaseResultMap" type="com.zhonglianxs.erp.cpw.bean.CableInfo" >
     <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cable_user_id" property="cableUserId" jdbcType="INTEGER" />
     <result column="cable_model" property="cableModel" jdbcType="VARCHAR" />
     <result column="cable_spec" property="cableSpec" jdbcType="VARCHAR" />
     <result column="cable_desc" property="cableDesc" jdbcType="VARCHAR" />
+    <result column="cable_price" property="cablePrice" jdbcType="INTEGER" />
     <result column="cable_delete" property="cableDelete" jdbcType="SMALLINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -67,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, cable_model, cable_spec, cable_desc, cable_delete
+    id, cable_user_id, cable_model, cable_spec, cable_desc, cable_price, cable_delete
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhonglianxs.erp.cpw.bean.CableInfoExample" >
     select
@@ -101,16 +103,21 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.zhonglianxs.erp.cpw.bean.CableInfo" >
-    insert into cable_info (id, cable_model, cable_spec, 
-      cable_desc, cable_delete)
-    values (#{id,jdbcType=INTEGER}, #{cableModel,jdbcType=VARCHAR}, #{cableSpec,jdbcType=VARCHAR}, 
-      #{cableDesc,jdbcType=VARCHAR}, #{cableDelete,jdbcType=SMALLINT})
+    insert into cable_info (id, cable_user_id, cable_model, 
+      cable_spec, cable_desc, cable_price, 
+      cable_delete)
+    values (#{id,jdbcType=INTEGER}, #{cableUserId,jdbcType=INTEGER}, #{cableModel,jdbcType=VARCHAR}, 
+      #{cableSpec,jdbcType=VARCHAR}, #{cableDesc,jdbcType=VARCHAR}, #{cablePrice,jdbcType=INTEGER}, 
+      #{cableDelete,jdbcType=SMALLINT})
   </insert>
   <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableInfo" >
     insert into cable_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
+      </if>
+      <if test="cableUserId != null" >
+        cable_user_id,
       </if>
       <if test="cableModel != null" >
         cable_model,
@@ -121,6 +128,9 @@
       <if test="cableDesc != null" >
         cable_desc,
       </if>
+      <if test="cablePrice != null" >
+        cable_price,
+      </if>
       <if test="cableDelete != null" >
         cable_delete,
       </if>
@@ -128,6 +138,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cableUserId != null" >
+        #{cableUserId,jdbcType=INTEGER},
       </if>
       <if test="cableModel != null" >
         #{cableModel,jdbcType=VARCHAR},
@@ -137,6 +150,9 @@
       </if>
       <if test="cableDesc != null" >
         #{cableDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="cablePrice != null" >
+        #{cablePrice,jdbcType=INTEGER},
       </if>
       <if test="cableDelete != null" >
         #{cableDelete,jdbcType=SMALLINT},
@@ -155,6 +171,9 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
+      <if test="record.cableUserId != null" >
+        cable_user_id = #{record.cableUserId,jdbcType=INTEGER},
+      </if>
       <if test="record.cableModel != null" >
         cable_model = #{record.cableModel,jdbcType=VARCHAR},
       </if>
@@ -163,6 +182,9 @@
       </if>
       <if test="record.cableDesc != null" >
         cable_desc = #{record.cableDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cablePrice != null" >
+        cable_price = #{record.cablePrice,jdbcType=INTEGER},
       </if>
       <if test="record.cableDelete != null" >
         cable_delete = #{record.cableDelete,jdbcType=SMALLINT},
@@ -175,9 +197,11 @@
   <update id="updateByExample" parameterType="map" >
     update cable_info
     set id = #{record.id,jdbcType=INTEGER},
+      cable_user_id = #{record.cableUserId,jdbcType=INTEGER},
       cable_model = #{record.cableModel,jdbcType=VARCHAR},
       cable_spec = #{record.cableSpec,jdbcType=VARCHAR},
       cable_desc = #{record.cableDesc,jdbcType=VARCHAR},
+      cable_price = #{record.cablePrice,jdbcType=INTEGER},
       cable_delete = #{record.cableDelete,jdbcType=SMALLINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -186,6 +210,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableInfo" >
     update cable_info
     <set >
+      <if test="cableUserId != null" >
+        cable_user_id = #{cableUserId,jdbcType=INTEGER},
+      </if>
       <if test="cableModel != null" >
         cable_model = #{cableModel,jdbcType=VARCHAR},
       </if>
@@ -195,6 +222,9 @@
       <if test="cableDesc != null" >
         cable_desc = #{cableDesc,jdbcType=VARCHAR},
       </if>
+      <if test="cablePrice != null" >
+        cable_price = #{cablePrice,jdbcType=INTEGER},
+      </if>
       <if test="cableDelete != null" >
         cable_delete = #{cableDelete,jdbcType=SMALLINT},
       </if>
@@ -203,11 +233,12 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zhonglianxs.erp.cpw.bean.CableInfo" >
     update cable_info
-    set cable_model = #{cableModel,jdbcType=VARCHAR},
+    set cable_user_id = #{cableUserId,jdbcType=INTEGER},
+      cable_model = #{cableModel,jdbcType=VARCHAR},
       cable_spec = #{cableSpec,jdbcType=VARCHAR},
       cable_desc = #{cableDesc,jdbcType=VARCHAR},
+      cable_price = #{cablePrice,jdbcType=INTEGER},
       cable_delete = #{cableDelete,jdbcType=SMALLINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
-

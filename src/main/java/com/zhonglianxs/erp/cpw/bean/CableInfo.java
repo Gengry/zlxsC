@@ -1,13 +1,19 @@
 package com.zhonglianxs.erp.cpw.bean;
 
+import java.math.BigDecimal;
+
 public class CableInfo {
     private Integer id;
+
+    private Integer cableUserId;
 
     private String cableModel;
 
     private String cableSpec;
 
     private String cableDesc;
+
+    private BigDecimal cablePrice;
 
     private Short cableDelete;
 
@@ -17,6 +23,14 @@ public class CableInfo {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getCableUserId() {
+        return cableUserId;
+    }
+
+    public void setCableUserId(Integer cableUserId) {
+        this.cableUserId = cableUserId;
     }
 
     public String getCableModel() {
@@ -41,6 +55,14 @@ public class CableInfo {
 
     public void setCableDesc(String cableDesc) {
         this.cableDesc = cableDesc == null ? null : cableDesc.trim();
+    }
+
+    public BigDecimal getCablePrice() {
+        return cablePrice;
+    }
+
+    public void setCablePrice(BigDecimal cablePrice) {
+        this.cablePrice = cablePrice;
     }
 
     public Short getCableDelete() {

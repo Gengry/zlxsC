@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhonglianxs.erp.cpw.mapper.CableHouseMapper" >
+  <resultMap id="BaseResultMap" type="com.zhonglianxs.erp.cpw.bean.CableHouse" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cable_house_user_id" property="cableHouseUserId" jdbcType="INTEGER" />
+    <result column="cable_house_name" property="cableHouseName" jdbcType="VARCHAR" />
+    <result column="cable_house_address" property="cableHouseAddress" jdbcType="VARCHAR" />
+    <result column="cable_house_contact" property="cableHouseContact" jdbcType="VARCHAR" />
+    <result column="cable_house_tele" property="cableHouseTele" jdbcType="VARCHAR" />
+    <result column="cable_house_delete" property="cableHouseDelete" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, cable_house_user_id, cable_house_name, cable_house_address, cable_house_contact, 
+    cable_house_tele, cable_house_delete
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhonglianxs.erp.cpw.bean.CableHouseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from cable_house
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cable_house
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cable_house
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhonglianxs.erp.cpw.bean.CableHouseExample" >
+    delete from cable_house
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhonglianxs.erp.cpw.bean.CableHouse" >
+    insert into cable_house (id, cable_house_user_id, cable_house_name, 
+      cable_house_address, cable_house_contact, cable_house_tele, 
+      cable_house_delete)
+    values (#{id,jdbcType=INTEGER}, #{cableHouseUserId,jdbcType=INTEGER}, #{cableHouseName,jdbcType=VARCHAR}, 
+      #{cableHouseAddress,jdbcType=VARCHAR}, #{cableHouseContact,jdbcType=VARCHAR}, #{cableHouseTele,jdbcType=VARCHAR}, 
+      #{cableHouseDelete,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableHouse" >
+    insert into cable_house
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cableHouseUserId != null" >
+        cable_house_user_id,
+      </if>
+      <if test="cableHouseName != null" >
+        cable_house_name,
+      </if>
+      <if test="cableHouseAddress != null" >
+        cable_house_address,
+      </if>
+      <if test="cableHouseContact != null" >
+        cable_house_contact,
+      </if>
+      <if test="cableHouseTele != null" >
+        cable_house_tele,
+      </if>
+      <if test="cableHouseDelete != null" >
+        cable_house_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cableHouseUserId != null" >
+        #{cableHouseUserId,jdbcType=INTEGER},
+      </if>
+      <if test="cableHouseName != null" >
+        #{cableHouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="cableHouseAddress != null" >
+        #{cableHouseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="cableHouseContact != null" >
+        #{cableHouseContact,jdbcType=VARCHAR},
+      </if>
+      <if test="cableHouseTele != null" >
+        #{cableHouseTele,jdbcType=VARCHAR},
+      </if>
+      <if test="cableHouseDelete != null" >
+        #{cableHouseDelete,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhonglianxs.erp.cpw.bean.CableHouseExample" resultType="java.lang.Integer" >
+    select count(*) from cable_house
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cable_house
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.cableHouseUserId != null" >
+        cable_house_user_id = #{record.cableHouseUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cableHouseName != null" >
+        cable_house_name = #{record.cableHouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cableHouseAddress != null" >
+        cable_house_address = #{record.cableHouseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cableHouseContact != null" >
+        cable_house_contact = #{record.cableHouseContact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cableHouseTele != null" >
+        cable_house_tele = #{record.cableHouseTele,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cableHouseDelete != null" >
+        cable_house_delete = #{record.cableHouseDelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cable_house
+    set id = #{record.id,jdbcType=INTEGER},
+      cable_house_user_id = #{record.cableHouseUserId,jdbcType=INTEGER},
+      cable_house_name = #{record.cableHouseName,jdbcType=VARCHAR},
+      cable_house_address = #{record.cableHouseAddress,jdbcType=VARCHAR},
+      cable_house_contact = #{record.cableHouseContact,jdbcType=VARCHAR},
+      cable_house_tele = #{record.cableHouseTele,jdbcType=VARCHAR},
+      cable_house_delete = #{record.cableHouseDelete,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableHouse" >
+    update cable_house
+    <set >
+      <if test="cableHouseUserId != null" >
+        cable_house_user_id = #{cableHouseUserId,jdbcType=INTEGER},
+      </if>
+      <if test="cableHouseName != null" >
+        cable_house_name = #{cableHouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="cableHouseAddress != null" >
+        cable_house_address = #{cableHouseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="cableHouseContact != null" >
+        cable_house_contact = #{cableHouseContact,jdbcType=VARCHAR},
+      </if>
+      <if test="cableHouseTele != null" >
+        cable_house_tele = #{cableHouseTele,jdbcType=VARCHAR},
+      </if>
+      <if test="cableHouseDelete != null" >
+        cable_house_delete = #{cableHouseDelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhonglianxs.erp.cpw.bean.CableHouse" >
+    update cable_house
+    set cable_house_user_id = #{cableHouseUserId,jdbcType=INTEGER},
+      cable_house_name = #{cableHouseName,jdbcType=VARCHAR},
+      cable_house_address = #{cableHouseAddress,jdbcType=VARCHAR},
+      cable_house_contact = #{cableHouseContact,jdbcType=VARCHAR},
+      cable_house_tele = #{cableHouseTele,jdbcType=VARCHAR},
+      cable_house_delete = #{cableHouseDelete,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,6 +1,6 @@
 package com.zhonglianxs.erp.cpw.interceptor;
 
-import org.springframework.util.StringUtils;
+import com.zhonglianxs.erp.cpw.bean.UserInfo;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,9 +12,8 @@ public class AuthInterceptor implements HandlerInterceptor{
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         HttpSession session = httpServletRequest.getSession();
-        Object username = session.getAttribute("username");
-        Object password = session.getAttribute("password");
-        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
+        UserInfo UserInfo = (UserInfo) session.getAttribute("userInfo");
+        if (UserInfo==null) {
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/");
             return false;
         }

@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhonglianxs.erp.cpw.mapper.CableStorageMapper" >
+  <resultMap id="BaseResultMap" type="com.zhonglianxs.erp.cpw.bean.CableStorage" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="storage_user_id" property="storageUserId" jdbcType="INTEGER" />
+    <result column="storage_model" property="storageModel" jdbcType="INTEGER" />
+    <result column="storage_spec" property="storageSpec" jdbcType="VARCHAR" />
+    <result column="storage_unit" property="storageUnit" jdbcType="VARCHAR" />
+    <result column="storage_number" property="storageNumber" jdbcType="DECIMAL" />
+    <result column="storage_quality" property="storageQuality" jdbcType="VARCHAR" />
+    <result column="storage_color" property="storageColor" jdbcType="VARCHAR" />
+    <result column="storage_providerid" property="storageProviderid" jdbcType="INTEGER" />
+    <result column="storage_update_time" property="storageUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="storage_houseid" property="storageHouseid" jdbcType="INTEGER" />
+    <result column="storage_desc" property="storageDesc" jdbcType="VARCHAR" />
+    <result column="storage_delete" property="storageDelete" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, storage_user_id, storage_model, storage_spec, storage_unit, storage_number, storage_quality, 
+    storage_color, storage_providerid, storage_update_time, storage_houseid, storage_desc, 
+    storage_delete
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhonglianxs.erp.cpw.bean.CableStorageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from cable_storage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cable_storage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cable_storage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhonglianxs.erp.cpw.bean.CableStorageExample" >
+    delete from cable_storage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhonglianxs.erp.cpw.bean.CableStorage" >
+    insert into cable_storage (id, storage_user_id, storage_model, 
+      storage_spec, storage_unit, storage_number, 
+      storage_quality, storage_color, storage_providerid, 
+      storage_update_time, storage_houseid, storage_desc, 
+      storage_delete)
+    values (#{id,jdbcType=INTEGER}, #{storageUserId,jdbcType=INTEGER}, #{storageModel,jdbcType=INTEGER}, 
+      #{storageSpec,jdbcType=VARCHAR}, #{storageUnit,jdbcType=VARCHAR}, #{storageNumber,jdbcType=DECIMAL}, 
+      #{storageQuality,jdbcType=VARCHAR}, #{storageColor,jdbcType=VARCHAR}, #{storageProviderid,jdbcType=INTEGER}, 
+      #{storageUpdateTime,jdbcType=TIMESTAMP}, #{storageHouseid,jdbcType=INTEGER}, #{storageDesc,jdbcType=VARCHAR}, 
+      #{storageDelete,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableStorage" >
+    insert into cable_storage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="storageUserId != null" >
+        storage_user_id,
+      </if>
+      <if test="storageModel != null" >
+        storage_model,
+      </if>
+      <if test="storageSpec != null" >
+        storage_spec,
+      </if>
+      <if test="storageUnit != null" >
+        storage_unit,
+      </if>
+      <if test="storageNumber != null" >
+        storage_number,
+      </if>
+      <if test="storageQuality != null" >
+        storage_quality,
+      </if>
+      <if test="storageColor != null" >
+        storage_color,
+      </if>
+      <if test="storageProviderid != null" >
+        storage_providerid,
+      </if>
+      <if test="storageUpdateTime != null" >
+        storage_update_time,
+      </if>
+      <if test="storageHouseid != null" >
+        storage_houseid,
+      </if>
+      <if test="storageDesc != null" >
+        storage_desc,
+      </if>
+      <if test="storageDelete != null" >
+        storage_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="storageUserId != null" >
+        #{storageUserId,jdbcType=INTEGER},
+      </if>
+      <if test="storageModel != null" >
+        #{storageModel,jdbcType=INTEGER},
+      </if>
+      <if test="storageSpec != null" >
+        #{storageSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="storageUnit != null" >
+        #{storageUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="storageNumber != null" >
+        #{storageNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="storageQuality != null" >
+        #{storageQuality,jdbcType=VARCHAR},
+      </if>
+      <if test="storageColor != null" >
+        #{storageColor,jdbcType=VARCHAR},
+      </if>
+      <if test="storageProviderid != null" >
+        #{storageProviderid,jdbcType=INTEGER},
+      </if>
+      <if test="storageUpdateTime != null" >
+        #{storageUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storageHouseid != null" >
+        #{storageHouseid,jdbcType=INTEGER},
+      </if>
+      <if test="storageDesc != null" >
+        #{storageDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="storageDelete != null" >
+        #{storageDelete,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhonglianxs.erp.cpw.bean.CableStorageExample" resultType="java.lang.Integer" >
+    select count(*) from cable_storage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cable_storage
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.storageUserId != null" >
+        storage_user_id = #{record.storageUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.storageModel != null" >
+        storage_model = #{record.storageModel,jdbcType=INTEGER},
+      </if>
+      <if test="record.storageSpec != null" >
+        storage_spec = #{record.storageSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storageUnit != null" >
+        storage_unit = #{record.storageUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storageNumber != null" >
+        storage_number = #{record.storageNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="record.storageQuality != null" >
+        storage_quality = #{record.storageQuality,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storageColor != null" >
+        storage_color = #{record.storageColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storageProviderid != null" >
+        storage_providerid = #{record.storageProviderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.storageUpdateTime != null" >
+        storage_update_time = #{record.storageUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.storageHouseid != null" >
+        storage_houseid = #{record.storageHouseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.storageDesc != null" >
+        storage_desc = #{record.storageDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storageDelete != null" >
+        storage_delete = #{record.storageDelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cable_storage
+    set id = #{record.id,jdbcType=INTEGER},
+      storage_user_id = #{record.storageUserId,jdbcType=INTEGER},
+      storage_model = #{record.storageModel,jdbcType=INTEGER},
+      storage_spec = #{record.storageSpec,jdbcType=VARCHAR},
+      storage_unit = #{record.storageUnit,jdbcType=VARCHAR},
+      storage_number = #{record.storageNumber,jdbcType=DECIMAL},
+      storage_quality = #{record.storageQuality,jdbcType=VARCHAR},
+      storage_color = #{record.storageColor,jdbcType=VARCHAR},
+      storage_providerid = #{record.storageProviderid,jdbcType=INTEGER},
+      storage_update_time = #{record.storageUpdateTime,jdbcType=TIMESTAMP},
+      storage_houseid = #{record.storageHouseid,jdbcType=INTEGER},
+      storage_desc = #{record.storageDesc,jdbcType=VARCHAR},
+      storage_delete = #{record.storageDelete,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableStorage" >
+    update cable_storage
+    <set >
+      <if test="storageUserId != null" >
+        storage_user_id = #{storageUserId,jdbcType=INTEGER},
+      </if>
+      <if test="storageModel != null" >
+        storage_model = #{storageModel,jdbcType=INTEGER},
+      </if>
+      <if test="storageSpec != null" >
+        storage_spec = #{storageSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="storageUnit != null" >
+        storage_unit = #{storageUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="storageNumber != null" >
+        storage_number = #{storageNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="storageQuality != null" >
+        storage_quality = #{storageQuality,jdbcType=VARCHAR},
+      </if>
+      <if test="storageColor != null" >
+        storage_color = #{storageColor,jdbcType=VARCHAR},
+      </if>
+      <if test="storageProviderid != null" >
+        storage_providerid = #{storageProviderid,jdbcType=INTEGER},
+      </if>
+      <if test="storageUpdateTime != null" >
+        storage_update_time = #{storageUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storageHouseid != null" >
+        storage_houseid = #{storageHouseid,jdbcType=INTEGER},
+      </if>
+      <if test="storageDesc != null" >
+        storage_desc = #{storageDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="storageDelete != null" >
+        storage_delete = #{storageDelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhonglianxs.erp.cpw.bean.CableStorage" >
+    update cable_storage
+    set storage_user_id = #{storageUserId,jdbcType=INTEGER},
+      storage_model = #{storageModel,jdbcType=INTEGER},
+      storage_spec = #{storageSpec,jdbcType=VARCHAR},
+      storage_unit = #{storageUnit,jdbcType=VARCHAR},
+      storage_number = #{storageNumber,jdbcType=DECIMAL},
+      storage_quality = #{storageQuality,jdbcType=VARCHAR},
+      storage_color = #{storageColor,jdbcType=VARCHAR},
+      storage_providerid = #{storageProviderid,jdbcType=INTEGER},
+      storage_update_time = #{storageUpdateTime,jdbcType=TIMESTAMP},
+      storage_houseid = #{storageHouseid,jdbcType=INTEGER},
+      storage_desc = #{storageDesc,jdbcType=VARCHAR},
+      storage_delete = #{storageDelete,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

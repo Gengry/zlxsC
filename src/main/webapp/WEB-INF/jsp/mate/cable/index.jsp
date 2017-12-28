@@ -61,6 +61,7 @@ $(function() {
 			{field: 'id', title: '编号', align: 'center', visible:false},
 			{field: 'cableModel', title: '线缆型号', align: 'center'},
 			{field: 'cableSpec', title: '线缆规格', align: 'center'},
+            {field: 'cablePrice', title: '建议单价', align: 'center'},
             {field: 'cableDesc', title: '描述', align: 'center'},
 			{field: 'action', title: '操作', align: 'center', formatter: 'actionFormatter', events: 'actionEvents', clickToSelect: false,width:'150px' }
 		],
@@ -118,7 +119,7 @@ function updateAction(cableInfoId) {
     updateDialog = $.dialog({
         animationSpeed: 300,
         title: '编辑角色',
-        content: 'url:${basePath}/manage/role/update/' + cableInfoId,
+        content: 'url:${basePath}/mate/cable/update/' + cableInfoId,
         onContentReady: function () {
             initMaterialInput();
         }
@@ -170,7 +171,7 @@ function deleteAction() {
 			type: 'red',
 			animationSpeed: 300,
 			title: false,
-			content: '确认删除该角色吗？',
+			content: '确认删除该记录吗？',
 			buttons: {
 				confirm: {
 					text: '确认',
@@ -178,11 +179,11 @@ function deleteAction() {
 					action: function () {
 						var ids = new Array();
 						for (var i in rows) {
-							ids.push(rows[i].roleId);
+							ids.push(rows[i].id);
 						}
 						$.ajax({
 							type: 'get',
-							url: '${basePath}/manage/role/delete/' + ids.join("-"),
+							url: '${basePath}/mate/cable/delete/' + ids.join("-"),
 							success: function(result) {
 								if (result.code != 1) {
 									if (result.data instanceof Array) {

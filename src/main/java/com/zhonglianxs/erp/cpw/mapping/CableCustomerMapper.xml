@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhonglianxs.erp.cpw.mapper.CableCustomerMapper" >
+  <resultMap id="BaseResultMap" type="com.zhonglianxs.erp.cpw.bean.CableCustomer" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="customer_user_id" property="customerUserId" jdbcType="INTEGER" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="customer_contact" property="customerContact" jdbcType="VARCHAR" />
+    <result column="customer_tele" property="customerTele" jdbcType="VARCHAR" />
+    <result column="customer_address" property="customerAddress" jdbcType="VARCHAR" />
+    <result column="customer_warehouse" property="customerWarehouse" jdbcType="VARCHAR" />
+    <result column="customer_desc" property="customerDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, customer_user_id, customer_name, customer_contact, customer_tele, customer_address, 
+    customer_warehouse, customer_desc
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhonglianxs.erp.cpw.bean.CableCustomerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from cable_customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cable_customer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cable_customer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhonglianxs.erp.cpw.bean.CableCustomerExample" >
+    delete from cable_customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhonglianxs.erp.cpw.bean.CableCustomer" >
+    insert into cable_customer (id, customer_user_id, customer_name, 
+      customer_contact, customer_tele, customer_address, 
+      customer_warehouse, customer_desc)
+    values (#{id,jdbcType=INTEGER}, #{customerUserId,jdbcType=INTEGER}, #{customerName,jdbcType=VARCHAR}, 
+      #{customerContact,jdbcType=VARCHAR}, #{customerTele,jdbcType=VARCHAR}, #{customerAddress,jdbcType=VARCHAR}, 
+      #{customerWarehouse,jdbcType=VARCHAR}, #{customerDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableCustomer" >
+    insert into cable_customer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="customerUserId != null" >
+        customer_user_id,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
+      </if>
+      <if test="customerContact != null" >
+        customer_contact,
+      </if>
+      <if test="customerTele != null" >
+        customer_tele,
+      </if>
+      <if test="customerAddress != null" >
+        customer_address,
+      </if>
+      <if test="customerWarehouse != null" >
+        customer_warehouse,
+      </if>
+      <if test="customerDesc != null" >
+        customer_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="customerUserId != null" >
+        #{customerUserId,jdbcType=INTEGER},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerContact != null" >
+        #{customerContact,jdbcType=VARCHAR},
+      </if>
+      <if test="customerTele != null" >
+        #{customerTele,jdbcType=VARCHAR},
+      </if>
+      <if test="customerAddress != null" >
+        #{customerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="customerWarehouse != null" >
+        #{customerWarehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="customerDesc != null" >
+        #{customerDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhonglianxs.erp.cpw.bean.CableCustomerExample" resultType="java.lang.Integer" >
+    select count(*) from cable_customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cable_customer
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.customerUserId != null" >
+        customer_user_id = #{record.customerUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.customerName != null" >
+        customer_name = #{record.customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerContact != null" >
+        customer_contact = #{record.customerContact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerTele != null" >
+        customer_tele = #{record.customerTele,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerAddress != null" >
+        customer_address = #{record.customerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerWarehouse != null" >
+        customer_warehouse = #{record.customerWarehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerDesc != null" >
+        customer_desc = #{record.customerDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cable_customer
+    set id = #{record.id,jdbcType=INTEGER},
+      customer_user_id = #{record.customerUserId,jdbcType=INTEGER},
+      customer_name = #{record.customerName,jdbcType=VARCHAR},
+      customer_contact = #{record.customerContact,jdbcType=VARCHAR},
+      customer_tele = #{record.customerTele,jdbcType=VARCHAR},
+      customer_address = #{record.customerAddress,jdbcType=VARCHAR},
+      customer_warehouse = #{record.customerWarehouse,jdbcType=VARCHAR},
+      customer_desc = #{record.customerDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableCustomer" >
+    update cable_customer
+    <set >
+      <if test="customerUserId != null" >
+        customer_user_id = #{customerUserId,jdbcType=INTEGER},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerContact != null" >
+        customer_contact = #{customerContact,jdbcType=VARCHAR},
+      </if>
+      <if test="customerTele != null" >
+        customer_tele = #{customerTele,jdbcType=VARCHAR},
+      </if>
+      <if test="customerAddress != null" >
+        customer_address = #{customerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="customerWarehouse != null" >
+        customer_warehouse = #{customerWarehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="customerDesc != null" >
+        customer_desc = #{customerDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhonglianxs.erp.cpw.bean.CableCustomer" >
+    update cable_customer
+    set customer_user_id = #{customerUserId,jdbcType=INTEGER},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      customer_contact = #{customerContact,jdbcType=VARCHAR},
+      customer_tele = #{customerTele,jdbcType=VARCHAR},
+      customer_address = #{customerAddress,jdbcType=VARCHAR},
+      customer_warehouse = #{customerWarehouse,jdbcType=VARCHAR},
+      customer_desc = #{customerDesc,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

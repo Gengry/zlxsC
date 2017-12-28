@@ -1,7 +1,10 @@
 package com.zhonglianxs.erp.cpw.controller;
 
 import com.github.pagehelper.PageHelper;
+import com.zhonglianxs.erp.cpw.bean.UserInfo;
+import com.zhonglianxs.erp.cpw.bean.UserInfoExample;
 import com.zhonglianxs.erp.cpw.mapper.UserMapper;
+import com.zhonglianxs.erp.cpw.service.UserInfoService;
 import com.zhonglianxs.erp.cpw.util.BaseResult;
 import com.zhonglianxs.erp.cpw.util.ResultConstant;
 import org.apache.ibatis.session.SqlSession;
@@ -22,18 +25,19 @@ import java.util.Map;
 @Controller
 public class LoginController {
 
-    @Value("${login.username}")
-    private String usernameSys;
-
-    @Value("${login.password}")
-    private String passwordSys;
+    @Autowired
+    private UserInfoService userInfoService;
 
     @RequestMapping("/login")
     @ResponseBody
     public Object login(String username, String password, HttpSession session){
-        if(this.usernameSys.equals(username)&&this.passwordSys.equals(password)){
-            session.setAttribute("username",username);
-            session.setAttribute("password",password);
+        UserInfoExample userInfoExample = new UserInfoExample();
+        UserInfoExample.Criteria criteria = userInfoExample.createCriteria();
+        criteria.andUserNameEqualTo(username).andUserPassEqualTo(password).andUserDeleteEqualTo(0);
+        UserInfo userInfo = userInfoService.selectFirstByExample(userInfoExample);
+        if(userInfo!=null){
+            session.setAttribute("userInfo",userInfo);
+            session.setAttribute("userId",userInfo.getId());
             return new BaseResult(ResultConstant.SUCCESS,"/index");
         }else{
             return new BaseResult(ResultConstant.EMPTY_PASSWORD,"/index");
@@ -51,6 +55,6 @@ public class LoginController {
 
     @RequestMapping("/index")
     public String index(){
-        return "index";
+        return "index.jsp";
     }
 }
