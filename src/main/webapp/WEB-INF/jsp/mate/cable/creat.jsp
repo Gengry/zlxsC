@@ -8,16 +8,16 @@
 <div id="createDialog" class="crudDialog">
     <form id="createForm" method="post">
         <div class="form-group">
-            <label for="name">名称</label>
-            <input id="name" type="text" class="form-control" name="name" maxlength="20">
+            <label for="cableModel">线缆型号</label>
+            <input id="cableModel" type="text" class="form-control" name="cableModel" maxlength="20" value="${cableModel}">
         </div>
         <div class="form-group">
-            <label for="title">标题</label>
-            <input id="title" type="text" class="form-control" name="title" maxlength="20">
+            <label for="cableSpec">线缆规格</label>
+            <input id="cableSpec" type="text" class="form-control" name="cableSpec" maxlength="20">
         </div>
         <div class="form-group">
-            <label for="description">描述</label>
-            <input id="description" type="text" class="form-control" name="description" maxlength="300">
+            <label for="cableDesc">描述</label>
+            <input id="cableDesc" type="text" class="form-control" name="cableDesc" maxlength="300">
         </div>
         <div class="form-group text-right dialog-buttons">
             <a class="waves-effect waves-button" href="javascript:;" onclick="createSubmit();">保存</a>
@@ -27,9 +27,10 @@
 </div>
 <script>
     function createSubmit() {
+        $table.bootstrapTable('remove', {field: 'id', values: [1]});
         $.ajax({
             type: 'post',
-            url: '${basePath}/manage/role/create',
+            url: '${basePath}/mate/cable/create',
             data: $('#createForm').serialize(),
             beforeSend: function() {
                 if ($('#name').val() == '') {
@@ -65,7 +66,7 @@
                             animation: 'rotateX',
                             closeAnimation: 'rotateX',
                             title: false,
-                            content: result.data.errorMsg,
+                            content: result.message,
                             buttons: {
                                 confirm: {
                                     text: '确认',

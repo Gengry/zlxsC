@@ -18,17 +18,16 @@
 <div id="main">
 	<div id="toolbar" class="form-inline">
 		<a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增线缆</a>
-		<a class="waves-effect waves-button" href="javascript:;" onclick="updateAction()"><i class="zmdi zmdi-edit"></i> 编辑信息</a>
 		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除信息</a>
         <div class="form-group">
-            <label class="sr-only" for="exampleInputEmail3">线缆型号</label>
-            <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+            <label class="sr-only" for="cableModel">线缆型号</label>
+            <input type="text" class="form-control" id="cableModel" placeholder="线缆型号">
         </div>
         <div class="form-group">
-            <label class="sr-only" for="exampleInputPassword3">线缆规格</label>
-            <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
+            <label class="sr-only" for="cableSpec">线缆规格</label>
+            <input type="text" class="form-control" id="cableSpec" placeholder="线缆规格">
         </div>
-        <button type="submit" class="btn btn-default">查找</button>
+        <button type="button" class="btn btn-default" onclick="javascript:$table.bootstrapTable('refresh');">查找</button>
 	</div>
 	<table id="table"></table>
 </div>
@@ -38,12 +37,10 @@ var $table = $('#table');
 $(function() {
 	// bootstrap table初始化
 	$table.bootstrapTable({
-		//url: '${basePath}/manage/role/list',
+		url: '${basePath}/mate/cable/list',
 		height: getHeight(),
 		striped: true,
-		//search: true,
-		//showRefresh: true,
-		showColumns: true,
+		//showColumns: true,
 		minimumCountColumns: 2,
 		clickToSelect: true,
 		detailView: true,
@@ -51,33 +48,44 @@ $(function() {
 		pagination: true,
 		paginationLoop: false,
 		sidePagination: 'server',
-		//silentSort: false,
 		smartDisplay: false,
 		escape: true,
 		searchOnEnterKey: true,
 		idField: 'roleId',
 		maintainSelected: true,
 		toolbar: '#toolbar',
+        onRefresh:refreshInit,
+        queryParams:queryParams,
 		columns: [
 			{field: 'ck', checkbox: true},
-			{field: 'roleId', title: '编号', sortable: true, align: 'center'},
-			{field: 'name', title: '角色名称'},
-			{field: 'title', title: '角色标题'},
-            {field: 'description', title: '角色描述'},
-			{field: 'action', title: '操作', align: 'center', formatter: 'actionFormatter', events: 'actionEvents', clickToSelect: false}
+			{field: 'id', title: '编号', align: 'center', visible:false},
+			{field: 'cableModel', title: '线缆型号', align: 'center'},
+			{field: 'cableSpec', title: '线缆规格', align: 'center'},
+            {field: 'cableDesc', title: '描述', align: 'center'},
+			{field: 'action', title: '操作', align: 'center', formatter: 'actionFormatter', events: 'actionEvents', clickToSelect: false,width:'150px' }
 		],
-		data:[
-			{roleId:"1",name:"2",title:"3",description:"4"},
-            {roleId:"2",name:"2",title:"5",description:"4"},
-            {roleId:"3",name:"2",title:"6",description:"4"}
-		]
+
 	});
 });
+
+function refreshInit(){
+    $table.bootstrapTable("selectPage",1);
+}
+
+function queryParams(params) {
+    params["cableModel"]=$("#cableModel").val();
+    params["cableSpec"]=$("#cableSpec").val();
+    return params;
+}
+
 // 格式化操作按钮
 function actionFormatter(value, row, index) {
+    var cableInfoId = row.id;
+    var cableModel = row.cableModel;
     return [
-		'<a class="update" href="javascript:;" onclick="updateAction()" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>　',
-		'<a class="delete" href="javascript:;" onclick="deleteAction()" data-toggle="tooltip" title="Remove"><i class="glyphicon glyphicon-remove"></i></a>'
+        '<a class="update" href="javascript:;" onclick="createSpecAction('+cableModel+')" data-toggle="tooltip" title="add"><i class="glyphicon glyphicon-plus-sign"></i></a>　',
+		'<a class="update" href="javascript:;" onclick="updateAction('+cableInfoId+')" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>　',
+		'<a class="delete" href="javascript:;" onclick="deleteAction('+cableInfoId+')" data-toggle="tooltip" title="Remove"><i class="glyphicon glyphicon-remove"></i></a>'
     ].join('');
 }
 // 新增
@@ -85,17 +93,37 @@ var createDialog;
 function createAction() {
 	createDialog = $.dialog({
 		animationSpeed: 300,
-		title: '新增角色',
+		title: '新增线缆信息',
 		content: 'url:${basePath}/mate/cable/create',
 		onContentReady: function () {
 			initMaterialInput();
 		}
 	});
 }
+
+function createSpecAction(cableModel) {
+    createDialog = $.dialog({
+        animationSpeed: 300,
+        title: '新增线缆规格',
+        content: 'url:${basePath}/mate/cable/create?cableModel='+cableModel,
+        onContentReady: function () {
+            initMaterialInput();
+        }
+    });
+}
+
 // 编辑
 var updateDialog;
-function updateAction() {
-	var rows = $table.bootstrapTable('getSelections');
+function updateAction(cableInfoId) {
+    updateDialog = $.dialog({
+        animationSpeed: 300,
+        title: '编辑角色',
+        content: 'url:${basePath}/manage/role/update/' + cableInfoId,
+        onContentReady: function () {
+            initMaterialInput();
+        }
+    });
+	/*var rows = $table.bootstrapTable('getSelections');
 	if (rows.length != 1) {
 		$.confirm({
 			title: false,
@@ -113,12 +141,12 @@ function updateAction() {
 		updateDialog = $.dialog({
 			animationSpeed: 300,
 			title: '编辑角色',
-			content: 'url:${basePath}/manage/role/update/' + rows[0].roleId,
+			content: 'url:\${basePath}/manage/role/update/' + rows[0].roleId,
 			onContentReady: function () {
 				initMaterialInput();
 			}
 		});
-	}
+	}*/
 }
 // 删除
 var deleteDialog;
@@ -219,7 +247,6 @@ function deleteAction() {
 		});
 	}
 }
-
 </script>
 </body>
 </html>

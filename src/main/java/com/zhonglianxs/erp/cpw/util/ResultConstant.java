@@ -19,7 +19,7 @@ public enum ResultConstant {
     /**
      * 无效长度
      */
-    INVALID_LENGTH(10001, "Invalid length"),
+    INVALID_LENGTH(10001, "新增信息已存在"),
 
     /**
      * 用户名不能为空
