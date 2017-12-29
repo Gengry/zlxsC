@@ -643,6 +643,66 @@ public class CableProviderExample {
             addCriterion("provider_desc not between", value1, value2, "providerDesc");
             return (Criteria) this;
         }
+
+        public Criteria andProviderDeleteIsNull() {
+            addCriterion("provider_delete is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderDeleteIsNotNull() {
+            addCriterion("provider_delete is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderDeleteEqualTo(Integer value) {
+            addCriterion("provider_delete =", value, "providerDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderDeleteNotEqualTo(Integer value) {
+            addCriterion("provider_delete <>", value, "providerDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderDeleteGreaterThan(Integer value) {
+            addCriterion("provider_delete >", value, "providerDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderDeleteGreaterThanOrEqualTo(Integer value) {
+            addCriterion("provider_delete >=", value, "providerDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderDeleteLessThan(Integer value) {
+            addCriterion("provider_delete <", value, "providerDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderDeleteLessThanOrEqualTo(Integer value) {
+            addCriterion("provider_delete <=", value, "providerDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderDeleteIn(List<Integer> values) {
+            addCriterion("provider_delete in", values, "providerDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderDeleteNotIn(List<Integer> values) {
+            addCriterion("provider_delete not in", values, "providerDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderDeleteBetween(Integer value1, Integer value2) {
+            addCriterion("provider_delete between", value1, value2, "providerDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderDeleteNotBetween(Integer value1, Integer value2) {
+            addCriterion("provider_delete not between", value1, value2, "providerDelete");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

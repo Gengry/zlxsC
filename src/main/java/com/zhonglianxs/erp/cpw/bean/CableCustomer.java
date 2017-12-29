@@ -17,6 +17,8 @@ public class CableCustomer {
 
     private String customerDesc;
 
+    private Integer customerDelete;
+
     public Integer getId() {
         return id;
     }
@@ -79,5 +81,13 @@ public class CableCustomer {
 
     public void setCustomerDesc(String customerDesc) {
         this.customerDesc = customerDesc == null ? null : customerDesc.trim();
+    }
+
+    public Integer getCustomerDelete() {
+        return customerDelete;
+    }
+
+    public void setCustomerDelete(Integer customerDelete) {
+        this.customerDelete = customerDelete;
     }
 }

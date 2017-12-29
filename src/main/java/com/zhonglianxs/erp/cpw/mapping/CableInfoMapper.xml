@@ -7,7 +7,7 @@
     <result column="cable_model" property="cableModel" jdbcType="VARCHAR" />
     <result column="cable_spec" property="cableSpec" jdbcType="VARCHAR" />
     <result column="cable_desc" property="cableDesc" jdbcType="VARCHAR" />
-    <result column="cable_price" property="cablePrice" jdbcType="INTEGER" />
+    <result column="cable_price" property="cablePrice" jdbcType="DECIMAL" />
     <result column="cable_delete" property="cableDelete" jdbcType="SMALLINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -107,7 +107,7 @@
       cable_spec, cable_desc, cable_price, 
       cable_delete)
     values (#{id,jdbcType=INTEGER}, #{cableUserId,jdbcType=INTEGER}, #{cableModel,jdbcType=VARCHAR}, 
-      #{cableSpec,jdbcType=VARCHAR}, #{cableDesc,jdbcType=VARCHAR}, #{cablePrice,jdbcType=INTEGER}, 
+      #{cableSpec,jdbcType=VARCHAR}, #{cableDesc,jdbcType=VARCHAR}, #{cablePrice,jdbcType=DECIMAL}, 
       #{cableDelete,jdbcType=SMALLINT})
   </insert>
   <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableInfo" >
@@ -152,7 +152,7 @@
         #{cableDesc,jdbcType=VARCHAR},
       </if>
       <if test="cablePrice != null" >
-        #{cablePrice,jdbcType=INTEGER},
+        #{cablePrice,jdbcType=DECIMAL},
       </if>
       <if test="cableDelete != null" >
         #{cableDelete,jdbcType=SMALLINT},
@@ -184,7 +184,7 @@
         cable_desc = #{record.cableDesc,jdbcType=VARCHAR},
       </if>
       <if test="record.cablePrice != null" >
-        cable_price = #{record.cablePrice,jdbcType=INTEGER},
+        cable_price = #{record.cablePrice,jdbcType=DECIMAL},
       </if>
       <if test="record.cableDelete != null" >
         cable_delete = #{record.cableDelete,jdbcType=SMALLINT},
@@ -201,7 +201,7 @@
       cable_model = #{record.cableModel,jdbcType=VARCHAR},
       cable_spec = #{record.cableSpec,jdbcType=VARCHAR},
       cable_desc = #{record.cableDesc,jdbcType=VARCHAR},
-      cable_price = #{record.cablePrice,jdbcType=INTEGER},
+      cable_price = #{record.cablePrice,jdbcType=DECIMAL},
       cable_delete = #{record.cableDelete,jdbcType=SMALLINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -223,7 +223,7 @@
         cable_desc = #{cableDesc,jdbcType=VARCHAR},
       </if>
       <if test="cablePrice != null" >
-        cable_price = #{cablePrice,jdbcType=INTEGER},
+        cable_price = #{cablePrice,jdbcType=DECIMAL},
       </if>
       <if test="cableDelete != null" >
         cable_delete = #{cableDelete,jdbcType=SMALLINT},
@@ -237,7 +237,7 @@
       cable_model = #{cableModel,jdbcType=VARCHAR},
       cable_spec = #{cableSpec,jdbcType=VARCHAR},
       cable_desc = #{cableDesc,jdbcType=VARCHAR},
-      cable_price = #{cablePrice,jdbcType=INTEGER},
+      cable_price = #{cablePrice,jdbcType=DECIMAL},
       cable_delete = #{cableDelete,jdbcType=SMALLINT}
     where id = #{id,jdbcType=INTEGER}
   </update>

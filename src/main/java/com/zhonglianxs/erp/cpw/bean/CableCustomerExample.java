@@ -643,6 +643,66 @@ public class CableCustomerExample {
             addCriterion("customer_desc not between", value1, value2, "customerDesc");
             return (Criteria) this;
         }
+
+        public Criteria andCustomerDeleteIsNull() {
+            addCriterion("customer_delete is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerDeleteIsNotNull() {
+            addCriterion("customer_delete is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerDeleteEqualTo(Integer value) {
+            addCriterion("customer_delete =", value, "customerDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerDeleteNotEqualTo(Integer value) {
+            addCriterion("customer_delete <>", value, "customerDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerDeleteGreaterThan(Integer value) {
+            addCriterion("customer_delete >", value, "customerDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerDeleteGreaterThanOrEqualTo(Integer value) {
+            addCriterion("customer_delete >=", value, "customerDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerDeleteLessThan(Integer value) {
+            addCriterion("customer_delete <", value, "customerDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerDeleteLessThanOrEqualTo(Integer value) {
+            addCriterion("customer_delete <=", value, "customerDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerDeleteIn(List<Integer> values) {
+            addCriterion("customer_delete in", values, "customerDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerDeleteNotIn(List<Integer> values) {
+            addCriterion("customer_delete not in", values, "customerDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerDeleteBetween(Integer value1, Integer value2) {
+            addCriterion("customer_delete between", value1, value2, "customerDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerDeleteNotBetween(Integer value1, Integer value2) {
+            addCriterion("customer_delete not between", value1, value2, "customerDelete");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

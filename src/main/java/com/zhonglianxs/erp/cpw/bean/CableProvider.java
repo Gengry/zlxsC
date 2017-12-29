@@ -17,6 +17,8 @@ public class CableProvider {
 
     private String providerDesc;
 
+    private Integer providerDelete;
+
     public Integer getId() {
         return id;
     }
@@ -79,5 +81,13 @@ public class CableProvider {
 
     public void setProviderDesc(String providerDesc) {
         this.providerDesc = providerDesc == null ? null : providerDesc.trim();
+    }
+
+    public Integer getProviderDelete() {
+        return providerDelete;
+    }
+
+    public void setProviderDelete(Integer providerDelete) {
+        this.providerDelete = providerDelete;
     }
 }

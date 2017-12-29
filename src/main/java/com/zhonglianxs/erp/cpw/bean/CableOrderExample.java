@@ -825,6 +825,66 @@ public class CableOrderExample {
             addCriterion("order_desc not between", value1, value2, "orderDesc");
             return (Criteria) this;
         }
+
+        public Criteria andOrderDeleteIsNull() {
+            addCriterion("order_delete is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDeleteIsNotNull() {
+            addCriterion("order_delete is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDeleteEqualTo(Integer value) {
+            addCriterion("order_delete =", value, "orderDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDeleteNotEqualTo(Integer value) {
+            addCriterion("order_delete <>", value, "orderDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDeleteGreaterThan(Integer value) {
+            addCriterion("order_delete >", value, "orderDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDeleteGreaterThanOrEqualTo(Integer value) {
+            addCriterion("order_delete >=", value, "orderDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDeleteLessThan(Integer value) {
+            addCriterion("order_delete <", value, "orderDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDeleteLessThanOrEqualTo(Integer value) {
+            addCriterion("order_delete <=", value, "orderDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDeleteIn(List<Integer> values) {
+            addCriterion("order_delete in", values, "orderDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDeleteNotIn(List<Integer> values) {
+            addCriterion("order_delete not in", values, "orderDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDeleteBetween(Integer value1, Integer value2) {
+            addCriterion("order_delete between", value1, value2, "orderDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDeleteNotBetween(Integer value1, Integer value2) {
+            addCriterion("order_delete not between", value1, value2, "orderDelete");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

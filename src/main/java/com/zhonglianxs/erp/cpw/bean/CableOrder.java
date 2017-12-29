@@ -26,6 +26,8 @@ public class CableOrder {
 
     private String orderDesc;
 
+    private Integer orderDelete;
+
     public Integer getId() {
         return id;
     }
@@ -112,5 +114,13 @@ public class CableOrder {
 
     public void setOrderDesc(String orderDesc) {
         this.orderDesc = orderDesc == null ? null : orderDesc.trim();
+    }
+
+    public Integer getOrderDelete() {
+        return orderDelete;
+    }
+
+    public void setOrderDelete(Integer orderDelete) {
+        this.orderDelete = orderDelete;
     }
 }

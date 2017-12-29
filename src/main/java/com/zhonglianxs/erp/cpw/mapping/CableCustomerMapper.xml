@@ -10,6 +10,7 @@
     <result column="customer_address" property="customerAddress" jdbcType="VARCHAR" />
     <result column="customer_warehouse" property="customerWarehouse" jdbcType="VARCHAR" />
     <result column="customer_desc" property="customerDesc" jdbcType="VARCHAR" />
+    <result column="customer_delete" property="customerDelete" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -71,7 +72,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, customer_user_id, customer_name, customer_contact, customer_tele, customer_address, 
-    customer_warehouse, customer_desc
+    customer_warehouse, customer_desc, customer_delete
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhonglianxs.erp.cpw.bean.CableCustomerExample" >
     select
@@ -107,10 +108,12 @@
   <insert id="insert" parameterType="com.zhonglianxs.erp.cpw.bean.CableCustomer" >
     insert into cable_customer (id, customer_user_id, customer_name, 
       customer_contact, customer_tele, customer_address, 
-      customer_warehouse, customer_desc)
+      customer_warehouse, customer_desc, customer_delete
+      )
     values (#{id,jdbcType=INTEGER}, #{customerUserId,jdbcType=INTEGER}, #{customerName,jdbcType=VARCHAR}, 
       #{customerContact,jdbcType=VARCHAR}, #{customerTele,jdbcType=VARCHAR}, #{customerAddress,jdbcType=VARCHAR}, 
-      #{customerWarehouse,jdbcType=VARCHAR}, #{customerDesc,jdbcType=VARCHAR})
+      #{customerWarehouse,jdbcType=VARCHAR}, #{customerDesc,jdbcType=VARCHAR}, #{customerDelete,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableCustomer" >
     insert into cable_customer
@@ -139,6 +142,9 @@
       <if test="customerDesc != null" >
         customer_desc,
       </if>
+      <if test="customerDelete != null" >
+        customer_delete,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -164,6 +170,9 @@
       </if>
       <if test="customerDesc != null" >
         #{customerDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="customerDelete != null" >
+        #{customerDelete,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -200,6 +209,9 @@
       <if test="record.customerDesc != null" >
         customer_desc = #{record.customerDesc,jdbcType=VARCHAR},
       </if>
+      <if test="record.customerDelete != null" >
+        customer_delete = #{record.customerDelete,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -214,7 +226,8 @@
       customer_tele = #{record.customerTele,jdbcType=VARCHAR},
       customer_address = #{record.customerAddress,jdbcType=VARCHAR},
       customer_warehouse = #{record.customerWarehouse,jdbcType=VARCHAR},
-      customer_desc = #{record.customerDesc,jdbcType=VARCHAR}
+      customer_desc = #{record.customerDesc,jdbcType=VARCHAR},
+      customer_delete = #{record.customerDelete,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -243,6 +256,9 @@
       <if test="customerDesc != null" >
         customer_desc = #{customerDesc,jdbcType=VARCHAR},
       </if>
+      <if test="customerDelete != null" >
+        customer_delete = #{customerDelete,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -254,7 +270,8 @@
       customer_tele = #{customerTele,jdbcType=VARCHAR},
       customer_address = #{customerAddress,jdbcType=VARCHAR},
       customer_warehouse = #{customerWarehouse,jdbcType=VARCHAR},
-      customer_desc = #{customerDesc,jdbcType=VARCHAR}
+      customer_desc = #{customerDesc,jdbcType=VARCHAR},
+      customer_delete = #{customerDelete,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

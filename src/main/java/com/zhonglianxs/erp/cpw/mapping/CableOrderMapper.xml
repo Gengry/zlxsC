@@ -11,8 +11,9 @@
     <result column="order_other_address" property="orderOtherAddress" jdbcType="VARCHAR" />
     <result column="order_other_house" property="orderOtherHouse" jdbcType="VARCHAR" />
     <result column="order_time" property="orderTime" jdbcType="TIMESTAMP" />
-    <result column="order_totalprice" property="orderTotalprice" jdbcType="INTEGER" />
+    <result column="order_totalprice" property="orderTotalprice" jdbcType="DECIMAL" />
     <result column="order_desc" property="orderDesc" jdbcType="VARCHAR" />
+    <result column="order_delete" property="orderDelete" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -74,7 +75,8 @@
   </sql>
   <sql id="Base_Column_List" >
     id, order_user_id, order_other_id, order_other_name, order_other_contact, order_other_tele, 
-    order_other_address, order_other_house, order_time, order_totalprice, order_desc
+    order_other_address, order_other_house, order_time, order_totalprice, order_desc, 
+    order_delete
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhonglianxs.erp.cpw.bean.CableOrderExample" >
     select
@@ -111,11 +113,13 @@
     insert into cable_order (id, order_user_id, order_other_id, 
       order_other_name, order_other_contact, order_other_tele, 
       order_other_address, order_other_house, order_time, 
-      order_totalprice, order_desc)
+      order_totalprice, order_desc, order_delete
+      )
     values (#{id,jdbcType=INTEGER}, #{orderUserId,jdbcType=INTEGER}, #{orderOtherId,jdbcType=INTEGER}, 
       #{orderOtherName,jdbcType=VARCHAR}, #{orderOtherContact,jdbcType=VARCHAR}, #{orderOtherTele,jdbcType=VARCHAR}, 
       #{orderOtherAddress,jdbcType=VARCHAR}, #{orderOtherHouse,jdbcType=VARCHAR}, #{orderTime,jdbcType=TIMESTAMP}, 
-      #{orderTotalprice,jdbcType=INTEGER}, #{orderDesc,jdbcType=VARCHAR})
+      #{orderTotalprice,jdbcType=DECIMAL}, #{orderDesc,jdbcType=VARCHAR}, #{orderDelete,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableOrder" >
     insert into cable_order
@@ -153,6 +157,9 @@
       <if test="orderDesc != null" >
         order_desc,
       </if>
+      <if test="orderDelete != null" >
+        order_delete,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -183,10 +190,13 @@
         #{orderTime,jdbcType=TIMESTAMP},
       </if>
       <if test="orderTotalprice != null" >
-        #{orderTotalprice,jdbcType=INTEGER},
+        #{orderTotalprice,jdbcType=DECIMAL},
       </if>
       <if test="orderDesc != null" >
         #{orderDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDelete != null" >
+        #{orderDelete,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -227,10 +237,13 @@
         order_time = #{record.orderTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.orderTotalprice != null" >
-        order_totalprice = #{record.orderTotalprice,jdbcType=INTEGER},
+        order_totalprice = #{record.orderTotalprice,jdbcType=DECIMAL},
       </if>
       <if test="record.orderDesc != null" >
         order_desc = #{record.orderDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderDelete != null" >
+        order_delete = #{record.orderDelete,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -248,8 +261,9 @@
       order_other_address = #{record.orderOtherAddress,jdbcType=VARCHAR},
       order_other_house = #{record.orderOtherHouse,jdbcType=VARCHAR},
       order_time = #{record.orderTime,jdbcType=TIMESTAMP},
-      order_totalprice = #{record.orderTotalprice,jdbcType=INTEGER},
-      order_desc = #{record.orderDesc,jdbcType=VARCHAR}
+      order_totalprice = #{record.orderTotalprice,jdbcType=DECIMAL},
+      order_desc = #{record.orderDesc,jdbcType=VARCHAR},
+      order_delete = #{record.orderDelete,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -282,10 +296,13 @@
         order_time = #{orderTime,jdbcType=TIMESTAMP},
       </if>
       <if test="orderTotalprice != null" >
-        order_totalprice = #{orderTotalprice,jdbcType=INTEGER},
+        order_totalprice = #{orderTotalprice,jdbcType=DECIMAL},
       </if>
       <if test="orderDesc != null" >
         order_desc = #{orderDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDelete != null" >
+        order_delete = #{orderDelete,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -300,8 +317,9 @@
       order_other_address = #{orderOtherAddress,jdbcType=VARCHAR},
       order_other_house = #{orderOtherHouse,jdbcType=VARCHAR},
       order_time = #{orderTime,jdbcType=TIMESTAMP},
-      order_totalprice = #{orderTotalprice,jdbcType=INTEGER},
-      order_desc = #{orderDesc,jdbcType=VARCHAR}
+      order_totalprice = #{orderTotalprice,jdbcType=DECIMAL},
+      order_desc = #{orderDesc,jdbcType=VARCHAR},
+      order_delete = #{orderDelete,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

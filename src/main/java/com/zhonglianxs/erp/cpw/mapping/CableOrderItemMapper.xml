@@ -11,9 +11,9 @@
     <result column="item_unit" property="itemUnit" jdbcType="VARCHAR" />
     <result column="item_color" property="itemColor" jdbcType="VARCHAR" />
     <result column="item_number" property="itemNumber" jdbcType="DECIMAL" />
-    <result column="item_price" property="itemPrice" jdbcType="INTEGER" />
+    <result column="item_price" property="itemPrice" jdbcType="DECIMAL" />
     <result column="item_discount" property="itemDiscount" jdbcType="DECIMAL" />
-    <result column="item_totle_price" property="itemTotlePrice" jdbcType="INTEGER" />
+    <result column="item_totle_price" property="itemTotlePrice" jdbcType="DECIMAL" />
     <result column="item_house" property="itemHouse" jdbcType="VARCHAR" />
     <result column="item_delete" property="itemDelete" jdbcType="INTEGER" />
   </resultMap>
@@ -120,7 +120,7 @@
     values (#{id,jdbcType=INTEGER}, #{itemUserId,jdbcType=INTEGER}, #{itemOrderId,jdbcType=INTEGER}, 
       #{itemModel,jdbcType=VARCHAR}, #{itemSpec,jdbcType=VARCHAR}, #{itemQuality,jdbcType=VARCHAR}, 
       #{itemUnit,jdbcType=VARCHAR}, #{itemColor,jdbcType=VARCHAR}, #{itemNumber,jdbcType=DECIMAL}, 
-      #{itemPrice,jdbcType=INTEGER}, #{itemDiscount,jdbcType=DECIMAL}, #{itemTotlePrice,jdbcType=INTEGER}, 
+      #{itemPrice,jdbcType=DECIMAL}, #{itemDiscount,jdbcType=DECIMAL}, #{itemTotlePrice,jdbcType=DECIMAL}, 
       #{itemHouse,jdbcType=VARCHAR}, #{itemDelete,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableOrderItem" >
@@ -198,13 +198,13 @@
         #{itemNumber,jdbcType=DECIMAL},
       </if>
       <if test="itemPrice != null" >
-        #{itemPrice,jdbcType=INTEGER},
+        #{itemPrice,jdbcType=DECIMAL},
       </if>
       <if test="itemDiscount != null" >
         #{itemDiscount,jdbcType=DECIMAL},
       </if>
       <if test="itemTotlePrice != null" >
-        #{itemTotlePrice,jdbcType=INTEGER},
+        #{itemTotlePrice,jdbcType=DECIMAL},
       </if>
       <if test="itemHouse != null" >
         #{itemHouse,jdbcType=VARCHAR},
@@ -251,13 +251,13 @@
         item_number = #{record.itemNumber,jdbcType=DECIMAL},
       </if>
       <if test="record.itemPrice != null" >
-        item_price = #{record.itemPrice,jdbcType=INTEGER},
+        item_price = #{record.itemPrice,jdbcType=DECIMAL},
       </if>
       <if test="record.itemDiscount != null" >
         item_discount = #{record.itemDiscount,jdbcType=DECIMAL},
       </if>
       <if test="record.itemTotlePrice != null" >
-        item_totle_price = #{record.itemTotlePrice,jdbcType=INTEGER},
+        item_totle_price = #{record.itemTotlePrice,jdbcType=DECIMAL},
       </if>
       <if test="record.itemHouse != null" >
         item_house = #{record.itemHouse,jdbcType=VARCHAR},
@@ -281,9 +281,9 @@
       item_unit = #{record.itemUnit,jdbcType=VARCHAR},
       item_color = #{record.itemColor,jdbcType=VARCHAR},
       item_number = #{record.itemNumber,jdbcType=DECIMAL},
-      item_price = #{record.itemPrice,jdbcType=INTEGER},
+      item_price = #{record.itemPrice,jdbcType=DECIMAL},
       item_discount = #{record.itemDiscount,jdbcType=DECIMAL},
-      item_totle_price = #{record.itemTotlePrice,jdbcType=INTEGER},
+      item_totle_price = #{record.itemTotlePrice,jdbcType=DECIMAL},
       item_house = #{record.itemHouse,jdbcType=VARCHAR},
       item_delete = #{record.itemDelete,jdbcType=INTEGER}
     <if test="_parameter != null" >
@@ -318,13 +318,13 @@
         item_number = #{itemNumber,jdbcType=DECIMAL},
       </if>
       <if test="itemPrice != null" >
-        item_price = #{itemPrice,jdbcType=INTEGER},
+        item_price = #{itemPrice,jdbcType=DECIMAL},
       </if>
       <if test="itemDiscount != null" >
         item_discount = #{itemDiscount,jdbcType=DECIMAL},
       </if>
       <if test="itemTotlePrice != null" >
-        item_totle_price = #{itemTotlePrice,jdbcType=INTEGER},
+        item_totle_price = #{itemTotlePrice,jdbcType=DECIMAL},
       </if>
       <if test="itemHouse != null" >
         item_house = #{itemHouse,jdbcType=VARCHAR},
@@ -345,9 +345,9 @@
       item_unit = #{itemUnit,jdbcType=VARCHAR},
       item_color = #{itemColor,jdbcType=VARCHAR},
       item_number = #{itemNumber,jdbcType=DECIMAL},
-      item_price = #{itemPrice,jdbcType=INTEGER},
+      item_price = #{itemPrice,jdbcType=DECIMAL},
       item_discount = #{itemDiscount,jdbcType=DECIMAL},
-      item_totle_price = #{itemTotlePrice,jdbcType=INTEGER},
+      item_totle_price = #{itemTotlePrice,jdbcType=DECIMAL},
       item_house = #{itemHouse,jdbcType=VARCHAR},
       item_delete = #{itemDelete,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
