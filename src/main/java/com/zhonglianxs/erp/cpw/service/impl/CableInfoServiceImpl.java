@@ -14,4 +14,5 @@ import org.springframework.transaction.annotation.Transactional;
 @BaseService
 public class CableInfoServiceImpl extends BaseServiceImpl<CableInfoMapper,CableInfo,CableInfoExample> implements CableInfoService{
 
+
 }

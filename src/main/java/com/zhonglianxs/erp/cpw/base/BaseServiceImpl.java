@@ -359,7 +359,7 @@ public abstract class BaseServiceImpl<Mapper, Record, Example> implements BaseSe
 					continue;
 				}
 				Integer id = Integer.parseInt(idStr);
-				Method deleteByPrimaryKey = mapper.getClass().getDeclaredMethod("deleteByPrimaryKey", id.getClass());
+				Method deleteByPrimaryKey = mapper.getClass().getDeclaredMethod("deleteRecordByKey", id.getClass());
 				Object result = deleteByPrimaryKey.invoke(mapper, id);
 				count += Integer.parseInt(String.valueOf(result));
 			}

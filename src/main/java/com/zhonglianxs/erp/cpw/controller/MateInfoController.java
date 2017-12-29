@@ -1,7 +1,10 @@
 package com.zhonglianxs.erp.cpw.controller;
 
+import com.zhonglianxs.erp.cpw.bean.CableHouse;
+import com.zhonglianxs.erp.cpw.bean.CableHouseExample;
 import com.zhonglianxs.erp.cpw.bean.CableInfo;
 import com.zhonglianxs.erp.cpw.bean.CableInfoExample;
+import com.zhonglianxs.erp.cpw.service.CableHouseService;
 import com.zhonglianxs.erp.cpw.service.CableInfoService;
 import com.zhonglianxs.erp.cpw.util.BaseResult;
 import com.zhonglianxs.erp.cpw.util.ResultConstant;
@@ -24,6 +27,8 @@ public class MateInfoController {
 
     @Autowired
     private CableInfoService cableInfoService;
+    @Autowired
+    private CableHouseService cableHouseService;
 
     @RequestMapping("/cableIndex")
     public String cableInfoIndex(){
@@ -40,7 +45,6 @@ public class MateInfoController {
             @RequestParam(required = false, value = "sort") String sort,
             @RequestParam(required = false, value = "order") String order) {
         CableInfoExample cableInfoExample = new CableInfoExample();
-        cableInfoExample.getOredCriteria();
         CableInfoExample.Criteria criteria = cableInfoExample.createCriteria();
         criteria.andCableDeleteEqualTo((short)0).andCableUserIdEqualTo((int)session.getAttribute("userId"));
         if(StringUtils.isNotBlank(cableModel)){
@@ -90,7 +94,7 @@ public class MateInfoController {
 
     @RequestMapping(value = "/cable/update/{cableInfoId}", method = RequestMethod.POST)
     @ResponseBody
-    public Object update(@PathVariable("cableInfoId") int cableInfoId, CableInfo cableInfo,HttpSession session) {
+    public Object update(@PathVariable("cableInfoId") int cableInfoId, CableInfo cableInfo) {
         cableInfo.setId(cableInfoId);
         int count = cableInfoService.updateByPrimaryKeySelective(cableInfo);
         return new BaseResult(ResultConstant.SUCCESS, count);
@@ -103,4 +107,70 @@ public class MateInfoController {
         return new BaseResult(ResultConstant.SUCCESS, count);
     }
 
+    @RequestMapping("/houseIndex")
+    public String houseInfoIndex(){
+        return "mate/house/index.jsp";
+    }
+
+    @RequestMapping(value = "/house/list", method = RequestMethod.GET)
+    @ResponseBody
+    public Object houseList(HttpSession session,
+                       @RequestParam(required = false, defaultValue = "0", value = "offset") int offset,
+                       @RequestParam(required = false, defaultValue = "10", value = "limit") int limit,
+                       @RequestParam(required = false, value = "sort") String sort,
+                       @RequestParam(required = false, value = "order") String order) {
+        CableHouseExample cableHouseExample = new CableHouseExample();
+        CableHouseExample.Criteria criteria = cableHouseExample.createCriteria();
+        criteria.andCableHouseDeleteEqualTo(0).andCableHouseUserIdEqualTo((int)session.getAttribute("userId"));
+        cableHouseExample.setOrderByClause("cable_house_name");
+        List<CableHouse> rows = cableHouseService.selectByExampleForOffsetPage(cableHouseExample, offset, limit);
+        long total = cableHouseService.countByExample(cableHouseExample);
+        Map<String, Object> result = new HashMap<>();
+        result.put("rows", rows);
+        result.put("total", total);
+        return result;
+    }
+
+    @RequestMapping(value = "/house/create", method = RequestMethod.GET)
+    public String houseCreate() {
+        return "mate/house/creat.jsp";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/house/create", method = RequestMethod.POST)
+    public Object houseCreate(CableHouse cableHouse,HttpSession session) {
+        CableHouseExample cableHouseExample = new CableHouseExample();
+        CableHouseExample.Criteria criteria = cableHouseExample.createCriteria();
+        criteria.andCableHouseNameEqualTo(cableHouse.getCableHouseName()).andCableHouseAddressEqualTo(cableHouse.getCableHouseAddress()).andCableHouseDeleteEqualTo(0);
+        int count = cableHouseService.countByExample(cableHouseExample);
+        if(count!=0){
+            return new BaseResult(ResultConstant.INVALID_LENGTH, count);
+        }
+        cableHouse.setCableHouseUserId((int)session.getAttribute("userId"));
+        cableHouse.setCableHouseDelete(0);
+        count = cableHouseService.insertSelective(cableHouse);
+        return new BaseResult(ResultConstant.SUCCESS, count);
+    }
+
+    @RequestMapping(value = "/house/update/{id}", method = RequestMethod.GET)
+    public String houseUpdate(@PathVariable("id") Integer id, ModelMap modelMap) {
+        CableHouse cableHouse = cableHouseService.selectByPrimaryKey(id);
+        modelMap.put("cableHouse", cableHouse);
+        return "mate/house/update.jsp";
+    }
+
+    @RequestMapping(value = "/house/update/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public Object houseUpdate(@PathVariable("id") int id, CableHouse cableHouse,HttpSession session) {
+        cableHouse.setId(id);
+        int count = cableHouseService.updateByPrimaryKeySelective(cableHouse);
+        return new BaseResult(ResultConstant.SUCCESS, count);
+    }
+
+    @RequestMapping(value = "/house/delete/{ids}",method = RequestMethod.GET)
+    @ResponseBody
+    public Object houseDelete(@PathVariable("ids") String ids) {
+        int count = cableHouseService.deleteByPrimaryKeys(ids);
+        return new BaseResult(ResultConstant.SUCCESS, count);
+    }
 }

@@ -4,6 +4,7 @@ import com.zhonglianxs.erp.cpw.bean.CableOrder;
 import com.zhonglianxs.erp.cpw.bean.CableOrderExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 public interface CableOrderMapper {
     int countByExample(CableOrderExample example);
@@ -27,4 +28,7 @@ public interface CableOrderMapper {
     int updateByPrimaryKeySelective(CableOrder record);
 
     int updateByPrimaryKey(CableOrder record);
+
+    @Update("update cable_order set order_delete = 1 where id = #{id}")
+    int deleteRecordByKey(@Param("id") Integer id);
 }

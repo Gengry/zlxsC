@@ -4,6 +4,7 @@ import com.zhonglianxs.erp.cpw.bean.CableStorage;
 import com.zhonglianxs.erp.cpw.bean.CableStorageExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 public interface CableStorageMapper {
     int countByExample(CableStorageExample example);
@@ -27,4 +28,7 @@ public interface CableStorageMapper {
     int updateByPrimaryKeySelective(CableStorage record);
 
     int updateByPrimaryKey(CableStorage record);
+
+    @Update("update cable_storage set storage_delete = 1 where id = #{id}")
+    int deleteRecordByKey(@Param("id") Integer id);
 }

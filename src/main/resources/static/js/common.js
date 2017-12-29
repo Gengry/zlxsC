@@ -38,3 +38,19 @@ function initMaterialInput() {
 		}
 	});
 }
+
+function failPrompt(message){
+    $.confirm({
+        theme: 'dark',
+        animation: 'rotateX',
+        closeAnimation: 'rotateX',
+        title: false,
+        content: message,
+        buttons: {
+            confirm: {
+                text: '确认',
+                btnClass: 'waves-effect waves-button waves-light'
+            }
+        }
+    });
+}

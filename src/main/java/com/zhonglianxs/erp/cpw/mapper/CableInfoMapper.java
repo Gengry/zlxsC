@@ -4,6 +4,7 @@ import com.zhonglianxs.erp.cpw.bean.CableInfo;
 import com.zhonglianxs.erp.cpw.bean.CableInfoExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 public interface CableInfoMapper {
     int countByExample(CableInfoExample example);
@@ -27,4 +28,7 @@ public interface CableInfoMapper {
     int updateByPrimaryKeySelective(CableInfo record);
 
     int updateByPrimaryKey(CableInfo record);
+
+    @Update("update cable_info set cable_delete = 1 where id = #{id}")
+    int deleteRecordByKey(@Param("id") Integer id);
 }

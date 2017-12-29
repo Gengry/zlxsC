@@ -84,7 +84,7 @@
 					<li><a class="waves-effect" href="javascript:Tab.addTab('颜色信息', 'crud2.html');">颜色信息</a></li>
                     <li><a class="waves-effect" href="javascript:Tab.addTab('计量单位', 'crud3.html');">计量单位</a></li>
                     <li><a class="waves-effect" href="javascript:Tab.addTab('质量标准', 'crud4.html');">质量标准</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('仓库管理', 'crud5.html');">仓库管理</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('仓库管理', '/mate/houseIndex');">仓库管理</a></li>
 				</ul>
 			</li>
 			<li class="sub-menu system_menus system_1 0" style="display: list-item;">

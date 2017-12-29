@@ -8,20 +8,24 @@
 <div id="createDialog" class="crudDialog">
     <form id="createForm" method="post">
         <div class="form-group">
-            <label for="cableModelCreate">线缆型号</label>
-            <input id="cableModelCreate" type="text" class="form-control" name="cableModel" maxlength="20" value="${cableModel}">
+            <label for="cableHouseNameCreate">仓库名</label>
+            <input id="cableHouseNameCreate" type="text" class="form-control" name="cableHouseName" maxlength="20">
         </div>
         <div class="form-group">
-            <label for="cableSpecCreate">线缆规格</label>
-            <input id="cableSpecCreate" type="text" class="form-control" name="cableSpec" maxlength="20">
+            <label for="cableHouseAddressCreate">仓库地址</label>
+            <input id="cableHouseAddressCreate" type="text" class="form-control" name="cableHouseAddress" maxlength="20">
         </div>
         <div class="form-group">
-            <label for="cablePriceCreate">推荐价格</label>
-            <input id="cablePriceCreate" type="text" class="form-control" name="cablePrice" maxlength="300">
+            <label for="cableHouseContactCreate">仓库管理员</label>
+            <input id="cableHouseContactCreate" type="text" class="form-control" name="cableHouseContact" maxlength="300">
         </div>
         <div class="form-group">
-            <label for="cableDesc">描述</label>
-            <input id="cableDesc" type="text" class="form-control" name="cableDesc" maxlength="300">
+            <label for="cableHouseTeleCreate">仓库电话</label>
+            <input id="cableHouseTeleCreate" type="text" class="form-control" name="cableHouseTele" maxlength="300">
+        </div>
+        <div class="form-group">
+            <label for="cableHouseDescCreate">描述</label>
+            <input id="cableHouseDescCreate" type="text" class="form-control" name="cableHouseDesc" maxlength="300">
         </div>
         <div class="form-group text-right dialog-buttons">
             <a class="waves-effect waves-button" href="javascript:;" onclick="createSubmit();">保存</a>
@@ -33,22 +37,17 @@
     function createSubmit() {
         $.ajax({
             type: 'post',
-            url: '${basePath}/mate/cable/create',
+            url: '${basePath}/mate/house/create',
             data: $('#createForm').serialize(),
             beforeSend: function() {
-                if(isEmpty($("#cableModelCreate").val())){
-                    failPrompt('线缆型号不能为空');
+                if(isEmpty($("#cableHouseNameCreate").val())){
+                    failPrompt('仓库名不能为空');
                     $('#cableModelCreate').focus();
                     return false;
                 }
-                if(isEmpty($("#cableSpecCreate").val())){
-                    failPrompt('线缆规格不能为空');
+                if(isEmpty($("#cableHouseAddressCreate").val())){
+                    failPrompt('仓库地址不能为空');
                     $('#cableSpecCreate').focus();
-                    return false;
-                }
-                if(!checkFormat('num3',$("#cablePriceCreate").val())){
-                    failPrompt('推荐价格必须是数字');
-                    $('#cablePriceCreate').focus();
                     return false;
                 }
             },
