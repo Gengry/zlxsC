@@ -35,8 +35,8 @@ $(function() {
 		//showColumns: true,
 		minimumCountColumns: 2,
 		clickToSelect: true,
-//		detailView: true,
-//		detailFormatter: 'detailFormatter',
+		detailView: true,
+		detailFormatter: 'cableFormatter',
 		pagination: true,
 		paginationLoop: false,
 		sidePagination: 'server',
@@ -55,7 +55,8 @@ $(function() {
 			{field: 'cableHouseAddress', title: '仓库地址', align: 'center'},
             {field: 'cableHouseContact', title: '仓库管理员', align: 'center'},
             {field: 'cableHouseTele', title: '仓库电话', align: 'center'},
-            {field: 'cableHouseDesc', title: '仓库描述', align: 'center'},
+            {field: 'cableHouseTime', title: '创建时间', align: 'center',formatter: 'timeFormatter'},
+            //{field: 'cableHouseDesc', title: '仓库描述', align: 'center'},
 			{field: 'action', title: '操作', align: 'center', formatter: 'actionFormatter', events: 'actionEvents', clickToSelect: false,width:'150px' }
 		],
 
@@ -74,6 +75,17 @@ function actionFormatter(value, row, index) {
 		'<a class="delete" href="javascript:;" onclick="deleteAction('+id+')" data-toggle="tooltip" title="Remove"><i class="glyphicon glyphicon-remove"></i></a>'
     ].join('');
 }
+
+function cableFormatter(index, row) {
+    return '描述：'+row.cableHouseDesc;
+}
+
+function timeFormatter(value, row, index){
+    var timeStamp = row.cableHouseTime;
+    var date = new Date(timeStamp)
+    return dateFtt("yyyy-MM-dd hh:mm:ss",date);
+}
+
 // 新增
 var createDialog;
 function createAction() {

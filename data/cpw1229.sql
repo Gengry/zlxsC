@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2017/12/29 14:01:42                          */
+/* Created on:     2017/12/29 21:43:35                          */
 /*==============================================================*/
 
 
@@ -34,8 +34,9 @@ create table cable_customer
    customer_tele        varchar(50) comment '客户联系电话',
    customer_address     varchar(50) comment '客户公司地址',
    customer_warehouse   varchar(50) comment '客户仓库地址',
+   customer_time        datetime default CURRENT_TIMESTAMP comment '创建时间',
    customer_desc        varchar(255) comment '描述',
-   customer_delete      int comment '0 正常 1已删除',
+   customer_delete      int default 0 comment '0 正常 1已删除',
    primary key (id)
 )
 ENGINE = InnoDB;
@@ -49,10 +50,12 @@ alter table cable_customer comment '客户信息表
 create table cable_dic
 (
    id                   int not null auto_increment comment '主键id',
-   cable_dic_ENGINE       int comment '字典类型（1:质量 2:计量单位,3:颜色）',
+   cable_dic_type       int comment '字典类型（1:质量 2:计量单位,3:颜色）',
    cable_dic_name       varchar(50) comment '字典值',
    cable_dic_desc       varchar(100) comment '字典值描述',
-   cable_dic_delete     int comment '0正常 1已删除',
+   cable_dic_intype     int default 0 comment '类型内标识',
+   cable_dic_time       datetime default CURRENT_TIMESTAMP comment '创建时间',
+   cable_dic_delete     int default 0 comment '0正常 1已删除',
    primary key (id)
 )
 ENGINE = InnoDB;
@@ -70,7 +73,9 @@ create table cable_house
    cable_house_address  varchar(100) comment '仓库地址',
    cable_house_contact  varchar(15) comment '仓库管理员',
    cable_house_tele     varchar(30) comment '仓库电话',
-   cable_house_delete   int comment '0正常 1已删除',
+   cable_house_time     datetime default CURRENT_TIMESTAMP comment '创建时间',
+   cable_house_desc     varchar(255) comment '仓库描述',
+   cable_house_delete   int default 0 comment '0正常 1已删除',
    primary key (id)
 )
 ENGINE = InnoDB;
@@ -88,7 +93,8 @@ create table cable_info
    cable_spec           varchar(20) comment '线缆型号',
    cable_desc           varchar(255) comment '描述',
    cable_price          decimal(18,2) comment '推荐价格',
-   cable_delete         smallint comment '0正常 1已删除',
+   cable_time           datetime default CURRENT_TIMESTAMP comment '创建时间',
+   cable_delete         smallint default 0 comment '0正常 1已删除',
    primary key (id)
 )
 ENGINE = InnoDB;
@@ -111,7 +117,7 @@ create table cable_order
    order_time           datetime comment '订单时间',
    order_totalprice     decimal(18,2) comment '订单总金额',
    order_desc           varchar(255) comment '订单备注',
-   order_delete         int comment '0 正常 1已删除',
+   order_delete         int default 0 comment '0 正常 1已删除',
    primary key (id)
 )
 ENGINE = InnoDB;
@@ -136,7 +142,7 @@ create table cable_order_item
    item_discount        decimal(18,2) comment '折扣',
    item_totle_price     decimal comment '小计',
    item_house           varchar(30) comment '出库仓库地址',
-   item_delete          int comment '0 正常 1已删除',
+   item_delete          int default 0 comment '0 正常 1已删除',
    primary key (id)
 )
 ENGINE = InnoDB;
@@ -155,8 +161,9 @@ create table cable_provider
    provider_tele        varchar(50) comment '联系电话',
    provider_address     varchar(50) comment '公司地址',
    provider_warehouse   varchar(50) comment '仓库地址',
+   provider_time        datetime default CURRENT_TIMESTAMP comment '创建时间',
    provider_desc        varchar(255) comment '描述',
-   provider_delete      int comment '0正常 1已删除',
+   provider_delete      int default 0 comment '0正常 1已删除',
    primary key (id)
 )
 ENGINE = InnoDB;
@@ -180,7 +187,7 @@ create table cable_storage
    storage_update_time  datetime comment '更新时间',
    storage_houseid      int comment '仓库id',
    storage_desc         varchar(255) comment '备注',
-   storage_delete       int comment '0 正常 1已删除',
+   storage_delete       int default 0 comment '0 正常 1已删除',
    primary key (id)
 )
 ENGINE = InnoDB;
@@ -195,7 +202,8 @@ create table user_info
    id                   int(11) not null auto_increment comment '用户id',
    user_name            varchar(20) comment '用户名',
    user_pass            varchar(20) comment '密码',
-   user_delete          int comment '0正常 1已删除',
+   user_time            datetime default CURRENT_TIMESTAMP comment '创建时间',
+   user_delete          int default 0 comment '0正常 1已删除',
    primary key (id)
 )
 ENGINE = InnoDB;

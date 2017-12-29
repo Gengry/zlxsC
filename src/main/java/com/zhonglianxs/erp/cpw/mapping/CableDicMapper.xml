@@ -3,9 +3,11 @@
 <mapper namespace="com.zhonglianxs.erp.cpw.mapper.CableDicMapper" >
   <resultMap id="BaseResultMap" type="com.zhonglianxs.erp.cpw.bean.CableDic" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="cable_dic_ENGINE" property="cableDicEngine" jdbcType="INTEGER" />
+    <result column="cable_dic_type" property="cableDicType" jdbcType="INTEGER" />
     <result column="cable_dic_name" property="cableDicName" jdbcType="VARCHAR" />
     <result column="cable_dic_desc" property="cableDicDesc" jdbcType="VARCHAR" />
+    <result column="cable_dic_intype" property="cableDicIntype" jdbcType="INTEGER" />
+    <result column="cable_dic_time" property="cableDicTime" jdbcType="TIMESTAMP" />
     <result column="cable_dic_delete" property="cableDicDelete" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -67,7 +69,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, cable_dic_ENGINE, cable_dic_name, cable_dic_desc, cable_dic_delete
+    id, cable_dic_type, cable_dic_name, cable_dic_desc, cable_dic_intype, cable_dic_time, 
+    cable_dic_delete
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhonglianxs.erp.cpw.bean.CableDicExample" >
     select
@@ -101,10 +104,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.zhonglianxs.erp.cpw.bean.CableDic" >
-    insert into cable_dic (id, cable_dic_ENGINE, cable_dic_name, 
-      cable_dic_desc, cable_dic_delete)
-    values (#{id,jdbcType=INTEGER}, #{cableDicEngine,jdbcType=INTEGER}, #{cableDicName,jdbcType=VARCHAR}, 
-      #{cableDicDesc,jdbcType=VARCHAR}, #{cableDicDelete,jdbcType=INTEGER})
+    insert into cable_dic (id, cable_dic_type, cable_dic_name, 
+      cable_dic_desc, cable_dic_intype, cable_dic_time, 
+      cable_dic_delete)
+    values (#{id,jdbcType=INTEGER}, #{cableDicType,jdbcType=INTEGER}, #{cableDicName,jdbcType=VARCHAR}, 
+      #{cableDicDesc,jdbcType=VARCHAR}, #{cableDicIntype,jdbcType=INTEGER}, #{cableDicTime,jdbcType=TIMESTAMP}, 
+      #{cableDicDelete,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableDic" >
     insert into cable_dic
@@ -112,14 +117,20 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="cableDicEngine != null" >
-        cable_dic_ENGINE,
+      <if test="cableDicType != null" >
+        cable_dic_type,
       </if>
       <if test="cableDicName != null" >
         cable_dic_name,
       </if>
       <if test="cableDicDesc != null" >
         cable_dic_desc,
+      </if>
+      <if test="cableDicIntype != null" >
+        cable_dic_intype,
+      </if>
+      <if test="cableDicTime != null" >
+        cable_dic_time,
       </if>
       <if test="cableDicDelete != null" >
         cable_dic_delete,
@@ -129,14 +140,20 @@
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="cableDicEngine != null" >
-        #{cableDicEngine,jdbcType=INTEGER},
+      <if test="cableDicType != null" >
+        #{cableDicType,jdbcType=INTEGER},
       </if>
       <if test="cableDicName != null" >
         #{cableDicName,jdbcType=VARCHAR},
       </if>
       <if test="cableDicDesc != null" >
         #{cableDicDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="cableDicIntype != null" >
+        #{cableDicIntype,jdbcType=INTEGER},
+      </if>
+      <if test="cableDicTime != null" >
+        #{cableDicTime,jdbcType=TIMESTAMP},
       </if>
       <if test="cableDicDelete != null" >
         #{cableDicDelete,jdbcType=INTEGER},
@@ -155,14 +172,20 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.cableDicEngine != null" >
-        cable_dic_ENGINE = #{record.cableDicEngine,jdbcType=INTEGER},
+      <if test="record.cableDicType != null" >
+        cable_dic_type = #{record.cableDicType,jdbcType=INTEGER},
       </if>
       <if test="record.cableDicName != null" >
         cable_dic_name = #{record.cableDicName,jdbcType=VARCHAR},
       </if>
       <if test="record.cableDicDesc != null" >
         cable_dic_desc = #{record.cableDicDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cableDicIntype != null" >
+        cable_dic_intype = #{record.cableDicIntype,jdbcType=INTEGER},
+      </if>
+      <if test="record.cableDicTime != null" >
+        cable_dic_time = #{record.cableDicTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.cableDicDelete != null" >
         cable_dic_delete = #{record.cableDicDelete,jdbcType=INTEGER},
@@ -175,9 +198,11 @@
   <update id="updateByExample" parameterType="map" >
     update cable_dic
     set id = #{record.id,jdbcType=INTEGER},
-      cable_dic_ENGINE = #{record.cableDicEngine,jdbcType=INTEGER},
+      cable_dic_type = #{record.cableDicType,jdbcType=INTEGER},
       cable_dic_name = #{record.cableDicName,jdbcType=VARCHAR},
       cable_dic_desc = #{record.cableDicDesc,jdbcType=VARCHAR},
+      cable_dic_intype = #{record.cableDicIntype,jdbcType=INTEGER},
+      cable_dic_time = #{record.cableDicTime,jdbcType=TIMESTAMP},
       cable_dic_delete = #{record.cableDicDelete,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -186,14 +211,20 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableDic" >
     update cable_dic
     <set >
-      <if test="cableDicEngine != null" >
-        cable_dic_ENGINE = #{cableDicEngine,jdbcType=INTEGER},
+      <if test="cableDicType != null" >
+        cable_dic_type = #{cableDicType,jdbcType=INTEGER},
       </if>
       <if test="cableDicName != null" >
         cable_dic_name = #{cableDicName,jdbcType=VARCHAR},
       </if>
       <if test="cableDicDesc != null" >
         cable_dic_desc = #{cableDicDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="cableDicIntype != null" >
+        cable_dic_intype = #{cableDicIntype,jdbcType=INTEGER},
+      </if>
+      <if test="cableDicTime != null" >
+        cable_dic_time = #{cableDicTime,jdbcType=TIMESTAMP},
       </if>
       <if test="cableDicDelete != null" >
         cable_dic_delete = #{cableDicDelete,jdbcType=INTEGER},
@@ -203,9 +234,11 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zhonglianxs.erp.cpw.bean.CableDic" >
     update cable_dic
-    set cable_dic_ENGINE = #{cableDicEngine,jdbcType=INTEGER},
+    set cable_dic_type = #{cableDicType,jdbcType=INTEGER},
       cable_dic_name = #{cableDicName,jdbcType=VARCHAR},
       cable_dic_desc = #{cableDicDesc,jdbcType=VARCHAR},
+      cable_dic_intype = #{cableDicIntype,jdbcType=INTEGER},
+      cable_dic_time = #{cableDicTime,jdbcType=TIMESTAMP},
       cable_dic_delete = #{cableDicDelete,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

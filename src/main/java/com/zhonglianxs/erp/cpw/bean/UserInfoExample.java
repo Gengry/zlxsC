@@ -1,6 +1,7 @@
 package com.zhonglianxs.erp.cpw.bean;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class UserInfoExample {
@@ -301,6 +302,66 @@ public class UserInfoExample {
 
         public Criteria andUserPassNotBetween(String value1, String value2) {
             addCriterion("user_pass not between", value1, value2, "userPass");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTimeIsNull() {
+            addCriterion("user_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTimeIsNotNull() {
+            addCriterion("user_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTimeEqualTo(Date value) {
+            addCriterion("user_time =", value, "userTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTimeNotEqualTo(Date value) {
+            addCriterion("user_time <>", value, "userTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTimeGreaterThan(Date value) {
+            addCriterion("user_time >", value, "userTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("user_time >=", value, "userTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTimeLessThan(Date value) {
+            addCriterion("user_time <", value, "userTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTimeLessThanOrEqualTo(Date value) {
+            addCriterion("user_time <=", value, "userTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTimeIn(List<Date> values) {
+            addCriterion("user_time in", values, "userTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTimeNotIn(List<Date> values) {
+            addCriterion("user_time not in", values, "userTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTimeBetween(Date value1, Date value2) {
+            addCriterion("user_time between", value1, value2, "userTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTimeNotBetween(Date value1, Date value2) {
+            addCriterion("user_time not between", value1, value2, "userTime");
             return (Criteria) this;
         }
 

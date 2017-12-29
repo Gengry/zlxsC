@@ -2,6 +2,7 @@ package com.zhonglianxs.erp.cpw.bean;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CableInfoExample {
@@ -492,6 +493,66 @@ public class CableInfoExample {
 
         public Criteria andCablePriceNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("cable_price not between", value1, value2, "cablePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableTimeIsNull() {
+            addCriterion("cable_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableTimeIsNotNull() {
+            addCriterion("cable_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableTimeEqualTo(Date value) {
+            addCriterion("cable_time =", value, "cableTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableTimeNotEqualTo(Date value) {
+            addCriterion("cable_time <>", value, "cableTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableTimeGreaterThan(Date value) {
+            addCriterion("cable_time >", value, "cableTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("cable_time >=", value, "cableTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableTimeLessThan(Date value) {
+            addCriterion("cable_time <", value, "cableTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableTimeLessThanOrEqualTo(Date value) {
+            addCriterion("cable_time <=", value, "cableTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableTimeIn(List<Date> values) {
+            addCriterion("cable_time in", values, "cableTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableTimeNotIn(List<Date> values) {
+            addCriterion("cable_time not in", values, "cableTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableTimeBetween(Date value1, Date value2) {
+            addCriterion("cable_time between", value1, value2, "cableTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableTimeNotBetween(Date value1, Date value2) {
+            addCriterion("cable_time not between", value1, value2, "cableTime");
             return (Criteria) this;
         }
 

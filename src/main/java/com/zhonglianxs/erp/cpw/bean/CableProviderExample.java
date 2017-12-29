@@ -1,6 +1,7 @@
 package com.zhonglianxs.erp.cpw.bean;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CableProviderExample {
@@ -571,6 +572,66 @@ public class CableProviderExample {
 
         public Criteria andProviderWarehouseNotBetween(String value1, String value2) {
             addCriterion("provider_warehouse not between", value1, value2, "providerWarehouse");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderTimeIsNull() {
+            addCriterion("provider_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderTimeIsNotNull() {
+            addCriterion("provider_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderTimeEqualTo(Date value) {
+            addCriterion("provider_time =", value, "providerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderTimeNotEqualTo(Date value) {
+            addCriterion("provider_time <>", value, "providerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderTimeGreaterThan(Date value) {
+            addCriterion("provider_time >", value, "providerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("provider_time >=", value, "providerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderTimeLessThan(Date value) {
+            addCriterion("provider_time <", value, "providerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderTimeLessThanOrEqualTo(Date value) {
+            addCriterion("provider_time <=", value, "providerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderTimeIn(List<Date> values) {
+            addCriterion("provider_time in", values, "providerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderTimeNotIn(List<Date> values) {
+            addCriterion("provider_time not in", values, "providerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderTimeBetween(Date value1, Date value2) {
+            addCriterion("provider_time between", value1, value2, "providerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderTimeNotBetween(Date value1, Date value2) {
+            addCriterion("provider_time not between", value1, value2, "providerTime");
             return (Criteria) this;
         }
 

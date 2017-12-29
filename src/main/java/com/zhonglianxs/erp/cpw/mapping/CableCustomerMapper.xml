@@ -9,6 +9,7 @@
     <result column="customer_tele" property="customerTele" jdbcType="VARCHAR" />
     <result column="customer_address" property="customerAddress" jdbcType="VARCHAR" />
     <result column="customer_warehouse" property="customerWarehouse" jdbcType="VARCHAR" />
+    <result column="customer_time" property="customerTime" jdbcType="TIMESTAMP" />
     <result column="customer_desc" property="customerDesc" jdbcType="VARCHAR" />
     <result column="customer_delete" property="customerDelete" jdbcType="INTEGER" />
   </resultMap>
@@ -72,7 +73,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, customer_user_id, customer_name, customer_contact, customer_tele, customer_address, 
-    customer_warehouse, customer_desc, customer_delete
+    customer_warehouse, customer_time, customer_desc, customer_delete
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhonglianxs.erp.cpw.bean.CableCustomerExample" >
     select
@@ -108,12 +109,12 @@
   <insert id="insert" parameterType="com.zhonglianxs.erp.cpw.bean.CableCustomer" >
     insert into cable_customer (id, customer_user_id, customer_name, 
       customer_contact, customer_tele, customer_address, 
-      customer_warehouse, customer_desc, customer_delete
-      )
+      customer_warehouse, customer_time, customer_desc, 
+      customer_delete)
     values (#{id,jdbcType=INTEGER}, #{customerUserId,jdbcType=INTEGER}, #{customerName,jdbcType=VARCHAR}, 
       #{customerContact,jdbcType=VARCHAR}, #{customerTele,jdbcType=VARCHAR}, #{customerAddress,jdbcType=VARCHAR}, 
-      #{customerWarehouse,jdbcType=VARCHAR}, #{customerDesc,jdbcType=VARCHAR}, #{customerDelete,jdbcType=INTEGER}
-      )
+      #{customerWarehouse,jdbcType=VARCHAR}, #{customerTime,jdbcType=TIMESTAMP}, #{customerDesc,jdbcType=VARCHAR}, 
+      #{customerDelete,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableCustomer" >
     insert into cable_customer
@@ -138,6 +139,9 @@
       </if>
       <if test="customerWarehouse != null" >
         customer_warehouse,
+      </if>
+      <if test="customerTime != null" >
+        customer_time,
       </if>
       <if test="customerDesc != null" >
         customer_desc,
@@ -167,6 +171,9 @@
       </if>
       <if test="customerWarehouse != null" >
         #{customerWarehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="customerTime != null" >
+        #{customerTime,jdbcType=TIMESTAMP},
       </if>
       <if test="customerDesc != null" >
         #{customerDesc,jdbcType=VARCHAR},
@@ -206,6 +213,9 @@
       <if test="record.customerWarehouse != null" >
         customer_warehouse = #{record.customerWarehouse,jdbcType=VARCHAR},
       </if>
+      <if test="record.customerTime != null" >
+        customer_time = #{record.customerTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.customerDesc != null" >
         customer_desc = #{record.customerDesc,jdbcType=VARCHAR},
       </if>
@@ -226,6 +236,7 @@
       customer_tele = #{record.customerTele,jdbcType=VARCHAR},
       customer_address = #{record.customerAddress,jdbcType=VARCHAR},
       customer_warehouse = #{record.customerWarehouse,jdbcType=VARCHAR},
+      customer_time = #{record.customerTime,jdbcType=TIMESTAMP},
       customer_desc = #{record.customerDesc,jdbcType=VARCHAR},
       customer_delete = #{record.customerDelete,jdbcType=INTEGER}
     <if test="_parameter != null" >
@@ -253,6 +264,9 @@
       <if test="customerWarehouse != null" >
         customer_warehouse = #{customerWarehouse,jdbcType=VARCHAR},
       </if>
+      <if test="customerTime != null" >
+        customer_time = #{customerTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="customerDesc != null" >
         customer_desc = #{customerDesc,jdbcType=VARCHAR},
       </if>
@@ -270,6 +284,7 @@
       customer_tele = #{customerTele,jdbcType=VARCHAR},
       customer_address = #{customerAddress,jdbcType=VARCHAR},
       customer_warehouse = #{customerWarehouse,jdbcType=VARCHAR},
+      customer_time = #{customerTime,jdbcType=TIMESTAMP},
       customer_desc = #{customerDesc,jdbcType=VARCHAR},
       customer_delete = #{customerDelete,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}

@@ -9,6 +9,7 @@
     <result column="provider_tele" property="providerTele" jdbcType="VARCHAR" />
     <result column="provider_address" property="providerAddress" jdbcType="VARCHAR" />
     <result column="provider_warehouse" property="providerWarehouse" jdbcType="VARCHAR" />
+    <result column="provider_time" property="providerTime" jdbcType="TIMESTAMP" />
     <result column="provider_desc" property="providerDesc" jdbcType="VARCHAR" />
     <result column="provider_delete" property="providerDelete" jdbcType="INTEGER" />
   </resultMap>
@@ -72,7 +73,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, provider_user_id, provider_name, provider_contact, provider_tele, provider_address, 
-    provider_warehouse, provider_desc, provider_delete
+    provider_warehouse, provider_time, provider_desc, provider_delete
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhonglianxs.erp.cpw.bean.CableProviderExample" >
     select
@@ -108,12 +109,12 @@
   <insert id="insert" parameterType="com.zhonglianxs.erp.cpw.bean.CableProvider" >
     insert into cable_provider (id, provider_user_id, provider_name, 
       provider_contact, provider_tele, provider_address, 
-      provider_warehouse, provider_desc, provider_delete
-      )
+      provider_warehouse, provider_time, provider_desc, 
+      provider_delete)
     values (#{id,jdbcType=INTEGER}, #{providerUserId,jdbcType=INTEGER}, #{providerName,jdbcType=VARCHAR}, 
       #{providerContact,jdbcType=VARCHAR}, #{providerTele,jdbcType=VARCHAR}, #{providerAddress,jdbcType=VARCHAR}, 
-      #{providerWarehouse,jdbcType=VARCHAR}, #{providerDesc,jdbcType=VARCHAR}, #{providerDelete,jdbcType=INTEGER}
-      )
+      #{providerWarehouse,jdbcType=VARCHAR}, #{providerTime,jdbcType=TIMESTAMP}, #{providerDesc,jdbcType=VARCHAR}, 
+      #{providerDelete,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableProvider" >
     insert into cable_provider
@@ -138,6 +139,9 @@
       </if>
       <if test="providerWarehouse != null" >
         provider_warehouse,
+      </if>
+      <if test="providerTime != null" >
+        provider_time,
       </if>
       <if test="providerDesc != null" >
         provider_desc,
@@ -167,6 +171,9 @@
       </if>
       <if test="providerWarehouse != null" >
         #{providerWarehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="providerTime != null" >
+        #{providerTime,jdbcType=TIMESTAMP},
       </if>
       <if test="providerDesc != null" >
         #{providerDesc,jdbcType=VARCHAR},
@@ -206,6 +213,9 @@
       <if test="record.providerWarehouse != null" >
         provider_warehouse = #{record.providerWarehouse,jdbcType=VARCHAR},
       </if>
+      <if test="record.providerTime != null" >
+        provider_time = #{record.providerTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.providerDesc != null" >
         provider_desc = #{record.providerDesc,jdbcType=VARCHAR},
       </if>
@@ -226,6 +236,7 @@
       provider_tele = #{record.providerTele,jdbcType=VARCHAR},
       provider_address = #{record.providerAddress,jdbcType=VARCHAR},
       provider_warehouse = #{record.providerWarehouse,jdbcType=VARCHAR},
+      provider_time = #{record.providerTime,jdbcType=TIMESTAMP},
       provider_desc = #{record.providerDesc,jdbcType=VARCHAR},
       provider_delete = #{record.providerDelete,jdbcType=INTEGER}
     <if test="_parameter != null" >
@@ -253,6 +264,9 @@
       <if test="providerWarehouse != null" >
         provider_warehouse = #{providerWarehouse,jdbcType=VARCHAR},
       </if>
+      <if test="providerTime != null" >
+        provider_time = #{providerTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="providerDesc != null" >
         provider_desc = #{providerDesc,jdbcType=VARCHAR},
       </if>
@@ -270,6 +284,7 @@
       provider_tele = #{providerTele,jdbcType=VARCHAR},
       provider_address = #{providerAddress,jdbcType=VARCHAR},
       provider_warehouse = #{providerWarehouse,jdbcType=VARCHAR},
+      provider_time = #{providerTime,jdbcType=TIMESTAMP},
       provider_desc = #{providerDesc,jdbcType=VARCHAR},
       provider_delete = #{providerDelete,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}

@@ -1,13 +1,19 @@
 package com.zhonglianxs.erp.cpw.bean;
 
+import java.util.Date;
+
 public class CableDic {
     private Integer id;
 
-    private Integer cableDicEngine;
+    private Integer cableDicType;
 
     private String cableDicName;
 
     private String cableDicDesc;
+
+    private Integer cableDicIntype;
+
+    private Date cableDicTime;
 
     private Integer cableDicDelete;
 
@@ -19,12 +25,12 @@ public class CableDic {
         this.id = id;
     }
 
-    public Integer getCableDicEngine() {
-        return cableDicEngine;
+    public Integer getCableDicType() {
+        return cableDicType;
     }
 
-    public void setCableDicEngine(Integer cableDicEngine) {
-        this.cableDicEngine = cableDicEngine;
+    public void setCableDicType(Integer cableDicType) {
+        this.cableDicType = cableDicType;
     }
 
     public String getCableDicName() {
@@ -41,6 +47,22 @@ public class CableDic {
 
     public void setCableDicDesc(String cableDicDesc) {
         this.cableDicDesc = cableDicDesc == null ? null : cableDicDesc.trim();
+    }
+
+    public Integer getCableDicIntype() {
+        return cableDicIntype;
+    }
+
+    public void setCableDicIntype(Integer cableDicIntype) {
+        this.cableDicIntype = cableDicIntype;
+    }
+
+    public Date getCableDicTime() {
+        return cableDicTime;
+    }
+
+    public void setCableDicTime(Date cableDicTime) {
+        this.cableDicTime = cableDicTime;
     }
 
     public Integer getCableDicDelete() {

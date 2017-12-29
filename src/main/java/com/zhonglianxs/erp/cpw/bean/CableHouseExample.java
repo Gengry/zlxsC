@@ -1,6 +1,7 @@
 package com.zhonglianxs.erp.cpw.bean;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CableHouseExample {
@@ -501,6 +502,136 @@ public class CableHouseExample {
 
         public Criteria andCableHouseTeleNotBetween(String value1, String value2) {
             addCriterion("cable_house_tele not between", value1, value2, "cableHouseTele");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseTimeIsNull() {
+            addCriterion("cable_house_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseTimeIsNotNull() {
+            addCriterion("cable_house_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseTimeEqualTo(Date value) {
+            addCriterion("cable_house_time =", value, "cableHouseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseTimeNotEqualTo(Date value) {
+            addCriterion("cable_house_time <>", value, "cableHouseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseTimeGreaterThan(Date value) {
+            addCriterion("cable_house_time >", value, "cableHouseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("cable_house_time >=", value, "cableHouseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseTimeLessThan(Date value) {
+            addCriterion("cable_house_time <", value, "cableHouseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseTimeLessThanOrEqualTo(Date value) {
+            addCriterion("cable_house_time <=", value, "cableHouseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseTimeIn(List<Date> values) {
+            addCriterion("cable_house_time in", values, "cableHouseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseTimeNotIn(List<Date> values) {
+            addCriterion("cable_house_time not in", values, "cableHouseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseTimeBetween(Date value1, Date value2) {
+            addCriterion("cable_house_time between", value1, value2, "cableHouseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseTimeNotBetween(Date value1, Date value2) {
+            addCriterion("cable_house_time not between", value1, value2, "cableHouseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseDescIsNull() {
+            addCriterion("cable_house_desc is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseDescIsNotNull() {
+            addCriterion("cable_house_desc is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseDescEqualTo(String value) {
+            addCriterion("cable_house_desc =", value, "cableHouseDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseDescNotEqualTo(String value) {
+            addCriterion("cable_house_desc <>", value, "cableHouseDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseDescGreaterThan(String value) {
+            addCriterion("cable_house_desc >", value, "cableHouseDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseDescGreaterThanOrEqualTo(String value) {
+            addCriterion("cable_house_desc >=", value, "cableHouseDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseDescLessThan(String value) {
+            addCriterion("cable_house_desc <", value, "cableHouseDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseDescLessThanOrEqualTo(String value) {
+            addCriterion("cable_house_desc <=", value, "cableHouseDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseDescLike(String value) {
+            addCriterion("cable_house_desc like", value, "cableHouseDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseDescNotLike(String value) {
+            addCriterion("cable_house_desc not like", value, "cableHouseDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseDescIn(List<String> values) {
+            addCriterion("cable_house_desc in", values, "cableHouseDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseDescNotIn(List<String> values) {
+            addCriterion("cable_house_desc not in", values, "cableHouseDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseDescBetween(String value1, String value2) {
+            addCriterion("cable_house_desc between", value1, value2, "cableHouseDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableHouseDescNotBetween(String value1, String value2) {
+            addCriterion("cable_house_desc not between", value1, value2, "cableHouseDesc");
             return (Criteria) this;
         }
 

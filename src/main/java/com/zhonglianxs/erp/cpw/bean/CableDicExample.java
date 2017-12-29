@@ -1,6 +1,7 @@
 package com.zhonglianxs.erp.cpw.bean;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CableDicExample {
@@ -164,63 +165,63 @@ public class CableDicExample {
             return (Criteria) this;
         }
 
-        public Criteria andCableDicEngineIsNull() {
-            addCriterion("cable_dic_ENGINE is null");
+        public Criteria andCableDicTypeIsNull() {
+            addCriterion("cable_dic_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andCableDicEngineIsNotNull() {
-            addCriterion("cable_dic_ENGINE is not null");
+        public Criteria andCableDicTypeIsNotNull() {
+            addCriterion("cable_dic_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCableDicEngineEqualTo(Integer value) {
-            addCriterion("cable_dic_ENGINE =", value, "cableDicEngine");
+        public Criteria andCableDicTypeEqualTo(Integer value) {
+            addCriterion("cable_dic_type =", value, "cableDicType");
             return (Criteria) this;
         }
 
-        public Criteria andCableDicEngineNotEqualTo(Integer value) {
-            addCriterion("cable_dic_ENGINE <>", value, "cableDicEngine");
+        public Criteria andCableDicTypeNotEqualTo(Integer value) {
+            addCriterion("cable_dic_type <>", value, "cableDicType");
             return (Criteria) this;
         }
 
-        public Criteria andCableDicEngineGreaterThan(Integer value) {
-            addCriterion("cable_dic_ENGINE >", value, "cableDicEngine");
+        public Criteria andCableDicTypeGreaterThan(Integer value) {
+            addCriterion("cable_dic_type >", value, "cableDicType");
             return (Criteria) this;
         }
 
-        public Criteria andCableDicEngineGreaterThanOrEqualTo(Integer value) {
-            addCriterion("cable_dic_ENGINE >=", value, "cableDicEngine");
+        public Criteria andCableDicTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("cable_dic_type >=", value, "cableDicType");
             return (Criteria) this;
         }
 
-        public Criteria andCableDicEngineLessThan(Integer value) {
-            addCriterion("cable_dic_ENGINE <", value, "cableDicEngine");
+        public Criteria andCableDicTypeLessThan(Integer value) {
+            addCriterion("cable_dic_type <", value, "cableDicType");
             return (Criteria) this;
         }
 
-        public Criteria andCableDicEngineLessThanOrEqualTo(Integer value) {
-            addCriterion("cable_dic_ENGINE <=", value, "cableDicEngine");
+        public Criteria andCableDicTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("cable_dic_type <=", value, "cableDicType");
             return (Criteria) this;
         }
 
-        public Criteria andCableDicEngineIn(List<Integer> values) {
-            addCriterion("cable_dic_ENGINE in", values, "cableDicEngine");
+        public Criteria andCableDicTypeIn(List<Integer> values) {
+            addCriterion("cable_dic_type in", values, "cableDicType");
             return (Criteria) this;
         }
 
-        public Criteria andCableDicEngineNotIn(List<Integer> values) {
-            addCriterion("cable_dic_ENGINE not in", values, "cableDicEngine");
+        public Criteria andCableDicTypeNotIn(List<Integer> values) {
+            addCriterion("cable_dic_type not in", values, "cableDicType");
             return (Criteria) this;
         }
 
-        public Criteria andCableDicEngineBetween(Integer value1, Integer value2) {
-            addCriterion("cable_dic_ENGINE between", value1, value2, "cableDicEngine");
+        public Criteria andCableDicTypeBetween(Integer value1, Integer value2) {
+            addCriterion("cable_dic_type between", value1, value2, "cableDicType");
             return (Criteria) this;
         }
 
-        public Criteria andCableDicEngineNotBetween(Integer value1, Integer value2) {
-            addCriterion("cable_dic_ENGINE not between", value1, value2, "cableDicEngine");
+        public Criteria andCableDicTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("cable_dic_type not between", value1, value2, "cableDicType");
             return (Criteria) this;
         }
 
@@ -361,6 +362,126 @@ public class CableDicExample {
 
         public Criteria andCableDicDescNotBetween(String value1, String value2) {
             addCriterion("cable_dic_desc not between", value1, value2, "cableDicDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicIntypeIsNull() {
+            addCriterion("cable_dic_intype is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicIntypeIsNotNull() {
+            addCriterion("cable_dic_intype is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicIntypeEqualTo(Integer value) {
+            addCriterion("cable_dic_intype =", value, "cableDicIntype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicIntypeNotEqualTo(Integer value) {
+            addCriterion("cable_dic_intype <>", value, "cableDicIntype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicIntypeGreaterThan(Integer value) {
+            addCriterion("cable_dic_intype >", value, "cableDicIntype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicIntypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("cable_dic_intype >=", value, "cableDicIntype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicIntypeLessThan(Integer value) {
+            addCriterion("cable_dic_intype <", value, "cableDicIntype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicIntypeLessThanOrEqualTo(Integer value) {
+            addCriterion("cable_dic_intype <=", value, "cableDicIntype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicIntypeIn(List<Integer> values) {
+            addCriterion("cable_dic_intype in", values, "cableDicIntype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicIntypeNotIn(List<Integer> values) {
+            addCriterion("cable_dic_intype not in", values, "cableDicIntype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicIntypeBetween(Integer value1, Integer value2) {
+            addCriterion("cable_dic_intype between", value1, value2, "cableDicIntype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicIntypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("cable_dic_intype not between", value1, value2, "cableDicIntype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicTimeIsNull() {
+            addCriterion("cable_dic_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicTimeIsNotNull() {
+            addCriterion("cable_dic_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicTimeEqualTo(Date value) {
+            addCriterion("cable_dic_time =", value, "cableDicTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicTimeNotEqualTo(Date value) {
+            addCriterion("cable_dic_time <>", value, "cableDicTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicTimeGreaterThan(Date value) {
+            addCriterion("cable_dic_time >", value, "cableDicTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("cable_dic_time >=", value, "cableDicTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicTimeLessThan(Date value) {
+            addCriterion("cable_dic_time <", value, "cableDicTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicTimeLessThanOrEqualTo(Date value) {
+            addCriterion("cable_dic_time <=", value, "cableDicTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicTimeIn(List<Date> values) {
+            addCriterion("cable_dic_time in", values, "cableDicTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicTimeNotIn(List<Date> values) {
+            addCriterion("cable_dic_time not in", values, "cableDicTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicTimeBetween(Date value1, Date value2) {
+            addCriterion("cable_dic_time between", value1, value2, "cableDicTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCableDicTimeNotBetween(Date value1, Date value2) {
+            addCriterion("cable_dic_time not between", value1, value2, "cableDicTime");
             return (Criteria) this;
         }
 

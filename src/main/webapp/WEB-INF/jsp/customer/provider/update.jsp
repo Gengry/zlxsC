@@ -8,28 +8,24 @@
 <div id="updateDialog" class="crudDialog">
 	<form id="updateForm" method="post">
 		<div class="form-group">
-			<label for="cableHouseNameCreate">仓库名</label>
-			<input id="cableHouseNameCreate" type="text" class="form-control" name="cableHouseName" maxlength="20" value="${cableHouse.cableHouseName}">
+			<label for="cableModelCreate">线缆型号</label>
+			<input id="cableModelCreate" type="text" class="form-control" name="cableModel" maxlength="20" value="${cableInfo.cableModel}">
 		</div>
 		<div class="form-group">
-			<label for="cableHouseAddressCreate">仓库地址</label>
-			<input id="cableHouseAddressCreate" type="text" class="form-control" name="cableHouseAddress" maxlength="20" value="${cableHouse.cableHouseAddress}">
+			<label for="cableSpecCreate">线缆规格</label>
+			<input id="cableSpecCreate" type="text" class="form-control" name="cableSpec" maxlength="20" value="${cableInfo.cableSpec}">
 		</div>
 		<div class="form-group">
-			<label for="cableHouseContactCreate">仓库管理员</label>
-			<input id="cableHouseContactCreate" type="text" class="form-control" name="cableHouseContact" maxlength="300" value="${cableHouse.cableHouseContact}">
+			<label for="cablePriceCreate">推荐价格</label>
+			<input id="cablePriceCreate" type="text" class="form-control" name="cablePrice" maxlength="300" value="${cableInfo.cablePrice}">
 		</div>
 		<div class="form-group">
-			<label for="cableHouseTeleCreate">仓库电话</label>
-			<input id="cableHouseTeleCreate" type="text" class="form-control" name="cableHouseTele" maxlength="300" value="${cableHouse.cableHouseTele}">
-		</div>
-		<div class="form-group">
-			<label for="cableHouseDescCreate">描述</label>
-			<input id="cableHouseDescCreate" type="text" class="form-control" name="cableHouseDesc" maxlength="300" value="${cableHouse.cableHouseDesc}">
+			<label for="cableDescCreate">描述</label>
+			<input id="cableDescCreate" type="text" class="form-control" name="cableDesc" maxlength="300" value="${cableInfo.cableDesc}">
 		</div>
 		<div class="form-group text-right dialog-buttons">
 			<a class="waves-effect waves-button" href="javascript:;" onclick="createSubmit();">保存</a>
-			<a class="waves-effect waves-button" href="javascript:;" onclick="createDialog.close();">取消</a>
+			<a class="waves-effect waves-button" href="javascript:;" onclick="updateDialog.close();">取消</a>
 		</div>
 	</form>
 </div>
@@ -37,7 +33,7 @@
 function createSubmit() {
     $.ajax({
         type: 'post',
-        url: '${basePath}/mate/house/update/${cableHouse.id}',
+        url: '${basePath}/mate/cable/update/${cableInfo.id}',
         data: $('#updateForm').serialize(),
         beforeSend: function() {
 			if ($('#name').val() == '') {

@@ -1,6 +1,7 @@
 package com.zhonglianxs.erp.cpw.bean;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class CableInfo {
     private Integer id;
@@ -14,6 +15,8 @@ public class CableInfo {
     private String cableDesc;
 
     private BigDecimal cablePrice;
+
+    private Date cableTime;
 
     private Short cableDelete;
 
@@ -63,6 +66,14 @@ public class CableInfo {
 
     public void setCablePrice(BigDecimal cablePrice) {
         this.cablePrice = cablePrice;
+    }
+
+    public Date getCableTime() {
+        return cableTime;
+    }
+
+    public void setCableTime(Date cableTime) {
+        this.cableTime = cableTime;
     }
 
     public Short getCableDelete() {

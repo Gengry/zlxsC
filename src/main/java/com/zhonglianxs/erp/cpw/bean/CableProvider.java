@@ -1,5 +1,7 @@
 package com.zhonglianxs.erp.cpw.bean;
 
+import java.util.Date;
+
 public class CableProvider {
     private Integer id;
 
@@ -14,6 +16,8 @@ public class CableProvider {
     private String providerAddress;
 
     private String providerWarehouse;
+
+    private Date providerTime;
 
     private String providerDesc;
 
@@ -73,6 +77,14 @@ public class CableProvider {
 
     public void setProviderWarehouse(String providerWarehouse) {
         this.providerWarehouse = providerWarehouse == null ? null : providerWarehouse.trim();
+    }
+
+    public Date getProviderTime() {
+        return providerTime;
+    }
+
+    public void setProviderTime(Date providerTime) {
+        this.providerTime = providerTime;
     }
 
     public String getProviderDesc() {

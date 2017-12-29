@@ -11,21 +11,25 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>角色管理</title>
+	<title>供应商管理</title>
 	<jsp:include page="/resources/inc/head.jsp" flush="true"/>
 </head>
 <body>
 <div id="main">
 	<div id="toolbar" class="form-inline">
-		<a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增线缆</a>
+		<a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增信息</a>
 		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除信息</a>
         <div class="form-group">
-            <label class="sr-only" for="cableModel">线缆型号</label>
-            <input type="text" class="form-control" id="cableModel" placeholder="线缆型号">
+            <label class="sr-only" for="providerName">供应商</label>
+            <input type="text" class="form-control" id="providerName" placeholder="供应商">
         </div>
         <div class="form-group">
-            <label class="sr-only" for="cableSpec">线缆规格</label>
-            <input type="text" class="form-control" id="cableSpec" placeholder="线缆规格">
+            <label class="sr-only" for="providerContact">联系人</label>
+            <input type="text" class="form-control" id="providerContact" placeholder="联系人">
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="providerTele">联系电话</label>
+            <input type="text" class="form-control" id="providerTele" placeholder="联系电话">
         </div>
         <button type="button" class="btn btn-default" onclick="javascript:$table.bootstrapTable('refresh');">查找</button>
 	</div>
@@ -37,7 +41,7 @@ var $table = $('#table');
 $(function() {
 	// bootstrap table初始化
 	$table.bootstrapTable({
-		url: '${basePath}/mate/cable/list',
+		url: '${basePath}/customer/provider/list',
 		height: getHeight(),
 		striped: true,
 		//showColumns: true,
@@ -59,11 +63,13 @@ $(function() {
 		columns: [
 			{field: 'ck', checkbox: true},
 			{field: 'id', title: '编号', align: 'center', visible:false},
-			{field: 'cableModel', title: '线缆型号', align: 'center'},
-			{field: 'cableSpec', title: '线缆规格', align: 'center'},
-            {field: 'cablePrice', title: '建议单价', align: 'center'},
-            {field: 'cableTime', title: '创建时间', align: 'center' , formatter: 'timeFormatter'},
-            //{field: 'cableDesc', title: '描述', align: 'center', width: '20%'},
+			{field: 'providerName', title: '供应商', align: 'center'},
+			{field: 'providerContact', title: '联系人', align: 'center'},
+            {field: 'providerTele', title: '联系电话', align: 'center'},
+            {field: 'providerAddress', title: '地址', align: 'center'},
+            {field: 'providerWarehouse', title: '仓库地址', align: 'center'},
+            {field: 'providerTime', title: '创建时间', align: 'center' , formatter: 'timeFormatter'},
+            //{field: 'providerDesc', title: '描述', align: 'center', width: '20%'},
 			{field: 'action', title: '操作', align: 'center', formatter: 'actionFormatter', events: 'actionEvents', clickToSelect: false,width:'150px' }
 		],
 
@@ -75,8 +81,9 @@ function refreshInit(){
 }
 
 function queryParams(params) {
-    params["cableModel"]=$("#cableModel").val();
-    params["cableSpec"]=$("#cableSpec").val();
+    params["providerName"]=$("#providerName").val();
+    params["providerContact"]=$("#providerContact").val();
+    params["providerTele"]=$("#providerTele").val();
     return params;
 }
 
@@ -92,9 +99,13 @@ function actionFormatter(value, row, index) {
 }
 
 function timeFormatter(value, row, index){
-    var timeStamp = row.cableTime;
+    var timeStamp = row.providerTime;
     var date = new Date(timeStamp)
     return dateFtt("yyyy-MM-dd hh:mm:ss",date);
+}
+
+function cableFormatter(index, row) {
+    return '描述：'+row.providerDesc;
 }
 
 // 新增
@@ -257,9 +268,6 @@ function deleteAction() {
 	}
 }
 
-function cableFormatter(index, row) {
-    return '描述：'+row.cableDesc;
-}
 </script>
 </body>
 </html>

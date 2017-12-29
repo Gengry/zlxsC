@@ -1,5 +1,7 @@
 package com.zhonglianxs.erp.cpw.bean;
 
+import java.util.Date;
+
 public class CableCustomer {
     private Integer id;
 
@@ -14,6 +16,8 @@ public class CableCustomer {
     private String customerAddress;
 
     private String customerWarehouse;
+
+    private Date customerTime;
 
     private String customerDesc;
 
@@ -73,6 +77,14 @@ public class CableCustomer {
 
     public void setCustomerWarehouse(String customerWarehouse) {
         this.customerWarehouse = customerWarehouse == null ? null : customerWarehouse.trim();
+    }
+
+    public Date getCustomerTime() {
+        return customerTime;
+    }
+
+    public void setCustomerTime(Date customerTime) {
+        this.customerTime = customerTime;
     }
 
     public String getCustomerDesc() {

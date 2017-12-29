@@ -8,6 +8,8 @@
     <result column="cable_house_address" property="cableHouseAddress" jdbcType="VARCHAR" />
     <result column="cable_house_contact" property="cableHouseContact" jdbcType="VARCHAR" />
     <result column="cable_house_tele" property="cableHouseTele" jdbcType="VARCHAR" />
+    <result column="cable_house_time" property="cableHouseTime" jdbcType="TIMESTAMP" />
+    <result column="cable_house_desc" property="cableHouseDesc" jdbcType="VARCHAR" />
     <result column="cable_house_delete" property="cableHouseDelete" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -70,7 +72,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, cable_house_user_id, cable_house_name, cable_house_address, cable_house_contact, 
-    cable_house_tele, cable_house_delete
+    cable_house_tele, cable_house_time, cable_house_desc, cable_house_delete
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhonglianxs.erp.cpw.bean.CableHouseExample" >
     select
@@ -106,10 +108,12 @@
   <insert id="insert" parameterType="com.zhonglianxs.erp.cpw.bean.CableHouse" >
     insert into cable_house (id, cable_house_user_id, cable_house_name, 
       cable_house_address, cable_house_contact, cable_house_tele, 
-      cable_house_delete)
+      cable_house_time, cable_house_desc, cable_house_delete
+      )
     values (#{id,jdbcType=INTEGER}, #{cableHouseUserId,jdbcType=INTEGER}, #{cableHouseName,jdbcType=VARCHAR}, 
       #{cableHouseAddress,jdbcType=VARCHAR}, #{cableHouseContact,jdbcType=VARCHAR}, #{cableHouseTele,jdbcType=VARCHAR}, 
-      #{cableHouseDelete,jdbcType=INTEGER})
+      #{cableHouseTime,jdbcType=TIMESTAMP}, #{cableHouseDesc,jdbcType=VARCHAR}, #{cableHouseDelete,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableHouse" >
     insert into cable_house
@@ -131,6 +135,12 @@
       </if>
       <if test="cableHouseTele != null" >
         cable_house_tele,
+      </if>
+      <if test="cableHouseTime != null" >
+        cable_house_time,
+      </if>
+      <if test="cableHouseDesc != null" >
+        cable_house_desc,
       </if>
       <if test="cableHouseDelete != null" >
         cable_house_delete,
@@ -154,6 +164,12 @@
       </if>
       <if test="cableHouseTele != null" >
         #{cableHouseTele,jdbcType=VARCHAR},
+      </if>
+      <if test="cableHouseTime != null" >
+        #{cableHouseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cableHouseDesc != null" >
+        #{cableHouseDesc,jdbcType=VARCHAR},
       </if>
       <if test="cableHouseDelete != null" >
         #{cableHouseDelete,jdbcType=INTEGER},
@@ -187,6 +203,12 @@
       <if test="record.cableHouseTele != null" >
         cable_house_tele = #{record.cableHouseTele,jdbcType=VARCHAR},
       </if>
+      <if test="record.cableHouseTime != null" >
+        cable_house_time = #{record.cableHouseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cableHouseDesc != null" >
+        cable_house_desc = #{record.cableHouseDesc,jdbcType=VARCHAR},
+      </if>
       <if test="record.cableHouseDelete != null" >
         cable_house_delete = #{record.cableHouseDelete,jdbcType=INTEGER},
       </if>
@@ -203,6 +225,8 @@
       cable_house_address = #{record.cableHouseAddress,jdbcType=VARCHAR},
       cable_house_contact = #{record.cableHouseContact,jdbcType=VARCHAR},
       cable_house_tele = #{record.cableHouseTele,jdbcType=VARCHAR},
+      cable_house_time = #{record.cableHouseTime,jdbcType=TIMESTAMP},
+      cable_house_desc = #{record.cableHouseDesc,jdbcType=VARCHAR},
       cable_house_delete = #{record.cableHouseDelete,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -226,6 +250,12 @@
       <if test="cableHouseTele != null" >
         cable_house_tele = #{cableHouseTele,jdbcType=VARCHAR},
       </if>
+      <if test="cableHouseTime != null" >
+        cable_house_time = #{cableHouseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cableHouseDesc != null" >
+        cable_house_desc = #{cableHouseDesc,jdbcType=VARCHAR},
+      </if>
       <if test="cableHouseDelete != null" >
         cable_house_delete = #{cableHouseDelete,jdbcType=INTEGER},
       </if>
@@ -239,6 +269,8 @@
       cable_house_address = #{cableHouseAddress,jdbcType=VARCHAR},
       cable_house_contact = #{cableHouseContact,jdbcType=VARCHAR},
       cable_house_tele = #{cableHouseTele,jdbcType=VARCHAR},
+      cable_house_time = #{cableHouseTime,jdbcType=TIMESTAMP},
+      cable_house_desc = #{cableHouseDesc,jdbcType=VARCHAR},
       cable_house_delete = #{cableHouseDelete,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

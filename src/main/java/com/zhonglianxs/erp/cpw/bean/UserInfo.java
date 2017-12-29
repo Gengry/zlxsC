@@ -1,11 +1,15 @@
 package com.zhonglianxs.erp.cpw.bean;
 
+import java.util.Date;
+
 public class UserInfo {
     private Integer id;
 
     private String userName;
 
     private String userPass;
+
+    private Date userTime;
 
     private Integer userDelete;
 
@@ -31,6 +35,14 @@ public class UserInfo {
 
     public void setUserPass(String userPass) {
         this.userPass = userPass == null ? null : userPass.trim();
+    }
+
+    public Date getUserTime() {
+        return userTime;
+    }
+
+    public void setUserTime(Date userTime) {
+        this.userTime = userTime;
     }
 
     public Integer getUserDelete() {

@@ -8,6 +8,7 @@
     <result column="cable_spec" property="cableSpec" jdbcType="VARCHAR" />
     <result column="cable_desc" property="cableDesc" jdbcType="VARCHAR" />
     <result column="cable_price" property="cablePrice" jdbcType="DECIMAL" />
+    <result column="cable_time" property="cableTime" jdbcType="TIMESTAMP" />
     <result column="cable_delete" property="cableDelete" jdbcType="SMALLINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -69,7 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, cable_user_id, cable_model, cable_spec, cable_desc, cable_price, cable_delete
+    id, cable_user_id, cable_model, cable_spec, cable_desc, cable_price, cable_time, 
+    cable_delete
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhonglianxs.erp.cpw.bean.CableInfoExample" >
     select
@@ -105,10 +107,10 @@
   <insert id="insert" parameterType="com.zhonglianxs.erp.cpw.bean.CableInfo" >
     insert into cable_info (id, cable_user_id, cable_model, 
       cable_spec, cable_desc, cable_price, 
-      cable_delete)
+      cable_time, cable_delete)
     values (#{id,jdbcType=INTEGER}, #{cableUserId,jdbcType=INTEGER}, #{cableModel,jdbcType=VARCHAR}, 
       #{cableSpec,jdbcType=VARCHAR}, #{cableDesc,jdbcType=VARCHAR}, #{cablePrice,jdbcType=DECIMAL}, 
-      #{cableDelete,jdbcType=SMALLINT})
+      #{cableTime,jdbcType=TIMESTAMP}, #{cableDelete,jdbcType=SMALLINT})
   </insert>
   <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableInfo" >
     insert into cable_info
@@ -130,6 +132,9 @@
       </if>
       <if test="cablePrice != null" >
         cable_price,
+      </if>
+      <if test="cableTime != null" >
+        cable_time,
       </if>
       <if test="cableDelete != null" >
         cable_delete,
@@ -153,6 +158,9 @@
       </if>
       <if test="cablePrice != null" >
         #{cablePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="cableTime != null" >
+        #{cableTime,jdbcType=TIMESTAMP},
       </if>
       <if test="cableDelete != null" >
         #{cableDelete,jdbcType=SMALLINT},
@@ -186,6 +194,9 @@
       <if test="record.cablePrice != null" >
         cable_price = #{record.cablePrice,jdbcType=DECIMAL},
       </if>
+      <if test="record.cableTime != null" >
+        cable_time = #{record.cableTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.cableDelete != null" >
         cable_delete = #{record.cableDelete,jdbcType=SMALLINT},
       </if>
@@ -202,6 +213,7 @@
       cable_spec = #{record.cableSpec,jdbcType=VARCHAR},
       cable_desc = #{record.cableDesc,jdbcType=VARCHAR},
       cable_price = #{record.cablePrice,jdbcType=DECIMAL},
+      cable_time = #{record.cableTime,jdbcType=TIMESTAMP},
       cable_delete = #{record.cableDelete,jdbcType=SMALLINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -225,6 +237,9 @@
       <if test="cablePrice != null" >
         cable_price = #{cablePrice,jdbcType=DECIMAL},
       </if>
+      <if test="cableTime != null" >
+        cable_time = #{cableTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="cableDelete != null" >
         cable_delete = #{cableDelete,jdbcType=SMALLINT},
       </if>
@@ -238,6 +253,7 @@
       cable_spec = #{cableSpec,jdbcType=VARCHAR},
       cable_desc = #{cableDesc,jdbcType=VARCHAR},
       cable_price = #{cablePrice,jdbcType=DECIMAL},
+      cable_time = #{cableTime,jdbcType=TIMESTAMP},
       cable_delete = #{cableDelete,jdbcType=SMALLINT}
     where id = #{id,jdbcType=INTEGER}
   </update>

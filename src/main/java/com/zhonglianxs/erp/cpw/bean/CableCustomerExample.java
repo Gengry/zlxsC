@@ -1,6 +1,7 @@
 package com.zhonglianxs.erp.cpw.bean;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CableCustomerExample {
@@ -571,6 +572,66 @@ public class CableCustomerExample {
 
         public Criteria andCustomerWarehouseNotBetween(String value1, String value2) {
             addCriterion("customer_warehouse not between", value1, value2, "customerWarehouse");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerTimeIsNull() {
+            addCriterion("customer_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerTimeIsNotNull() {
+            addCriterion("customer_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerTimeEqualTo(Date value) {
+            addCriterion("customer_time =", value, "customerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerTimeNotEqualTo(Date value) {
+            addCriterion("customer_time <>", value, "customerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerTimeGreaterThan(Date value) {
+            addCriterion("customer_time >", value, "customerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("customer_time >=", value, "customerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerTimeLessThan(Date value) {
+            addCriterion("customer_time <", value, "customerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerTimeLessThanOrEqualTo(Date value) {
+            addCriterion("customer_time <=", value, "customerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerTimeIn(List<Date> values) {
+            addCriterion("customer_time in", values, "customerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerTimeNotIn(List<Date> values) {
+            addCriterion("customer_time not in", values, "customerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerTimeBetween(Date value1, Date value2) {
+            addCriterion("customer_time between", value1, value2, "customerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerTimeNotBetween(Date value1, Date value2) {
+            addCriterion("customer_time not between", value1, value2, "customerTime");
             return (Criteria) this;
         }
 

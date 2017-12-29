@@ -1,5 +1,7 @@
 package com.zhonglianxs.erp.cpw.bean;
 
+import java.util.Date;
+
 public class CableHouse {
     private Integer id;
 
@@ -12,6 +14,10 @@ public class CableHouse {
     private String cableHouseContact;
 
     private String cableHouseTele;
+
+    private Date cableHouseTime;
+
+    private String cableHouseDesc;
 
     private Integer cableHouseDelete;
 
@@ -61,6 +67,22 @@ public class CableHouse {
 
     public void setCableHouseTele(String cableHouseTele) {
         this.cableHouseTele = cableHouseTele == null ? null : cableHouseTele.trim();
+    }
+
+    public Date getCableHouseTime() {
+        return cableHouseTime;
+    }
+
+    public void setCableHouseTime(Date cableHouseTime) {
+        this.cableHouseTime = cableHouseTime;
+    }
+
+    public String getCableHouseDesc() {
+        return cableHouseDesc;
+    }
+
+    public void setCableHouseDesc(String cableHouseDesc) {
+        this.cableHouseDesc = cableHouseDesc == null ? null : cableHouseDesc.trim();
     }
 
     public Integer getCableHouseDelete() {

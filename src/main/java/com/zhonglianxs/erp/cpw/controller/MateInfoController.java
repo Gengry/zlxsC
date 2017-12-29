@@ -48,12 +48,12 @@ public class MateInfoController {
         CableInfoExample.Criteria criteria = cableInfoExample.createCriteria();
         criteria.andCableDeleteEqualTo((short)0).andCableUserIdEqualTo((int)session.getAttribute("userId"));
         if(StringUtils.isNotBlank(cableModel)){
-            criteria.andCableModelEqualTo(cableModel);
+            criteria.andCableModelLike("%"+cableModel+"%");
         }
         if(StringUtils.isNotBlank(cableSpec)){
-            criteria.andCableSpecEqualTo(cableSpec);
+            criteria.andCableSpecLike("%"+cableSpec+"%");
         }
-        cableInfoExample.setOrderByClause("cable_model");
+        cableInfoExample.setOrderByClause("cable_time desc");
         List<CableInfo> rows = cableInfoService.selectByExampleForOffsetPage(cableInfoExample, offset, limit);
         long total = cableInfoService.countByExample(cableInfoExample);
         Map<String, Object> result = new HashMap<>();
@@ -122,7 +122,7 @@ public class MateInfoController {
         CableHouseExample cableHouseExample = new CableHouseExample();
         CableHouseExample.Criteria criteria = cableHouseExample.createCriteria();
         criteria.andCableHouseDeleteEqualTo(0).andCableHouseUserIdEqualTo((int)session.getAttribute("userId"));
-        cableHouseExample.setOrderByClause("cable_house_name");
+        cableHouseExample.setOrderByClause("cable_house_time desc");
         List<CableHouse> rows = cableHouseService.selectByExampleForOffsetPage(cableHouseExample, offset, limit);
         long total = cableHouseService.countByExample(cableHouseExample);
         Map<String, Object> result = new HashMap<>();
