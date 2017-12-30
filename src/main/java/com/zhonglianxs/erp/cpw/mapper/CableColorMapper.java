@@ -4,6 +4,7 @@ import com.zhonglianxs.erp.cpw.bean.CableColor;
 import com.zhonglianxs.erp.cpw.bean.CableColorExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 public interface CableColorMapper {
     int countByExample(CableColorExample example);
@@ -27,4 +28,7 @@ public interface CableColorMapper {
     int updateByPrimaryKeySelective(CableColor record);
 
     int updateByPrimaryKey(CableColor record);
+
+    @Update("update cable_color set color_delete = 1 where id = #{id}")
+    int deleteRecordByKey(@Param("id") Integer id);
 }

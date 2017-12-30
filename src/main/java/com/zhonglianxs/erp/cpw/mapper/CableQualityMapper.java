@@ -4,6 +4,7 @@ import com.zhonglianxs.erp.cpw.bean.CableQuality;
 import com.zhonglianxs.erp.cpw.bean.CableQualityExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 public interface CableQualityMapper {
     int countByExample(CableQualityExample example);
@@ -27,4 +28,7 @@ public interface CableQualityMapper {
     int updateByPrimaryKeySelective(CableQuality record);
 
     int updateByPrimaryKey(CableQuality record);
+
+    @Update("update cable_quality set quality_delete = 1 where id = #{id}")
+    int deleteRecordByKey(@Param("id") Integer id);
 }

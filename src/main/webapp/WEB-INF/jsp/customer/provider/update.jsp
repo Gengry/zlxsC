@@ -8,20 +8,28 @@
 <div id="updateDialog" class="crudDialog">
 	<form id="updateForm" method="post">
 		<div class="form-group">
-			<label for="cableModelCreate">线缆型号</label>
-			<input id="cableModelCreate" type="text" class="form-control" name="cableModel" maxlength="20" value="${cableInfo.cableModel}">
+			<label for="providerNameCreate">供应商</label>
+			<input id="providerNameCreate" type="text" class="form-control" name="providerName" maxlength="20" value="${cableProvider.providerName}">
 		</div>
 		<div class="form-group">
-			<label for="cableSpecCreate">线缆规格</label>
-			<input id="cableSpecCreate" type="text" class="form-control" name="cableSpec" maxlength="20" value="${cableInfo.cableSpec}">
+			<label for="providerContactCreate">联系人</label>
+			<input id="providerContactCreate" type="text" class="form-control" name="providerContact" maxlength="20" value="${cableProvider.providerContact}">
 		</div>
 		<div class="form-group">
-			<label for="cablePriceCreate">推荐价格</label>
-			<input id="cablePriceCreate" type="text" class="form-control" name="cablePrice" maxlength="300" value="${cableInfo.cablePrice}">
+			<label for="providerTeleCreate">联系电话</label>
+			<input id="providerTeleCreate" type="text" class="form-control" name="providerTele" maxlength="300" value="${cableProvider.providerTele}">
 		</div>
 		<div class="form-group">
-			<label for="cableDescCreate">描述</label>
-			<input id="cableDescCreate" type="text" class="form-control" name="cableDesc" maxlength="300" value="${cableInfo.cableDesc}">
+			<label for="providerAddressCreate">地址</label>
+			<input id="providerAddressCreate" type="text" class="form-control" name="providerAddress" maxlength="300" value="${cableProvider.providerAddress}">
+		</div>
+		<div class="form-group">
+			<label for="providerWarehouseCreate">仓库地址</label>
+			<input id="providerWarehouseCreate" type="text" class="form-control" name="providerWarehouse" maxlength="300" value="${cableProvider.providerWarehouse}">
+		</div>
+		<div class="form-group">
+			<label for="providerDescCreate">描述</label>
+			<input id="providerDescCreate" type="text" class="form-control" name="providerDesc" maxlength="300" value="${cableProvider.providerDesc}">
 		</div>
 		<div class="form-group text-right dialog-buttons">
 			<a class="waves-effect waves-button" href="javascript:;" onclick="createSubmit();">保存</a>
@@ -33,17 +41,24 @@
 function createSubmit() {
     $.ajax({
         type: 'post',
-        url: '${basePath}/mate/cable/update/${cableInfo.id}',
+        url: '${basePath}/customer/provider/update/${cableProvider.id}',
         data: $('#updateForm').serialize(),
         beforeSend: function() {
-			if ($('#name').val() == '') {
-				$('#name').focus();
-				return false;
-			}
-			if ($('#title').val() == '') {
-				$('#title').focus();
-				return false;
-			}
+            if(isEmpty($("#providerNameCreate").val())){
+                failPrompt('供应商不能为空');
+                $('#providerNameCreate').focus();
+                return false;
+            }
+            if(isEmpty($("#providerContactCreate").val())){
+                failPrompt('联系人不能为空');
+                $('#providerContactCreate').focus();
+                return false;
+            }
+            if(isEmpty($("#providerTeleCreate").val())){
+                failPrompt('联系电话不能为空');
+                $('#providerTeleCreate').focus();
+                return false;
+            }
         },
         success: function(result) {
 			if (result.code != 1) {

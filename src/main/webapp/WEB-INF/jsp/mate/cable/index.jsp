@@ -97,6 +97,14 @@ function timeFormatter(value, row, index){
     return dateFtt("yyyy-MM-dd hh:mm:ss",date);
 }
 
+function cableFormatter(index, row) {
+    return '描述：'+row.cableDesc;
+//    var t = '仓库管理';
+//    var x = '/mate/houseIndex';
+//    return "<div type=''><table><tr><td>1</td><td>2</td><td>3</td></tr></table>" +
+//        "<a href='javascript:parent.Tab.addTab(\""+t+"\", \""+x+"\");'>123123</a></div>";
+}
+
 // 新增
 var createDialog;
 function createAction() {
@@ -255,10 +263,6 @@ function deleteAction() {
 			}
 		});
 	}
-}
-
-function cableFormatter(index, row) {
-    return '描述：'+row.cableDesc;
 }
 </script>
 </body>

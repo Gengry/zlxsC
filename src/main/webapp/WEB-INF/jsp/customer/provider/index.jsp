@@ -89,12 +89,10 @@ function queryParams(params) {
 
 // 格式化操作按钮
 function actionFormatter(value, row, index) {
-    var cableInfoId = row.id;
-    var cableModel = row.cableModel;
+    var id = row.id;
     return [
-        '<a class="update" href="javascript:;" onclick="createSpecAction('+cableModel+')" data-toggle="tooltip" title="add"><i class="glyphicon glyphicon-plus-sign"></i></a>　',
-		'<a class="update" href="javascript:;" onclick="updateAction('+cableInfoId+')" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>　',
-		'<a class="delete" href="javascript:;" onclick="deleteAction('+cableInfoId+')" data-toggle="tooltip" title="Remove"><i class="glyphicon glyphicon-remove"></i></a>'
+		'<a class="update" href="javascript:;" onclick="updateAction('+id+')" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>　',
+		'<a class="delete" href="javascript:;" onclick="deleteAction('+id+')" data-toggle="tooltip" title="Remove"><i class="glyphicon glyphicon-remove"></i></a>'
     ].join('');
 }
 
@@ -113,32 +111,21 @@ var createDialog;
 function createAction() {
 	createDialog = $.dialog({
 		animationSpeed: 300,
-		title: '新增线缆信息',
-		content: 'url:${basePath}/mate/cable/create',
+		title: '新增信息',
+		content: 'url:${basePath}/customer/provider/create',
 		onContentReady: function () {
 			initMaterialInput();
 		}
 	});
 }
 
-function createSpecAction(cableModel) {
-    createDialog = $.dialog({
-        animationSpeed: 300,
-        title: '新增线缆规格',
-        content: 'url:${basePath}/mate/cable/create?cableModel='+cableModel,
-        onContentReady: function () {
-            initMaterialInput();
-        }
-    });
-}
-
 // 编辑
 var updateDialog;
-function updateAction(cableInfoId) {
+function updateAction(id) {
     updateDialog = $.dialog({
         animationSpeed: 300,
-        title: '编辑角色',
-        content: 'url:${basePath}/mate/cable/update/' + cableInfoId,
+        title: '编辑信息',
+        content: 'url:${basePath}/customer/provider/update/' + id,
         onContentReady: function () {
             initMaterialInput();
         }
@@ -202,7 +189,7 @@ function deleteAction() {
 						}
 						$.ajax({
 							type: 'get',
-							url: '${basePath}/mate/cable/delete/' + ids.join("-"),
+							url: '${basePath}/customer/provider/delete/' + ids.join("-"),
 							success: function(result) {
 								if (result.code != 1) {
 									if (result.data instanceof Array) {
