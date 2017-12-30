@@ -4,6 +4,7 @@ import com.zhonglianxs.erp.cpw.bean.*;
 import com.zhonglianxs.erp.cpw.service.CableColorService;
 import com.zhonglianxs.erp.cpw.service.CableHouseService;
 import com.zhonglianxs.erp.cpw.service.CableInfoService;
+import com.zhonglianxs.erp.cpw.service.CableQualityService;
 import com.zhonglianxs.erp.cpw.util.BaseResult;
 import com.zhonglianxs.erp.cpw.util.ResultConstant;
 import org.apache.commons.lang.StringUtils;
@@ -29,6 +30,8 @@ public class MateInfoController {
     private CableHouseService cableHouseService;
     @Autowired
     private CableColorService cableColorService;
+    @Autowired
+    private CableQualityService cableQualityService;
 
     @RequestMapping("/cableIndex")
     public String cableInfoIndex(){
@@ -238,6 +241,73 @@ public class MateInfoController {
     @ResponseBody
     public Object colorDelete(@PathVariable("ids") String ids) {
         int count = cableColorService.deleteByPrimaryKeys(ids);
+        return new BaseResult(ResultConstant.SUCCESS, count);
+    }
+
+    @RequestMapping("/qualityIndex")
+    public String qualityInfoIndex(){
+        return "mate/quality/index.jsp";
+    }
+
+    @RequestMapping(value = "/quality/list", method = RequestMethod.GET)
+    @ResponseBody
+    public Object qualityList(HttpSession session,
+                            @RequestParam(required = false, defaultValue = "0", value = "offset") int offset,
+                            @RequestParam(required = false, defaultValue = "10", value = "limit") int limit,
+                            @RequestParam(required = false, value = "sort") String sort,
+                            @RequestParam(required = false, value = "order") String order) {
+        CableQualityExample cableQualityExample = new CableQualityExample();
+        CableQualityExample.Criteria criteria = cableQualityExample.createCriteria();
+        criteria.andQualityDeleteEqualTo(0).andQualityUserIdEqualTo((int)session.getAttribute("userId"));
+        cableQualityExample.setOrderByClause("quality_time desc");
+        List<CableQuality> rows = cableQualityService.selectByExampleForOffsetPage(cableQualityExample, offset, limit);
+        long total = cableQualityService.countByExample(cableQualityExample);
+        Map<String, Object> result = new HashMap<>();
+        result.put("rows", rows);
+        result.put("total", total);
+        return result;
+    }
+
+    @RequestMapping(value = "/quality/create", method = RequestMethod.GET)
+    public String qualityCreate() {
+        return "mate/quality/creat.jsp";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/quality/create", method = RequestMethod.POST)
+    public Object qualityCreate(CableQuality cableQuality,HttpSession session) {
+        CableQualityExample cableQualityExample = new CableQualityExample();
+        CableQualityExample.Criteria criteria = cableQualityExample.createCriteria();
+        criteria.andQualityQualityEqualTo(cableQuality.getQualityQuality()).andQualityDeleteEqualTo(0);
+        int count = cableQualityService.countByExample(cableQualityExample);
+        if(count!=0){
+            return new BaseResult(ResultConstant.INVALID_LENGTH, count);
+        }
+        cableQuality.setQualityUserId((int)session.getAttribute("userId"));
+        cableQuality.setQualityDelete(0);
+        count = cableQualityService.insertSelective(cableQuality);
+        return new BaseResult(ResultConstant.SUCCESS, count);
+    }
+
+    @RequestMapping(value = "/quality/update/{id}", method = RequestMethod.GET)
+    public String qualityUpdate(@PathVariable("id") Integer id, ModelMap modelMap) {
+        CableQuality cableQuality = cableQualityService.selectByPrimaryKey(id);
+        modelMap.put("cableQuality", cableQuality);
+        return "mate/quality/update.jsp";
+    }
+
+    @RequestMapping(value = "/quality/update/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public Object qualityUpdate(@PathVariable("id") int id, CableQuality cableQuality,HttpSession session) {
+        cableQuality.setId(id);
+        int count = cableQualityService.updateByPrimaryKeySelective(cableQuality);
+        return new BaseResult(ResultConstant.SUCCESS, count);
+    }
+
+    @RequestMapping(value = "/quality/delete/{ids}",method = RequestMethod.GET)
+    @ResponseBody
+    public Object qualityDelete(@PathVariable("ids") String ids) {
+        int count = cableQualityService.deleteByPrimaryKeys(ids);
         return new BaseResult(ResultConstant.SUCCESS, count);
     }
 

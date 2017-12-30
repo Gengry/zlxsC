@@ -11,13 +11,13 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>颜色信息</title>
+	<title>质量标准</title>
 	<jsp:include page="/resources/inc/head.jsp" flush="true"/>
 </head>
 <body>
 <div id="main">
 	<div id="toolbar" class="form-inline">
-		<a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增颜色</a>
+		<a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增标准</a>
 		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除信息</a>
         <button type="button" class="btn btn-default" onclick="javascript:$table.bootstrapTable('refresh');">刷新列表</button>
 	</div>
@@ -29,7 +29,7 @@ var $table = $('#table');
 $(function() {
 	// bootstrap table初始化
 	$table.bootstrapTable({
-		url: '${basePath}/mate/color/list',
+		url: '${basePath}/mate/quality/list',
 		height: getHeight(),
 		striped: true,
 		//showColumns: true,
@@ -50,9 +50,9 @@ $(function() {
 		columns: [
 			{field: 'ck', checkbox: true},
 			{field: 'id', title: '编号', align: 'center', visible:false},
-			{field: 'colorColor', title: '颜色', align: 'center'},
-            {field: 'colorTime', title: '创建时间', align: 'center' , formatter: 'timeFormatter'},
-            //{field: 'colorDesc', title: '描述', align: 'center', width: '20%'},
+			{field: 'qualityQuality', title: '质量', align: 'center'},
+            {field: 'qualityTime', title: '创建时间', align: 'center' , formatter: 'timeFormatter'},
+            //{field: 'qualityDesc', title: '描述', align: 'center', width: '20%'},
 			{field: 'action', title: '操作', align: 'center', formatter: 'actionFormatter', events: 'actionEvents', clickToSelect: false,width:'150px' }
 		],
 
@@ -73,13 +73,13 @@ function actionFormatter(value, row, index) {
 }
 
 function timeFormatter(value, row, index){
-    var timeStamp = row.colorTime;
+    var timeStamp = row.qualityTime;
     var date = new Date(timeStamp)
     return dateFtt("yyyy-MM-dd hh:mm:ss",date);
 }
 
 function cableFormatter(index, row) {
-    return '描述：'+row.colorDesc;
+    return '描述：'+row.qualityDesc;
 //    var t = '仓库管理';
 //    var x = '/mate/houseIndex';
 //    return "<div type=''><table><tr><td>1</td><td>2</td><td>3</td></tr></table>" +
@@ -91,8 +91,8 @@ var createDialog;
 function createAction() {
 	createDialog = $.dialog({
 		animationSpeed: 300,
-		title: '新增颜色',
-		content: 'url:${basePath}/mate/color/create',
+		title: '新增质量',
+		content: 'url:${basePath}/mate/quality/create',
 		onContentReady: function () {
 			initMaterialInput();
 		}
@@ -104,8 +104,8 @@ var updateDialog;
 function updateAction(id) {
     updateDialog = $.dialog({
         animationSpeed: 300,
-        title: '编辑颜色',
-        content: 'url:${basePath}/mate/color/update/' + id,
+        title: '编辑质量',
+        content: 'url:${basePath}/mate/quality/update/' + id,
         onContentReady: function () {
             initMaterialInput();
         }
@@ -145,7 +145,7 @@ function deleteAction() {
 						}
 						$.ajax({
 							type: 'get',
-							url: '${basePath}/mate/color/delete/' + ids.join("-"),
+							url: '${basePath}/mate/quality/delete/' + ids.join("-"),
 							success: function(result) {
 								if (result.code != 1) {
 									if (result.data instanceof Array) {

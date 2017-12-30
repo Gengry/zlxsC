@@ -8,12 +8,12 @@
 <div id="updateDialog" class="crudDialog">
 	<form id="updateForm" method="post">
 		<div class="form-group">
-			<label for="colorColorCreate">颜色</label>
-			<input id="colorColorCreate" type="text" class="form-control" name="colorColor" maxlength="20" value="${cableColor.colorColor}">
+			<label for="qualityQualityCreate">颜色</label>
+			<input id="qualityQualityCreate" type="text" class="form-control" name="qualityQuality" maxlength="20" value="${cableQuality.qualityQuality}">
 		</div>
 		<div class="form-group">
-			<label for="colorDescCreate">描述</label>
-			<input id="colorDescCreate" type="text" class="form-control" name="colorDesc" maxlength="300" value="${cableColor.colorDesc}">
+			<label for="qualityDescCreate">描述</label>
+			<input id="qualityDescCreate" type="text" class="form-control" name="qualityDesc" maxlength="300" value="${cableQuality.qualityDesc}">
 		</div>
 		<div class="form-group text-right dialog-buttons">
 			<a class="waves-effect waves-button" href="javascript:;" onclick="createSubmit();">保存</a>
@@ -25,7 +25,7 @@
 function createSubmit() {
     $.ajax({
         type: 'post',
-        url: '${basePath}/mate/color/update/${cableColor.id}',
+        url: '${basePath}/mate/quality/update/${cableQuality.id}',
         data: $('#updateForm').serialize(),
         beforeSend: function() {
 			if ($('#name').val() == '') {

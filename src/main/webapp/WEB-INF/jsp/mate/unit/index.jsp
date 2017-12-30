@@ -11,13 +11,13 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>颜色信息</title>
+	<title>单位信息</title>
 	<jsp:include page="/resources/inc/head.jsp" flush="true"/>
 </head>
 <body>
 <div id="main">
 	<div id="toolbar" class="form-inline">
-		<a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增颜色</a>
+		<a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增单位</a>
 		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除信息</a>
         <button type="button" class="btn btn-default" onclick="javascript:$table.bootstrapTable('refresh');">刷新列表</button>
 	</div>
@@ -29,7 +29,7 @@ var $table = $('#table');
 $(function() {
 	// bootstrap table初始化
 	$table.bootstrapTable({
-		url: '${basePath}/mate/color/list',
+		url: '${basePath}/mate/unit/list',
 		height: getHeight(),
 		striped: true,
 		//showColumns: true,
@@ -50,9 +50,9 @@ $(function() {
 		columns: [
 			{field: 'ck', checkbox: true},
 			{field: 'id', title: '编号', align: 'center', visible:false},
-			{field: 'colorColor', title: '颜色', align: 'center'},
-            {field: 'colorTime', title: '创建时间', align: 'center' , formatter: 'timeFormatter'},
-            //{field: 'colorDesc', title: '描述', align: 'center', width: '20%'},
+			{field: 'unitUnit', title: '单位', align: 'center'},
+            {field: 'unitTime', title: '创建时间', align: 'center' , formatter: 'timeFormatter'},
+            //{field: 'unitDesc', title: '描述', align: 'center', width: '20%'},
 			{field: 'action', title: '操作', align: 'center', formatter: 'actionFormatter', events: 'actionEvents', clickToSelect: false,width:'150px' }
 		],
 

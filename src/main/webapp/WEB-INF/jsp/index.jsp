@@ -103,7 +103,7 @@
 				<ul>
 					<li><a class="waves-effect" href="javascript:Tab.addTab('线缆信息', '/mate/cableIndex');">线缆信息</a></li>
 					<li><a class="waves-effect" href="javascript:Tab.addTab('颜色信息', '/mate/colorIndex');">颜色信息</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('计量单位', '/mate/unitIndex');">计量单位</a></li>
+					<%--<li><a class="waves-effect" href="javascript:Tab.addTab('计量单位', '/mate/unitIndex');"> </a></li>--%>
 					<li><a class="waves-effect" href="javascript:Tab.addTab('质量标准', '/mate/qualityIndex');">质量标准</a></li>
 					<li><a class="waves-effect" href="javascript:Tab.addTab('仓库管理', '/mate/houseIndex');">仓库管理</a></li>
 				</ul>
