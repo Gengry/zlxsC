@@ -15,6 +15,13 @@ $(function() {
 			$(this).parent().find('label').removeClass('active');
 		}
 	});
+    $(document).on('change', 'select', function() {
+        if($(this).val() == ''){
+            $(this).parent().find('label').removeClass('active');
+        }else{
+            $(this).parent().find('label').addClass('active');
+        }
+    });
 	// select2初始化
 	$('select').select2();
 });

@@ -1,9 +1,7 @@
 package com.zhonglianxs.erp.cpw.controller;
 
-import com.zhonglianxs.erp.cpw.bean.CableHouse;
-import com.zhonglianxs.erp.cpw.bean.CableHouseExample;
-import com.zhonglianxs.erp.cpw.bean.CableInfo;
-import com.zhonglianxs.erp.cpw.bean.CableInfoExample;
+import com.zhonglianxs.erp.cpw.bean.*;
+import com.zhonglianxs.erp.cpw.service.CableColorService;
 import com.zhonglianxs.erp.cpw.service.CableHouseService;
 import com.zhonglianxs.erp.cpw.service.CableInfoService;
 import com.zhonglianxs.erp.cpw.util.BaseResult;
@@ -29,6 +27,8 @@ public class MateInfoController {
     private CableInfoService cableInfoService;
     @Autowired
     private CableHouseService cableHouseService;
+    @Autowired
+    private CableColorService cableColorService;
 
     @RequestMapping("/cableIndex")
     public String cableInfoIndex(){
@@ -173,4 +173,72 @@ public class MateInfoController {
         int count = cableHouseService.deleteByPrimaryKeys(ids);
         return new BaseResult(ResultConstant.SUCCESS, count);
     }
+
+    @RequestMapping("/colorIndex")
+    public String colorInfoIndex(){
+        return "mate/color/index.jsp";
+    }
+
+    @RequestMapping(value = "/color/list", method = RequestMethod.GET)
+    @ResponseBody
+    public Object colorList(HttpSession session,
+                            @RequestParam(required = false, defaultValue = "0", value = "offset") int offset,
+                            @RequestParam(required = false, defaultValue = "10", value = "limit") int limit,
+                            @RequestParam(required = false, value = "sort") String sort,
+                            @RequestParam(required = false, value = "order") String order) {
+        CableColorExample cableColorExample = new CableColorExample();
+        CableColorExample.Criteria criteria = cableColorExample.createCriteria();
+        criteria.andColorDeleteEqualTo(0).andColorUserIdEqualTo((int)session.getAttribute("userId"));
+        cableColorExample.setOrderByClause("color_time desc");
+        List<CableColor> rows = cableColorService.selectByExampleForOffsetPage(cableColorExample, offset, limit);
+        long total = cableColorService.countByExample(cableColorExample);
+        Map<String, Object> result = new HashMap<>();
+        result.put("rows", rows);
+        result.put("total", total);
+        return result;
+    }
+
+    @RequestMapping(value = "/color/create", method = RequestMethod.GET)
+    public String colorCreate() {
+        return "mate/color/creat.jsp";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/color/create", method = RequestMethod.POST)
+    public Object colorCreate(CableColor cableColor,HttpSession session) {
+        CableColorExample cableColorExample = new CableColorExample();
+        CableColorExample.Criteria criteria = cableColorExample.createCriteria();
+        criteria.andColorColorEqualTo(cableColor.getColorColor()).andColorDeleteEqualTo(0);
+        int count = cableColorService.countByExample(cableColorExample);
+        if(count!=0){
+            return new BaseResult(ResultConstant.INVALID_LENGTH, count);
+        }
+        cableColor.setColorUserId((int)session.getAttribute("userId"));
+        cableColor.setColorDelete(0);
+        count = cableColorService.insertSelective(cableColor);
+        return new BaseResult(ResultConstant.SUCCESS, count);
+    }
+
+    @RequestMapping(value = "/color/update/{id}", method = RequestMethod.GET)
+    public String colorUpdate(@PathVariable("id") Integer id, ModelMap modelMap) {
+        CableColor cableColor = cableColorService.selectByPrimaryKey(id);
+        modelMap.put("cableColor", cableColor);
+        return "mate/color/update.jsp";
+    }
+
+    @RequestMapping(value = "/color/update/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public Object colorUpdate(@PathVariable("id") int id, CableColor cableColor,HttpSession session) {
+        cableColor.setId(id);
+        int count = cableColorService.updateByPrimaryKeySelective(cableColor);
+        return new BaseResult(ResultConstant.SUCCESS, count);
+    }
+
+    @RequestMapping(value = "/color/delete/{ids}",method = RequestMethod.GET)
+    @ResponseBody
+    public Object colorDelete(@PathVariable("ids") String ids) {
+        int count = cableColorService.deleteByPrimaryKeys(ids);
+        return new BaseResult(ResultConstant.SUCCESS, count);
+    }
+
 }

@@ -1,9 +1,7 @@
 package com.zhonglianxs.erp.cpw.controller;
 
-import com.zhonglianxs.erp.cpw.bean.CableInfo;
-import com.zhonglianxs.erp.cpw.bean.CableInfoExample;
-import com.zhonglianxs.erp.cpw.bean.CableProvider;
-import com.zhonglianxs.erp.cpw.bean.CableProviderExample;
+import com.zhonglianxs.erp.cpw.bean.*;
+import com.zhonglianxs.erp.cpw.service.CableCustomerService;
 import com.zhonglianxs.erp.cpw.service.CableProviderService;
 import com.zhonglianxs.erp.cpw.util.BaseResult;
 import com.zhonglianxs.erp.cpw.util.ResultConstant;
@@ -25,6 +23,9 @@ public class CustomerController {
 
     @Autowired
     private CableProviderService cableProviderService;
+
+    @Autowired
+    private CableCustomerService cableCustomerService;
 
     @RequestMapping("/providerIndex")
     public String providerIndex(){
@@ -85,7 +86,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/provider/update/{id}", method = RequestMethod.GET)
-    public String update(@PathVariable("id") Integer id, ModelMap modelMap) {
+    public String providerUpdate(@PathVariable("id") Integer id, ModelMap modelMap) {
         CableProvider cableProvider = cableProviderService.selectByPrimaryKey(id);
         modelMap.put("cableProvider", cableProvider);
         return "customer/provider/update.jsp";
@@ -93,7 +94,7 @@ public class CustomerController {
 
     @RequestMapping(value = "/provider/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public Object update(@PathVariable("id") int id, CableProvider cableProvider) {
+    public Object providerUpdate(@PathVariable("id") int id, CableProvider cableProvider) {
         cableProvider.setId(id);
         int count = cableProviderService.updateByPrimaryKeySelective(cableProvider);
         return new BaseResult(ResultConstant.SUCCESS, count);
@@ -101,10 +102,89 @@ public class CustomerController {
 
     @RequestMapping(value = "/provider/delete/{ids}",method = RequestMethod.GET)
     @ResponseBody
-    public Object delete(@PathVariable("ids") String ids) {
+    public Object providerDelete(@PathVariable("ids") String ids) {
         int count = cableProviderService.deleteByPrimaryKeys(ids);
         return new BaseResult(ResultConstant.SUCCESS, count);
     }
 
+    @RequestMapping("/customerIndex")
+    public String customerIndex(){
+        return "customer/customer/index.jsp";
+    }
+
+    @RequestMapping(value = "/customer/list", method = RequestMethod.GET)
+    @ResponseBody
+    public Object customerList(HttpSession session,
+                               @RequestParam(required = false, defaultValue = "0", value = "offset") int offset,
+                               @RequestParam(required = false, defaultValue = "10", value = "limit") int limit,
+                               @RequestParam(required = false, defaultValue = "", value = "providerName") String customerName,
+                               @RequestParam(required = false, defaultValue = "", value = "providerContact") String customerContact,
+                               @RequestParam(required = false, defaultValue = "", value = "providerTele") String customerTele,
+                               @RequestParam(required = false, value = "sort") String sort,
+                               @RequestParam(required = false, value = "order") String order) {
+        CableCustomerExample cableCustomerExample = new CableCustomerExample();
+        CableCustomerExample.Criteria criteria = cableCustomerExample.createCriteria();
+        criteria.andCustomerDeleteEqualTo(0).andCustomerUserIdEqualTo((int)session.getAttribute("userId"));
+        if(StringUtils.isNotBlank(customerName)){
+            criteria.andCustomerNameLike("%"+customerName+"%");
+        }
+        if(StringUtils.isNotBlank(customerContact)){
+            criteria.andCustomerContactLike("%"+customerContact+"%");
+        }
+        if(StringUtils.isNotBlank(customerTele)){
+            criteria.andCustomerTeleLike("%"+customerTele+"%");
+        }
+        cableCustomerExample.setOrderByClause("customer_time desc");
+        List<CableCustomer> rows = cableCustomerService.selectByExampleForOffsetPage(cableCustomerExample, offset, limit);
+        long total = cableCustomerService.countByExample(cableCustomerExample);
+        Map<String, Object> result = new HashMap<>();
+        result.put("rows", rows);
+        result.put("total", total);
+        return result;
+    }
+
+    @RequestMapping(value = "/customer/create", method = RequestMethod.GET)
+    public String customerCreate() {
+        return "customer/customer/creat.jsp";
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/customer/create", method = RequestMethod.POST)
+    public Object customerCreate(CableCustomer cableCustomer,HttpSession session) {
+        CableCustomerExample cableCustomerExample = new CableCustomerExample();
+        CableCustomerExample.Criteria criteria = cableCustomerExample.createCriteria();
+        criteria.andCustomerNameEqualTo(cableCustomer.getCustomerName()).andCustomerDeleteEqualTo(0);
+        int count = cableCustomerService.countByExample(cableCustomerExample);
+        if(count!=0){
+            return new BaseResult(ResultConstant.INVALID_LENGTH, count);
+        }
+        cableCustomer.setCustomerUserId((int)session.getAttribute("userId"));
+        cableCustomer.setCustomerDelete(0);
+        count = cableCustomerService.insertSelective(cableCustomer);
+        return new BaseResult(ResultConstant.SUCCESS, count);
+    }
+
+    @RequestMapping(value = "/customer/update/{id}", method = RequestMethod.GET)
+    public String customerUpdate(@PathVariable("id") Integer id, ModelMap modelMap) {
+        CableCustomer cableCustomer = cableCustomerService.selectByPrimaryKey(id);
+        modelMap.put("cableCustomer", cableCustomer);
+        return "customer/customer/update.jsp";
+    }
+
+    @RequestMapping(value = "/customer/update/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public Object customerUpdate(@PathVariable("id") int id, CableCustomer cableCustomer) {
+        cableCustomer.setId(id);
+        int count = cableCustomerService.updateByPrimaryKeySelective(cableCustomer);
+        return new BaseResult(ResultConstant.SUCCESS, count);
+    }
+
+    @RequestMapping(value = "/customer/delete/{ids}",method = RequestMethod.GET)
+    @ResponseBody
+    public Object customerDelete(@PathVariable("ids") String ids) {
+        int count = cableCustomerService.deleteByPrimaryKeys(ids);
+        return new BaseResult(ResultConstant.SUCCESS, count);
+    }
 
 }

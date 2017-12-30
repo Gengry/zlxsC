@@ -95,16 +95,16 @@
 				<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts-list"></i> 客户管理</a>
 				<ul>
 					<li><a class="waves-effect" href="javascript:Tab.addTab('供应商管理', '/customer/providerIndex');">供应商管理</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('客户管理', 'crud7.html');">客户管理</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('客户管理', '/customer/customerIndex');">客户管理</a></li>
 				</ul>
 			</li>
 			<li class="sub-menu system_menus system_1 0" style="display: list-item;">
 				<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts-list"></i> 元数据管理</a>
 				<ul>
 					<li><a class="waves-effect" href="javascript:Tab.addTab('线缆信息', '/mate/cableIndex');">线缆信息</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('颜色信息', 'crud2.html');">颜色信息</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('计量单位', 'crud3.html');">计量单位</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('质量标准', 'crud4.html');">质量标准</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('颜色信息', '/mate/colorIndex');">颜色信息</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('计量单位', '/mate/unitIndex');">计量单位</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('质量标准', '/mate/qualityIndex');">质量标准</a></li>
 					<li><a class="waves-effect" href="javascript:Tab.addTab('仓库管理', '/mate/houseIndex');">仓库管理</a></li>
 				</ul>
 			</li>
