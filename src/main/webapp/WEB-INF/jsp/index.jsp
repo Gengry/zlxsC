@@ -80,8 +80,8 @@
 			<li class="sub-menu system_menus system_1 0" style="display: list-item;">
 				<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts-list"></i> 订单管理</a>
 				<ul>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('订购', 'crud8.html');">订购</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('销售', 'crud9.html');">销售</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('订购', '/order/inIndex');">订购</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('销售', '/order/outIndex');">销售</a></li>
 					<li><a class="waves-effect" href="javascript:Tab.addTab('订单列表', 'crud10.html');">订单列表</a></li>
 				</ul>
 			</li>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhonglianxs.erp.cpw.mapper.OrderMapper" >
+
+    <select id="getModelByUser" resultType="java.lang.String">
+        SELECT cable_model FROM `cable_info` where cable_delete = 0 and cable_user_id = #{userId} group by cable_model
+    </select>
+
+</mapper>

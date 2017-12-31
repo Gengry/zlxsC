@@ -11,15 +11,15 @@
             <label for="colorColorCreate">颜色</label>
             <input id="colorColorCreate" type="text" class="form-control" name="colorColor" maxlength="20">
         </div>
-        <%--<div class="form-group">--%>
-            <%--<label for="colorDescCreate">描述</label>--%>
-            <%--<select id="colorDescCreate" class="form-control">--%>
-                <%--<option></option>--%>
-                <%--<option>1</option>--%>
-                <%--<option>2</option>--%>
-                <%--<option>3</option>--%>
-            <%--</select>--%>
-        <%--</div>--%>
+        <div class="form-group">
+            <label for="colorDesCreate">描述</label>
+            <select id="colorDesCreate" class="form-control">
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select>
+        </div>
         <div class="form-group">
             <label for="colorDescCreate">描述</label>
             <input id="colorDescCreate" type="text" class="form-control" name="colorDesc" maxlength="300">
@@ -31,6 +31,7 @@
     </form>
 </div>
 <script>
+    $('select').select2();
     function createSubmit() {
         $.ajax({
             type: 'post',
