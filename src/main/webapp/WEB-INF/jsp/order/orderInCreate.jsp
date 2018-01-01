@@ -16,25 +16,53 @@
             </select>
         </div>
         <div class="form-group">
-            <select class="form-control" id="specCreate" data-placeholder="请选择线缆规格">
+            <select class="form-control" id="specCreate" data-placeholder="请选择线缆型号">
 
             </select>
         </div>
         <div class="form-group">
-            <label for="customerTeleCreate">联系电话</label>
-            <input id="customerTeleCreate" type="text" class="form-control" name="customerTele" maxlength="300">
+            <select class="form-control" id="qualityCreate" data-placeholder="请选择线缆质量">
+                <c:forEach items="${cableQualities}" var="item">
+                    <option value="${item.qualityQuality}">${item.qualityQuality}</option>
+                </c:forEach>
+            </select>
         </div>
         <div class="form-group">
-            <label for="customerAddressCreate">地址</label>
-            <input id="customerAddressCreate" type="text" class="form-control" name="customerAddress" maxlength="300">
+            <select class="form-control" id="unitCreate" data-placeholder="请选择线缆单位">
+                <c:forEach items="${units}" var="item">
+                    <option value="${item}">${item}</option>
+                </c:forEach>
+            </select>
         </div>
         <div class="form-group">
-            <label for="customerWarehouseCreate">仓库地址</label>
-            <input id="customerWarehouseCreate" type="text" class="form-control" name="customerWarehouse" maxlength="300">
+            <select class="form-control" id="colorCreate" data-placeholder="请选择线缆颜色">
+                <c:forEach items="${cableColors}" var="item">
+                    <option value="${item.colorColor}">${item.colorColor}</option>
+                </c:forEach>
+            </select>
         </div>
         <div class="form-group">
-            <label for="customerDescCreate">描述</label>
-            <input id="customerDescCreate" type="text" class="form-control" name="customerDesc" maxlength="300">
+            <select class="form-control" id="houseCreate" data-placeholder="请选择入库仓库">
+                <c:forEach items="${cableHouses}" var="item">
+                    <option value="${item.cableHouseName}">${item.cableHouseName}</option>
+                </c:forEach>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="numCreate">数量</label>
+            <input id="numCreate" type="number" class="form-control"  maxlength="20" min="0" onclick="setPrice()" onblur="setPrice()" onchange="setPrice()">
+        </div>
+        <div class="form-group">
+            <label for="priceCreate">单价</label>
+            <input id="priceCreate" type="number" class="form-control"  maxlength="20" min="0" onclick="setPrice()" onblur="setPrice()" onchange="setPrice()">
+        </div>
+        <div class="form-group">
+            <label for="discountCreate" class="active">折扣</label>
+            <input id="discountCreate" type="number" class="form-control"  maxlength="20" max="1" min="0" value="1" onclick="setPrice()" onblur="setPrice()" onchange="setPrice()">
+        </div>
+        <div class="form-group">
+            <label for="countPriceCreate" class="active">小计</label>
+            <input id="countPriceCreate" type="number" class="form-control"  maxlength="20" min="0">
         </div>
         <div class="form-group text-right dialog-buttons">
             <a class="waves-effect waves-button" href="javascript:;" onclick="addRow();">保存</a>
@@ -43,10 +71,33 @@
     </form>
 </div>
 <script>
-    $("#modelCreate").select2();
-    $("#specCreate").select2();
-    function getSpecByModel(that){
-        $("#specCreate").html("");
-        $("#specCreate").append("<option value='10001'>Jquery</option>");
+
+    $("select").select2();
+    function getSpecByModel(){
+        $.ajax({
+            url: BASE_PATH + '/order/getSpecByModel',
+            type: 'GET',
+            data: {
+                model: $("#modelCreate").val(),
+            },
+            success: function(json){
+                if (json.code == 1) {
+                    $("#specCreate").html("");
+                    var specs = json.data;
+                    for(var key in specs){
+                        $("#specCreate").append("<option value='"+specs[key]+"'>"+specs[key]+"</option>");
+                    }
+                } else {
+
+                }
+
+            }
+        });
+    }
+
+    function setPrice(){
+        if(!isEmpty($("#numCreate").val())&&!isEmpty($("#priceCreate").val())&&!isEmpty($("#discountCreate").val())){
+            $("#countPriceCreate").val($("#numCreate").val()*$("#priceCreate").val()*$("#discountCreate").val());
+        }
     }
 </script>

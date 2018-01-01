@@ -6,4 +6,7 @@
         SELECT cable_model FROM `cable_info` where cable_delete = 0 and cable_user_id = #{userId} group by cable_model
     </select>
 
+    <select id="getSpecByModel" resultType="java.lang.String">
+        select cable_spec from cable_info where cable_delete = 0 and cable_user_id = #{userId} and cable_model = #{model}
+    </select>
 </mapper>

@@ -25,4 +25,9 @@ public class CableInfoServiceImpl extends BaseServiceImpl<CableInfoMapper,CableI
     public List<String> getModelByUser(Integer userId) {
         return orderMapper.getModelByUser(userId);
     }
+
+    @Override
+    public List<String> getSpecByModel(Integer userId, String model) {
+        return orderMapper.getSpecByModel(userId,model);
+    }
 }

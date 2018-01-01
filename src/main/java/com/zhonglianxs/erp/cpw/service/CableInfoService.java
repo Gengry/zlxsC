@@ -10,4 +10,6 @@ public interface CableInfoService extends BaseService<CableInfo, CableInfoExampl
 
     List<String> getModelByUser(Integer userId);
 
+    List<String> getSpecByModel(Integer userId,String model);
+
 }

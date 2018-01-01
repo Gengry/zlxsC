@@ -8,4 +8,5 @@ public interface OrderMapper {
 
     List<String> getModelByUser(@Param("userId")Integer userId);
 
+    List<String> getSpecByModel(@Param("userId")Integer userId,@Param("model") String model);
 }

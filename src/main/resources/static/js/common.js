@@ -22,6 +22,14 @@ $(function() {
             $(this).parent().find('label').addClass('active');
         }
     });
+    // 设置input特效
+    $(document).on('focus', 'input[type="number"]', function() {
+        $(this).parent().find('label').addClass('active');
+    }).on('blur', 'input[type="number"]', function() {
+        if ($(this).val() == '') {
+            $(this).parent().find('label').removeClass('active');
+        }
+    });
 	// select2初始化
 	//$('select').select2();
 });
