@@ -11,7 +11,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>订单列表</title>
+	<title>修改密码</title>
 	<jsp:include page="/resources/inc/head.jsp" flush="true"/>
 </head>
 <body>
@@ -29,7 +29,7 @@ var $table = $('#table');
 $(function() {
 	// bootstrap table初始化
 	$table.bootstrapTable({
-		url: '${basePath}/order/order/list',
+		url: '${basePath}/mate/color/list',
 		height: getHeight(),
 		striped: true,
 		//showColumns: true,
@@ -50,16 +50,9 @@ $(function() {
 		columns: [
 			{field: 'ck', checkbox: true},
 			{field: 'id', title: '编号', align: 'center', visible:false},
-            {field: 'orderUserId', title: '订单单号', align: 'center'},
-			{field: 'orderUserId', title: '订单类型', align: 'center'},
-            {field: 'orderOtherName', title: '客户公司名', align: 'center'},
-            {field: 'orderOtherContact', title: '联系人', align: 'center'},
-            {field: 'orderOtherTele', title: '联系电话', align: 'center'},
-            {field: 'orderOtherAddress', title: '公司地址', align: 'center'},
-            {field: 'orderOtherHouse', title: '客户仓库地址', align: 'center'},
-            {field: 'orderTime', title: '订单时间', align: 'center',formatter: 'timeFormatter'},
-            {field: 'orderTotalprice', title: '订单总金额', align: 'center'},
-            //{field: 'orderDesc', title: '描述', align: 'center', width: '20%'},
+			{field: 'colorColor', title: '颜色', align: 'center'},
+            {field: 'colorTime', title: '创建时间', align: 'center' , formatter: 'timeFormatter'},
+            //{field: 'colorDesc', title: '描述', align: 'center', width: '20%'},
 			{field: 'action', title: '操作', align: 'center', formatter: 'actionFormatter', events: 'actionEvents', clickToSelect: false,width:'150px' }
 		],
 
@@ -74,27 +67,23 @@ function refreshInit(){
 function actionFormatter(value, row, index) {
     var id = row.id;
     return [
-		'<a class="update" href="javascript:;" onclick="orderDetail('+id+')" data-toggle="tooltip" title="Detail"><i class="glyphicon glyphicon-eye-open"></i></a>　',
+		'<a class="update" href="javascript:;" onclick="updateAction('+id+')" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>　',
 		'<a class="delete" href="javascript:;" onclick="deleteAction('+id+')" data-toggle="tooltip" title="Remove"><i class="glyphicon glyphicon-remove"></i></a>'
     ].join('');
 }
 
 function timeFormatter(value, row, index){
-    var timeStamp = row.orderTime;
+    var timeStamp = row.colorTime;
     var date = new Date(timeStamp)
     return dateFtt("yyyy-MM-dd hh:mm:ss",date);
 }
 
 function cableFormatter(index, row) {
-    return '描述：'+row.orderDesc;
+    return '描述：'+row.colorDesc;
 //    var t = '仓库管理';
 //    var x = '/mate/houseIndex';
 //    return "<div type=''><table><tr><td>1</td><td>2</td><td>3</td></tr></table>" +
 //        "<a href='javascript:parent.Tab.addTab(\""+t+"\", \""+x+"\");'>123123</a></div>";
-}
-
-function orderDetail(id){
-    parent.Tab.addTab("订单详情","/order/order/detail");
 }
 
 // 新增

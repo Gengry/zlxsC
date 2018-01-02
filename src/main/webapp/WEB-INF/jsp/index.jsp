@@ -48,6 +48,9 @@
 					</a>
 					<ul class="dropdown-menu dm-icon pull-right">
 						<li>
+							<a class="waves-effect" href="${basePath}/logout"><i class="zmdi zmdi-run"></i> 修改密码</a>
+						</li>
+						<li>
 							<a class="waves-effect" href="${basePath}/logout"><i class="zmdi zmdi-run"></i> 退出登录</a>
 						</li>
 					</ul>
@@ -82,7 +85,7 @@
 				<ul>
 					<li><a class="waves-effect" href="javascript:Tab.addTab('订购', '/order/inIndex');">订购</a></li>
 					<li><a class="waves-effect" href="javascript:Tab.addTab('销售', '/order/outIndex');">销售</a></li>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('订单列表', 'crud10.html');">订单列表</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('订单列表', '/order/order/index');">订单列表</a></li>
 				</ul>
 			</li>
 			<li class="sub-menu system_menus system_1 0" style="display: list-item;">
@@ -131,22 +134,22 @@
 		</div>
 		<div class="content_main">
 			<div id="iframe_home" class="iframe cur">
-				<p><h4>通用用户权限管理系统</h4></p>
+				<p><h3>众联芯实 线缆管理系统</h3></p>
 				<p><b>演示地址</b>：<a href="http://www.zhangshuzheng.cn/zhengAdmin" target="_blank">http://www.zhangshuzheng.cn/zhengAdmin</a></p>
-				<p><b>系统简介</b>：本系统是基于RBAC授权和基于用户授权的细粒度权限控制通用平台，并提供单点登录、会话管理和日志管理。接入的系统可自由定义组织、角色、权限、资源等。</p><br/>
+				<p><b>系统简介</b>：本系统是基于zheng框架adminUI和common,实现对线缆商品的库存管理功能。</p><br/>
 				<p><h4>系统功能概述：</h4></p>
-				<p><b>系统组织管理</b>：系统和组织增加、删除、修改、查询功能。</p>
-				<p><b>用户角色管理</b>：用户和角色增加、删除、修改、查询功能。</p>
-				<p><b>资源权限管理</b>：菜单和按钮增加、删除、修改、查询功能。</p>
-				<p><b>权限分配管理</b>：提供给角色和用户的权限增加、删除、修改、查询功能。</p>
-				<p><b>单点登录(SSO)</b>：提供统一用户单点登录认证、用户鉴权功能。</p>
-				<p><b>用户会话管理</b>：提供分布式用户会话管理</p>
-				<p><b>操作日志管理</b>：提供记录用户登录、操作等日志。</p><br/>
-				<p><h4>对外接口概述：</h4></p>
-				<p><b>系统组织数据接口</b>、<b>用户角色数据接口</b>、<b>资源权限数据接口</b>、<b>单点登录(SSO)接口</b>、<b>用户鉴权接口</b></p><br/>
+				<p><b>订单管理</b>：提供生成订货单和销售单、订单列表查看、订单详情功能。</p>
+				<p><b>库存管理</b>：提供库存盘点、库存修改、库存删除功能。</p>
+				<p><b>客户管理</b>：提供供应商信息和客户信息的增加、修改、删除功能。</p>
+				<p><b>元数据管理</b>：提供线缆信息、颜色信息、质量标准、仓库的增加、修改、删除功能。</p>
+				<br/><br/><br/><br/>
+				<%--<p><h4>使用指南：</h4></p>--%>
+				<%--<p></p>--%>
+				<%--<p><b>系统组织数据接口</b>、<b>用户角色数据接口</b>、<b>资源权限数据接口</b>、<b>单点登录(SSO)接口</b>、<b>用户鉴权接口</b></p><br/>--%>
 				<p><h4>关于作者</h4></p>
-				<p><b>姓　　名</b>：张恕征</p>
-				<p><b>电子邮箱</b>：469741414@qq.com</p>
+				<p><b>姓　　名</b>：耿瑞阳</p>
+				<p><b>电子邮箱</b>：545620701@qq.com</p>
+				<p><b>使    用</b>：zheng admin ui，zheng common</p>
 			</div>
 		</div>
 	</section>
@@ -163,5 +166,10 @@
 <script src="${basePath}/js/admin.js"></script>
 <script src="${basePath}/plugins/fullPage/jquery.fullPage.min.js"></script>
 <script src="${basePath}/plugins/fullPage/jquery.jdirk.min.js"></script>
+<script>
+	$(function(){
+        Tab.addTab('库存盘点', '/storage/index');
+	});
+</script>
 </body>
 </html>

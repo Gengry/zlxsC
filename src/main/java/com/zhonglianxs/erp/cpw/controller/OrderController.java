@@ -11,12 +11,15 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/order")
@@ -132,5 +135,29 @@ public class OrderController {
         List<CableHouse> cableHouses = cableHouseService.selectByExample(cableHouseExample);
         modelMap.put("cableHouses",cableHouses);
         return "order/orderInCreate.jsp";
+    }
+
+    @RequestMapping("/order/index")
+    public String orderIndex(){
+        return "order/index.jsp";
+    }
+
+    @RequestMapping(value = "/order/list", method = RequestMethod.GET)
+    @ResponseBody
+    public Object orderList(HttpSession session,
+                            @RequestParam(required = false, defaultValue = "0", value = "offset") int offset,
+                            @RequestParam(required = false, defaultValue = "10", value = "limit") int limit,
+                            @RequestParam(required = false, value = "sort") String sort,
+                            @RequestParam(required = false, value = "order") String order) {
+        CableOrderExample cableOrderExample = new CableOrderExample();
+        CableOrderExample.Criteria criteria = cableOrderExample.createCriteria();
+        criteria.andOrderDeleteEqualTo(0).andOrderUserIdEqualTo((int)session.getAttribute("userId"));
+        cableOrderExample.setOrderByClause("order_time desc");
+        List<CableOrder> rows = cableOrderService.selectByExampleForOffsetPage(cableOrderExample, offset, limit);
+        long total = cableOrderService.countByExample(cableOrderExample);
+        Map<String, Object> result = new HashMap<>();
+        result.put("rows", rows);
+        result.put("total", total);
+        return result;
     }
 }

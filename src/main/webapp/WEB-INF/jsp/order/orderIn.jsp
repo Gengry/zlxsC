@@ -262,6 +262,7 @@ function submitOrder(){
                             text: '确认',
                             btnClass: 'waves-effect waves-button waves-light',
                             action: function(){
+                                parent.Tab.addTab("订单列表","/order/order/index");
                                 parent.Tab.closeTab(parent.$("#tab__order_inIndex"));
                             }
                         }
