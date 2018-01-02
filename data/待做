@@ -5,3 +5,4 @@
 0102
 1、库存表  model字段改varchar   供应商和仓库从id改name
     storage example mapper重新生成一下
+2、订单表加类型，标识是进货还是出货

@@ -34,6 +34,8 @@ public class OrderController {
     private CableHouseService cableHouseService;
     @Autowired
     private CableOrderService cableOrderService;
+    @Autowired
+    private CableCustomerService cableCustomerService;
 
     @RequestMapping("/inIndex")
     public String providerIndex(HttpSession session, ModelMap modelMap){
@@ -81,11 +83,54 @@ public class OrderController {
     public Object getProviderInfoById(HttpSession session,Integer id){
         CableProvider cableProvider = cableProviderService.selectByPrimaryKey(id);
         return new BaseResult(1,"ok",cableProvider);
+
+    }
+
+    @RequestMapping("getCustomerInfoById")
+    @ResponseBody
+    public Object getCustomerInfoById(HttpSession session,Integer id){
+        CableCustomer cableCustomer = cableCustomerService.selectByPrimaryKey(id);
+        return new BaseResult(1,"ok",cableCustomer);
     }
 
     @RequestMapping(value = "/orderIn/create",method = RequestMethod.POST)
     @ResponseBody
     public Object OrderInCreate(HttpSession session,OrderInVo orderInVo){
         return cableOrderService.createOrder(orderInVo,(int)session.getAttribute("userId"));
+    }
+
+
+    @RequestMapping("/outIndex")
+    public String customerIndex(HttpSession session, ModelMap modelMap){
+        CableCustomerExample cableCustomerExample = new CableCustomerExample();
+        cableCustomerExample.createCriteria().andCustomerUserIdEqualTo((int)session.getAttribute("userId")).andCustomerDeleteEqualTo(0);
+        List<CableCustomer> cableCustomer = cableCustomerService.selectByExample(cableCustomerExample);
+        modelMap.put("cableCustomer",cableCustomer);
+        return "order/orderOut.jsp";
+    }
+
+    @RequestMapping(value = "/orderOut/create",method = RequestMethod.GET)
+    public String orderOutCreate(HttpSession session, ModelMap modelMap){
+        CableInfoExample cableInfoExample = new CableInfoExample();
+        cableInfoExample.createCriteria().andCableUserIdEqualTo((int)session.getAttribute("userId")).andCableDeleteEqualTo((short)0);
+        List<String> cableModels = cableInfoService.getModelByUser((int)session.getAttribute("userId"));
+        modelMap.put("cableModels",cableModels);
+        CableColorExample cableColorExample = new CableColorExample();
+        cableColorExample.createCriteria().andColorUserIdEqualTo((int)session.getAttribute("userId")).andColorDeleteEqualTo(0);
+        List<CableColor> cableColors = cableColorService.selectByExample(cableColorExample);
+        modelMap.put("cableColors",cableColors);
+        CableQualityExample cableQualityExample = new CableQualityExample();
+        cableQualityExample.createCriteria().andQualityUserIdEqualTo((int)session.getAttribute("userId")).andQualityDeleteEqualTo(0);
+        List<CableQuality> cableQualities = cableQualityService.selectByExample(cableQualityExample);
+        modelMap.put("cableQualities",cableQualities);
+        List<String> units = new ArrayList<String>();
+        units.add(UnitConstant.MI.getUnit());
+        units.add(UnitConstant.PAN.getUnit());
+        modelMap.put("units",units);
+        CableHouseExample cableHouseExample = new CableHouseExample();
+        cableHouseExample.createCriteria().andCableHouseUserIdEqualTo((int)session.getAttribute("userId")).andCableHouseDeleteEqualTo(0);
+        List<CableHouse> cableHouses = cableHouseService.selectByExample(cableHouseExample);
+        modelMap.put("cableHouses",cableHouses);
+        return "order/orderInCreate.jsp";
     }
 }

@@ -88,7 +88,7 @@
 			<li class="sub-menu system_menus system_1 0" style="display: list-item;">
 				<a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts-list"></i> 库存管理</a>
 				<ul>
-					<li><a class="waves-effect" href="javascript:Tab.addTab('库存盘点', 'crud11.html');">库存盘点</a></li>
+					<li><a class="waves-effect" href="javascript:Tab.addTab('库存盘点', '/storage/index');">库存盘点</a></li>
 				</ul>
 			</li>
 			<li class="sub-menu system_menus system_1 0" style="display: list-item;">
