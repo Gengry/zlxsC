@@ -32,7 +32,8 @@ public class OrderController {
     private CableQualityService cableQualityService;
     @Autowired
     private CableHouseService cableHouseService;
-
+    @Autowired
+    private CableOrderService cableOrderService;
 
     @RequestMapping("/inIndex")
     public String providerIndex(HttpSession session, ModelMap modelMap){
@@ -83,8 +84,8 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/orderIn/create",method = RequestMethod.POST)
-    public Object OrderInCreate(OrderInVo orderInVo){
-        System.out.println(orderInVo);
-        return null;
+    @ResponseBody
+    public Object OrderInCreate(HttpSession session,OrderInVo orderInVo){
+        return cableOrderService.createOrder(orderInVo,(int)session.getAttribute("userId"));
     }
 }

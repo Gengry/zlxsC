@@ -97,7 +97,7 @@
 
     function setPrice(){
         if(!isEmpty($("#numCreate").val())&&!isEmpty($("#priceCreate").val())&&!isEmpty($("#discountCreate").val())){
-            $("#countPriceCreate").val($("#numCreate").val()*$("#priceCreate").val()*$("#discountCreate").val());
+            $("#countPriceCreate").val(numMulti(numMulti($("#numCreate").val(),$("#priceCreate").val()),$("#discountCreate").val()));
         }
     }
 </script>

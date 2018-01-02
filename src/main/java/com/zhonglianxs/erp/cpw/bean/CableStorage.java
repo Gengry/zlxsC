@@ -8,7 +8,7 @@ public class CableStorage {
 
     private Integer storageUserId;
 
-    private Integer storageModel;
+    private String storageModel;
 
     private String storageSpec;
 
@@ -20,11 +20,11 @@ public class CableStorage {
 
     private String storageColor;
 
-    private Integer storageProviderid;
+    private String storageProvider;
 
     private Date storageUpdateTime;
 
-    private Integer storageHouseid;
+    private String storageHouse;
 
     private String storageDesc;
 
@@ -46,11 +46,11 @@ public class CableStorage {
         this.storageUserId = storageUserId;
     }
 
-    public Integer getStorageModel() {
+    public String getStorageModel() {
         return storageModel;
     }
 
-    public void setStorageModel(Integer storageModel) {
+    public void setStorageModel(String storageModel) {
         this.storageModel = storageModel;
     }
 
@@ -94,12 +94,12 @@ public class CableStorage {
         this.storageColor = storageColor == null ? null : storageColor.trim();
     }
 
-    public Integer getStorageProviderid() {
-        return storageProviderid;
+    public String getStorageProvider() {
+        return storageProvider;
     }
 
-    public void setStorageProviderid(Integer storageProviderid) {
-        this.storageProviderid = storageProviderid;
+    public void setStorageProvider(String storageProvider) {
+        this.storageProvider = storageProvider;
     }
 
     public Date getStorageUpdateTime() {
@@ -110,12 +110,12 @@ public class CableStorage {
         this.storageUpdateTime = storageUpdateTime;
     }
 
-    public Integer getStorageHouseid() {
-        return storageHouseid;
+    public String getStorageHouse() {
+        return storageHouse;
     }
 
-    public void setStorageHouseid(Integer storageHouseid) {
-        this.storageHouseid = storageHouseid;
+    public void setStorageHouse(String storageHouse) {
+        this.storageHouse = storageHouse;
     }
 
     public String getStorageDesc() {

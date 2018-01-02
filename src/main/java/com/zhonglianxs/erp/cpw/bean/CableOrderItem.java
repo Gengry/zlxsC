@@ -21,11 +21,11 @@ public class CableOrderItem {
 
     private BigDecimal itemNumber;
 
-    private Long itemPrice;
+    private BigDecimal itemPrice;
 
     private BigDecimal itemDiscount;
 
-    private Long itemTotlePrice;
+    private BigDecimal itemTotlePrice;
 
     private String itemHouse;
 
@@ -103,11 +103,11 @@ public class CableOrderItem {
         this.itemNumber = itemNumber;
     }
 
-    public Long getItemPrice() {
+    public BigDecimal getItemPrice() {
         return itemPrice;
     }
 
-    public void setItemPrice(Long itemPrice) {
+    public void setItemPrice(BigDecimal itemPrice) {
         this.itemPrice = itemPrice;
     }
 
@@ -119,11 +119,11 @@ public class CableOrderItem {
         this.itemDiscount = itemDiscount;
     }
 
-    public Long getItemTotlePrice() {
+    public BigDecimal getItemTotlePrice() {
         return itemTotlePrice;
     }
 
-    public void setItemTotlePrice(Long itemTotlePrice) {
+    public void setItemTotlePrice(BigDecimal itemTotlePrice) {
         this.itemTotlePrice = itemTotlePrice;
     }
 

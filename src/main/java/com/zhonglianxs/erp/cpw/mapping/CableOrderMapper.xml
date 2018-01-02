@@ -109,7 +109,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zhonglianxs.erp.cpw.bean.CableOrder" >
+  <insert id="insert" parameterType="com.zhonglianxs.erp.cpw.bean.CableOrder" useGeneratedKeys="true" keyProperty="id">
     insert into cable_order (id, order_user_id, order_other_id, 
       order_other_name, order_other_contact, order_other_tele, 
       order_other_address, order_other_house, order_time, 
@@ -121,7 +121,7 @@
       #{orderTotalprice,jdbcType=DECIMAL}, #{orderDesc,jdbcType=VARCHAR}, #{orderDelete,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableOrder" >
+  <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableOrder" useGeneratedKeys="true" keyProperty="id">
     insert into cable_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

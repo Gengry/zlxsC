@@ -4,15 +4,15 @@
   <resultMap id="BaseResultMap" type="com.zhonglianxs.erp.cpw.bean.CableStorage" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="storage_user_id" property="storageUserId" jdbcType="INTEGER" />
-    <result column="storage_model" property="storageModel" jdbcType="INTEGER" />
+    <result column="storage_model" property="storageModel" jdbcType="VARCHAR" />
     <result column="storage_spec" property="storageSpec" jdbcType="VARCHAR" />
     <result column="storage_unit" property="storageUnit" jdbcType="VARCHAR" />
     <result column="storage_number" property="storageNumber" jdbcType="DECIMAL" />
     <result column="storage_quality" property="storageQuality" jdbcType="VARCHAR" />
     <result column="storage_color" property="storageColor" jdbcType="VARCHAR" />
-    <result column="storage_providerid" property="storageProviderid" jdbcType="INTEGER" />
+    <result column="storage_provider" property="storageProvider" jdbcType="VARCHAR" />
     <result column="storage_update_time" property="storageUpdateTime" jdbcType="TIMESTAMP" />
-    <result column="storage_houseid" property="storageHouseid" jdbcType="INTEGER" />
+    <result column="storage_house" property="storageHouse" jdbcType="VARCHAR" />
     <result column="storage_desc" property="storageDesc" jdbcType="VARCHAR" />
     <result column="storage_delete" property="storageDelete" jdbcType="INTEGER" />
   </resultMap>
@@ -76,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, storage_user_id, storage_model, storage_spec, storage_unit, storage_number, storage_quality, 
-    storage_color, storage_providerid, storage_update_time, storage_houseid, storage_desc, 
+    storage_color, storage_provider, storage_update_time, storage_house, storage_desc, 
     storage_delete
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhonglianxs.erp.cpw.bean.CableStorageExample" >
@@ -113,13 +113,13 @@
   <insert id="insert" parameterType="com.zhonglianxs.erp.cpw.bean.CableStorage" >
     insert into cable_storage (id, storage_user_id, storage_model, 
       storage_spec, storage_unit, storage_number, 
-      storage_quality, storage_color, storage_providerid, 
-      storage_update_time, storage_houseid, storage_desc, 
+      storage_quality, storage_color, storage_provider, 
+      storage_update_time, storage_house, storage_desc, 
       storage_delete)
-    values (#{id,jdbcType=INTEGER}, #{storageUserId,jdbcType=INTEGER}, #{storageModel,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{storageUserId,jdbcType=INTEGER}, #{storageModel,jdbcType=VARCHAR},
       #{storageSpec,jdbcType=VARCHAR}, #{storageUnit,jdbcType=VARCHAR}, #{storageNumber,jdbcType=DECIMAL}, 
-      #{storageQuality,jdbcType=VARCHAR}, #{storageColor,jdbcType=VARCHAR}, #{storageProviderid,jdbcType=INTEGER}, 
-      #{storageUpdateTime,jdbcType=TIMESTAMP}, #{storageHouseid,jdbcType=INTEGER}, #{storageDesc,jdbcType=VARCHAR}, 
+      #{storageQuality,jdbcType=VARCHAR}, #{storageColor,jdbcType=VARCHAR}, #{storageProvider,jdbcType=VARCHAR},
+      #{storageUpdateTime,jdbcType=TIMESTAMP}, #{storageHouse,jdbcType=VARCHAR}, #{storageDesc,jdbcType=VARCHAR},
       #{storageDelete,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableStorage" >
@@ -149,14 +149,14 @@
       <if test="storageColor != null" >
         storage_color,
       </if>
-      <if test="storageProviderid != null" >
-        storage_providerid,
+      <if test="storageProvider != null" >
+        storage_provider,
       </if>
       <if test="storageUpdateTime != null" >
         storage_update_time,
       </if>
-      <if test="storageHouseid != null" >
-        storage_houseid,
+      <if test="storageHouse != null" >
+        storage_house,
       </if>
       <if test="storageDesc != null" >
         storage_desc,
@@ -173,7 +173,7 @@
         #{storageUserId,jdbcType=INTEGER},
       </if>
       <if test="storageModel != null" >
-        #{storageModel,jdbcType=INTEGER},
+        #{storageModel,jdbcType=VARCHAR},
       </if>
       <if test="storageSpec != null" >
         #{storageSpec,jdbcType=VARCHAR},
@@ -190,14 +190,14 @@
       <if test="storageColor != null" >
         #{storageColor,jdbcType=VARCHAR},
       </if>
-      <if test="storageProviderid != null" >
-        #{storageProviderid,jdbcType=INTEGER},
+      <if test="storageProvider != null" >
+        #{storageProvider,jdbcType=VARCHAR},
       </if>
       <if test="storageUpdateTime != null" >
         #{storageUpdateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="storageHouseid != null" >
-        #{storageHouseid,jdbcType=INTEGER},
+      <if test="storageHouse != null" >
+        #{storageHouse,jdbcType=VARCHAR},
       </if>
       <if test="storageDesc != null" >
         #{storageDesc,jdbcType=VARCHAR},
@@ -223,7 +223,7 @@
         storage_user_id = #{record.storageUserId,jdbcType=INTEGER},
       </if>
       <if test="record.storageModel != null" >
-        storage_model = #{record.storageModel,jdbcType=INTEGER},
+        storage_model = #{record.storageModel,jdbcType=VARCHAR},
       </if>
       <if test="record.storageSpec != null" >
         storage_spec = #{record.storageSpec,jdbcType=VARCHAR},
@@ -240,14 +240,14 @@
       <if test="record.storageColor != null" >
         storage_color = #{record.storageColor,jdbcType=VARCHAR},
       </if>
-      <if test="record.storageProviderid != null" >
-        storage_providerid = #{record.storageProviderid,jdbcType=INTEGER},
+      <if test="record.storageProvider != null" >
+        storage_provider = #{record.storageProvider,jdbcType=VARCHAR},
       </if>
       <if test="record.storageUpdateTime != null" >
         storage_update_time = #{record.storageUpdateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.storageHouseid != null" >
-        storage_houseid = #{record.storageHouseid,jdbcType=INTEGER},
+      <if test="record.storageHouse != null" >
+        storage_house = #{record.storageHouse,jdbcType=VARCHAR},
       </if>
       <if test="record.storageDesc != null" >
         storage_desc = #{record.storageDesc,jdbcType=VARCHAR},
@@ -264,15 +264,15 @@
     update cable_storage
     set id = #{record.id,jdbcType=INTEGER},
       storage_user_id = #{record.storageUserId,jdbcType=INTEGER},
-      storage_model = #{record.storageModel,jdbcType=INTEGER},
+      storage_model = #{record.storageModel,jdbcType=VARCHAR},
       storage_spec = #{record.storageSpec,jdbcType=VARCHAR},
       storage_unit = #{record.storageUnit,jdbcType=VARCHAR},
       storage_number = #{record.storageNumber,jdbcType=DECIMAL},
       storage_quality = #{record.storageQuality,jdbcType=VARCHAR},
       storage_color = #{record.storageColor,jdbcType=VARCHAR},
-      storage_providerid = #{record.storageProviderid,jdbcType=INTEGER},
+      storage_provider = #{record.storageProvider,jdbcType=VARCHAR},
       storage_update_time = #{record.storageUpdateTime,jdbcType=TIMESTAMP},
-      storage_houseid = #{record.storageHouseid,jdbcType=INTEGER},
+      storage_house = #{record.storageHouse,jdbcType=VARCHAR},
       storage_desc = #{record.storageDesc,jdbcType=VARCHAR},
       storage_delete = #{record.storageDelete,jdbcType=INTEGER}
     <if test="_parameter != null" >
@@ -286,7 +286,7 @@
         storage_user_id = #{storageUserId,jdbcType=INTEGER},
       </if>
       <if test="storageModel != null" >
-        storage_model = #{storageModel,jdbcType=INTEGER},
+        storage_model = #{storageModel,jdbcType=VARCHAR},
       </if>
       <if test="storageSpec != null" >
         storage_spec = #{storageSpec,jdbcType=VARCHAR},
@@ -303,14 +303,14 @@
       <if test="storageColor != null" >
         storage_color = #{storageColor,jdbcType=VARCHAR},
       </if>
-      <if test="storageProviderid != null" >
-        storage_providerid = #{storageProviderid,jdbcType=INTEGER},
+      <if test="storageProvider != null" >
+        storage_provider = #{storageProvider,jdbcType=VARCHAR},
       </if>
       <if test="storageUpdateTime != null" >
         storage_update_time = #{storageUpdateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="storageHouseid != null" >
-        storage_houseid = #{storageHouseid,jdbcType=INTEGER},
+      <if test="storageHouse != null" >
+        storage_house = #{storageHouse,jdbcType=VARCHAR},
       </if>
       <if test="storageDesc != null" >
         storage_desc = #{storageDesc,jdbcType=VARCHAR},
@@ -324,15 +324,15 @@
   <update id="updateByPrimaryKey" parameterType="com.zhonglianxs.erp.cpw.bean.CableStorage" >
     update cable_storage
     set storage_user_id = #{storageUserId,jdbcType=INTEGER},
-      storage_model = #{storageModel,jdbcType=INTEGER},
+      storage_model = #{storageModel,jdbcType=VARCHAR},
       storage_spec = #{storageSpec,jdbcType=VARCHAR},
       storage_unit = #{storageUnit,jdbcType=VARCHAR},
       storage_number = #{storageNumber,jdbcType=DECIMAL},
       storage_quality = #{storageQuality,jdbcType=VARCHAR},
       storage_color = #{storageColor,jdbcType=VARCHAR},
-      storage_providerid = #{storageProviderid,jdbcType=INTEGER},
+      storage_provider = #{storageProvider,jdbcType=VARCHAR},
       storage_update_time = #{storageUpdateTime,jdbcType=TIMESTAMP},
-      storage_houseid = #{storageHouseid,jdbcType=INTEGER},
+      storage_house = #{storageHouse,jdbcType=VARCHAR},
       storage_desc = #{storageDesc,jdbcType=VARCHAR},
       storage_delete = #{storageDelete,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}

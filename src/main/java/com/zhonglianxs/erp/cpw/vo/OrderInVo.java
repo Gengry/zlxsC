@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class OrderInVo {
     List<Map<String,Object>> items;
+    Integer providerId;
     String providerName;
     String providerContact;
     String providerTele;
@@ -75,6 +76,14 @@ public class OrderInVo {
 
     public void setOrderDesc(String orderDesc) {
         this.orderDesc = orderDesc;
+    }
+
+    public Integer getProviderId() {
+        return providerId;
+    }
+
+    public void setProviderId(Integer providerId) {
+        this.providerId = providerId;
     }
 
     @Override

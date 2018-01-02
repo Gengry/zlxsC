@@ -236,7 +236,7 @@ public class CableStorageExample {
             return (Criteria) this;
         }
 
-        public Criteria andStorageModelEqualTo(Integer value) {
+        public Criteria andStorageModelEqualTo(String value) {
             addCriterion("storage_model =", value, "storageModel");
             return (Criteria) this;
         }

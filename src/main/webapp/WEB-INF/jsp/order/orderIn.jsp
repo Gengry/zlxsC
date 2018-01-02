@@ -193,7 +193,16 @@ function getProvoderByid(){
 
 function submitOrder(){
     var orderObj = {};
+    if(isEmpty($("#selectCustomer  option:selected").val())){
+        failPrompt("请填写完整。");
+        return false;
+    }
+    if($table.bootstrapTable("getData").length==0){
+        failPrompt("至少需要一条记录。");
+        return false;
+    }
     orderObj['items'] = $table.bootstrapTable("getData");
+    orderObj['providerId'] = $("#selectCustomer  option:selected").val();
     orderObj['providerName'] = $("#selectCustomer  option:selected").text();
     orderObj['providerContact'] = $("#providerContact").val();
     orderObj['providerTele'] = $("#providerTele").val();
@@ -214,7 +223,7 @@ function submitOrder(){
                             animation: 'rotateX',
                             closeAnimation: 'rotateX',
                             title: false,
-                            content: value.errorMsg,
+                            content: value.message,
                             buttons: {
                                 confirm: {
                                     text: '确认',
@@ -239,8 +248,27 @@ function submitOrder(){
                     });
                 }
             } else {
-                createDialog.close();
-                $table.bootstrapTable('refresh');
+                $.confirm({
+                    theme: 'dark',
+                    animation: 'rotateX',
+                    closeAnimation: 'rotateX',
+                    title: false,
+                    content: "保存成功。",
+                    confirm: function(){
+                        alert('confirmed');
+                    },
+                    buttons: {
+                        confirm: {
+                            text: '确认',
+                            btnClass: 'waves-effect waves-button waves-light',
+                            action: function(){
+                                parent.Tab.closeTab(parent.$("#tab__order_inIndex"));
+                                //跳转到订单列表
+                            }
+                        }
+                    }
+
+                });
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -259,6 +287,10 @@ function submitOrder(){
             });
         }
     });
+}
+
+function closeOrderIn(){
+    parent.Tab.closeTab(parent.$("#tab__order_inIndex"));
 }
 </script>
 </body>

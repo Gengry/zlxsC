@@ -1,3 +1,7 @@
 1、仓库表加描述字段
 2、字典表加类型内标识
 3、各个表加时间
+
+0102
+1、库存表  model字段改varchar   供应商和仓库从id改name
+    storage example mapper重新生成一下
