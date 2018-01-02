@@ -85,7 +85,7 @@ function actionFormatter(value, row, index) {
     var cableInfoId = row.id;
     var cableModel = row.cableModel;
     return [
-        '<a class="update" href="javascript:;" onclick="createSpecAction('+cableModel+')" data-toggle="tooltip" title="add"><i class="glyphicon glyphicon-plus-sign"></i></a>　',
+        '<a class="update" href="javascript:;" onclick="createSpecAction(\''+cableModel+'\')" data-toggle="tooltip" title="add"><i class="glyphicon glyphicon-plus-sign"></i></a>　',
 		'<a class="update" href="javascript:;" onclick="updateAction('+cableInfoId+')" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>　',
 		'<a class="delete" href="javascript:;" onclick="deleteAction('+cableInfoId+')" data-toggle="tooltip" title="Remove"><i class="glyphicon glyphicon-remove"></i></a>'
     ].join('');

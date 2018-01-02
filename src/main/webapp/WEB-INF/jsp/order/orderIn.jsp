@@ -263,12 +263,12 @@ function submitOrder(){
                             btnClass: 'waves-effect waves-button waves-light',
                             action: function(){
                                 parent.Tab.closeTab(parent.$("#tab__order_inIndex"));
-                                //跳转到订单列表
                             }
                         }
                     }
 
                 });
+                //
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {

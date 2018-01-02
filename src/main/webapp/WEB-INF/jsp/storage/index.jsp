@@ -17,20 +17,21 @@
 <body>
 <div id="main">
 	<div id="toolbar" class="form-inline">
-		<a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增信息</a>
 		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除信息</a>
         <div class="form-group">
-            <label class="sr-only" for="customerName">客户</label>
-            <input type="text" class="form-control" id="customerName" placeholder="客户">
+            <label class="sr-only" for="searchModel">线缆型号</label>
+            <input type="text" class="form-control" id="searchModel" placeholder="线缆型号">
         </div>
         <div class="form-group">
-            <label class="sr-only" for="customerContact">联系人</label>
-            <input type="text" class="form-control" id="customerContact" placeholder="联系人">
+            <label class="sr-only" for="searchSpec">线缆规格</label>
+            <input type="text" class="form-control" id="searchSpec" placeholder="线缆规格">
         </div>
-        <div class="form-group">
-            <label class="sr-only" for="customerTele">联系电话</label>
-            <input type="text" class="form-control" id="customerTele" placeholder="联系电话">
-        </div>
+        <select id="searchUnit" style="width: 150px;" data-placeholder="请选择单位">
+            <option value="NULL">请选择单位</option>
+            <c:forEach items="${units}" var="item" >
+                <option value="${item}">${item}</option>
+            </c:forEach>
+        </select>
         <button type="button" class="btn btn-default" onclick="javascript:$table.bootstrapTable('refresh');">查找</button>
 	</div>
 	<table id="table"></table>
@@ -47,8 +48,6 @@ $(function() {
 		//showColumns: true,
 		minimumCountColumns: 2,
 		clickToSelect: true,
-		detailView: true,
-		detailFormatter: 'cableFormatter',
 		pagination: true,
 		paginationLoop: false,
 		sidePagination: 'server',
@@ -77,6 +76,7 @@ $(function() {
 		],
 
 	});
+	$("select").select2();
 });
 
 function refreshInit(){
@@ -84,17 +84,18 @@ function refreshInit(){
 }
 
 function queryParams(params) {
-    params["customerName"]=$("#customerName").val();
-    params["customerContact"]=$("#customerContact").val();
-    params["customerTele"]=$("#customerTele").val();
+    params["searchModel"]=$("#searchModel").val();
+    params["searchSpec"]=$("#searchSpec").val();
+    params["searchUnit"]=$("#searchUnit").val();
     return params;
 }
 
 // 格式化操作按钮
 function actionFormatter(value, row, index) {
     var id = row.id;
+    var num = row.storageNumber;
     return [
-		'<a class="update" href="javascript:;" onclick="updateAction('+id+')" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>　',
+		'<a class="update" href="javascript:;" onclick="updateAction('+id+','+num+')" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>　',
 		'<a class="delete" href="javascript:;" onclick="deleteAction('+id+')" data-toggle="tooltip" title="Remove"><i class="glyphicon glyphicon-remove"></i></a>'
     ].join('');
 }
@@ -105,58 +106,81 @@ function timeFormatter(value, row, index){
     return dateFtt("yyyy-MM-dd hh:mm:ss",date);
 }
 
-function cableFormatter(index, row) {
-    return '描述：'+row.storageDesc;
-}
-
-// 新增
-var createDialog;
-function createAction() {
-	createDialog = $.dialog({
-		animationSpeed: 300,
-		title: '新增信息',
-		content: 'url:${basePath}/customer/customer/create',
-		onContentReady: function () {
-			initMaterialInput();
-		}
-	});
-}
 
 // 编辑
 var updateDialog;
-function updateAction(id) {
+function updateAction(id,num) {
     updateDialog = $.dialog({
         animationSpeed: 300,
         title: '编辑信息',
-        content: 'url:${basePath}/customer/customer/update/' + id,
+        content: '<div id="updateDialog" class="crudDialog" style="padding-top:10px;"><div class="form-group">' +
+        '<label for="updateNum" class="active">库存</label>' +
+        '<input id="updateNum" type="number" class="form-control" name="customerName" maxlength="20" value="'+num+'" min="0">' +
+        '</div>' +
+        '<div class="form-group text-right dialog-buttons">' +
+        '<a class="waves-effect waves-button" href="javascript:;" onclick="updateNum('+id+');">保存</a>' +
+        '<a class="waves-effect waves-button" href="javascript:;" onclick="updateDialog.close();">取消</a>' +
+        '</div>' +
+        '</div>',
         onContentReady: function () {
             initMaterialInput();
         }
     });
-	/*var rows = $table.bootstrapTable('getSelections');
-	if (rows.length != 1) {
-		$.confirm({
-			title: false,
-			content: '请选择一条记录！',
-			autoClose: 'cancel|3000',
-			backgroundDismiss: true,
-			buttons: {
-				cancel: {
-					text: '取消',
-					btnClass: 'waves-effect waves-button'
-				}
-			}
-		});
-	} else {
-		updateDialog = $.dialog({
-			animationSpeed: 300,
-			title: '编辑角色',
-			content: 'url:\${basePath}/manage/role/update/' + rows[0].roleId,
-			onContentReady: function () {
-				initMaterialInput();
-			}
-		});
-	}*/
+
+}
+
+function updateNum(id){
+    if(isEmpty($("#updateNum").val())){
+        failPrompt("库存不能为空。")
+        return false;
+    }
+    if(parseFloat($("#updateNum").val())<0){
+        failPrompt("库存不能小于零。")
+        return false;
+    }
+    $.ajax({
+        type: 'post',
+        url: '${basePath}/storage/storage/updateNum/'+id,
+        data: {"num":$("#updateNum").val()},
+        success: function(result) {
+            if (result.code != 1) {
+                if (result.data instanceof Array) {
+                    $.each(result.data, function(index, value) {
+                        $.confirm({
+                            theme: 'dark',
+                            animation: 'rotateX',
+                            closeAnimation: 'rotateX',
+                            title: false,
+                            content: value.errorMsg,
+                            buttons: {
+                                confirm: {
+                                    text: '确认',
+                                    btnClass: 'waves-effect waves-button waves-light'
+                                }
+                            }
+                        });
+                    });
+                } else {
+                    $.confirm({
+                        theme: 'dark',
+                        animation: 'rotateX',
+                        closeAnimation: 'rotateX',
+                        title: false,
+                        content: result.data.errorMsg,
+                        buttons: {
+                            confirm: {
+                                text: '确认',
+                                btnClass: 'waves-effect waves-button waves-light'
+                            }
+                        }
+                    });
+                }
+            } else {
+                updateDialog.close();
+                $table.bootstrapTable('refresh');
+            }
+        }
+    });
 }
 // 删除
 var deleteDialog;
@@ -192,7 +216,7 @@ function deleteAction() {
 						}
 						$.ajax({
 							type: 'get',
-							url: '${basePath}/customer/customer/delete/' + ids.join("-"),
+							url: '${basePath}/storage/storage/delete/' + ids.join("-"),
 							success: function(result) {
 								if (result.code != 1) {
 									if (result.data instanceof Array) {

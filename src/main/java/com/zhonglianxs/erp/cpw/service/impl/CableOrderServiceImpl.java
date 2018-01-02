@@ -84,7 +84,7 @@ public class CableOrderServiceImpl extends BaseServiceImpl<CableOrderMapper,Cabl
             }else if(UnitConstant.PAN.getUnit().equals(MapUtils.getString(item,"unit"))){
                 CableStorageExample cableStorageExample = new CableStorageExample();
                 cableStorageExample.createCriteria().andStorageModelEqualTo(MapUtils.getString(item,"model")).andStorageSpecEqualTo(MapUtils.getString(item,"spec")).andStorageUnitEqualTo(MapUtils.getString(item,"unit"))
-                        .andStorageQualityEqualTo(MapUtils.getString(item,"quality")).andStorageColorEqualTo(MapUtils.getString(item,"color"));
+                        .andStorageQualityEqualTo(MapUtils.getString(item,"quality")).andStorageColorEqualTo(MapUtils.getString(item,"color")).andStorageNumberGreaterThan(BigDecimal.ZERO).andStorageDeleteEqualTo(0);
                 List<CableStorage> cableStorages = cableStorageService.selectByExample(cableStorageExample);
                 if(cableStorages.size()>0){
                     CableStorage cableStorage = cableStorages.get(0);
