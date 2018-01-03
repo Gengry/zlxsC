@@ -705,52 +705,52 @@ public class CableOrderItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andItemPriceEqualTo(Long value) {
+        public Criteria andItemPriceEqualTo(BigDecimal value) {
             addCriterion("item_price =", value, "itemPrice");
             return (Criteria) this;
         }
 
-        public Criteria andItemPriceNotEqualTo(Long value) {
+        public Criteria andItemPriceNotEqualTo(BigDecimal value) {
             addCriterion("item_price <>", value, "itemPrice");
             return (Criteria) this;
         }
 
-        public Criteria andItemPriceGreaterThan(Long value) {
+        public Criteria andItemPriceGreaterThan(BigDecimal value) {
             addCriterion("item_price >", value, "itemPrice");
             return (Criteria) this;
         }
 
-        public Criteria andItemPriceGreaterThanOrEqualTo(Long value) {
+        public Criteria andItemPriceGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("item_price >=", value, "itemPrice");
             return (Criteria) this;
         }
 
-        public Criteria andItemPriceLessThan(Long value) {
+        public Criteria andItemPriceLessThan(BigDecimal value) {
             addCriterion("item_price <", value, "itemPrice");
             return (Criteria) this;
         }
 
-        public Criteria andItemPriceLessThanOrEqualTo(Long value) {
+        public Criteria andItemPriceLessThanOrEqualTo(BigDecimal value) {
             addCriterion("item_price <=", value, "itemPrice");
             return (Criteria) this;
         }
 
-        public Criteria andItemPriceIn(List<Long> values) {
+        public Criteria andItemPriceIn(List<BigDecimal> values) {
             addCriterion("item_price in", values, "itemPrice");
             return (Criteria) this;
         }
 
-        public Criteria andItemPriceNotIn(List<Long> values) {
+        public Criteria andItemPriceNotIn(List<BigDecimal> values) {
             addCriterion("item_price not in", values, "itemPrice");
             return (Criteria) this;
         }
 
-        public Criteria andItemPriceBetween(Long value1, Long value2) {
+        public Criteria andItemPriceBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("item_price between", value1, value2, "itemPrice");
             return (Criteria) this;
         }
 
-        public Criteria andItemPriceNotBetween(Long value1, Long value2) {
+        public Criteria andItemPriceNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("item_price not between", value1, value2, "itemPrice");
             return (Criteria) this;
         }
@@ -825,52 +825,52 @@ public class CableOrderItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andItemTotlePriceEqualTo(Long value) {
+        public Criteria andItemTotlePriceEqualTo(BigDecimal value) {
             addCriterion("item_totle_price =", value, "itemTotlePrice");
             return (Criteria) this;
         }
 
-        public Criteria andItemTotlePriceNotEqualTo(Long value) {
+        public Criteria andItemTotlePriceNotEqualTo(BigDecimal value) {
             addCriterion("item_totle_price <>", value, "itemTotlePrice");
             return (Criteria) this;
         }
 
-        public Criteria andItemTotlePriceGreaterThan(Long value) {
+        public Criteria andItemTotlePriceGreaterThan(BigDecimal value) {
             addCriterion("item_totle_price >", value, "itemTotlePrice");
             return (Criteria) this;
         }
 
-        public Criteria andItemTotlePriceGreaterThanOrEqualTo(Long value) {
+        public Criteria andItemTotlePriceGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("item_totle_price >=", value, "itemTotlePrice");
             return (Criteria) this;
         }
 
-        public Criteria andItemTotlePriceLessThan(Long value) {
+        public Criteria andItemTotlePriceLessThan(BigDecimal value) {
             addCriterion("item_totle_price <", value, "itemTotlePrice");
             return (Criteria) this;
         }
 
-        public Criteria andItemTotlePriceLessThanOrEqualTo(Long value) {
+        public Criteria andItemTotlePriceLessThanOrEqualTo(BigDecimal value) {
             addCriterion("item_totle_price <=", value, "itemTotlePrice");
             return (Criteria) this;
         }
 
-        public Criteria andItemTotlePriceIn(List<Long> values) {
+        public Criteria andItemTotlePriceIn(List<BigDecimal> values) {
             addCriterion("item_totle_price in", values, "itemTotlePrice");
             return (Criteria) this;
         }
 
-        public Criteria andItemTotlePriceNotIn(List<Long> values) {
+        public Criteria andItemTotlePriceNotIn(List<BigDecimal> values) {
             addCriterion("item_totle_price not in", values, "itemTotlePrice");
             return (Criteria) this;
         }
 
-        public Criteria andItemTotlePriceBetween(Long value1, Long value2) {
+        public Criteria andItemTotlePriceBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("item_totle_price between", value1, value2, "itemTotlePrice");
             return (Criteria) this;
         }
 
-        public Criteria andItemTotlePriceNotBetween(Long value1, Long value2) {
+        public Criteria andItemTotlePriceNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("item_totle_price not between", value1, value2, "itemTotlePrice");
             return (Criteria) this;
         }

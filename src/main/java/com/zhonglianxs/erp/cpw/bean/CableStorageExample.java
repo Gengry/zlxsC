@@ -241,47 +241,57 @@ public class CableStorageExample {
             return (Criteria) this;
         }
 
-        public Criteria andStorageModelNotEqualTo(Integer value) {
+        public Criteria andStorageModelNotEqualTo(String value) {
             addCriterion("storage_model <>", value, "storageModel");
             return (Criteria) this;
         }
 
-        public Criteria andStorageModelGreaterThan(Integer value) {
+        public Criteria andStorageModelGreaterThan(String value) {
             addCriterion("storage_model >", value, "storageModel");
             return (Criteria) this;
         }
 
-        public Criteria andStorageModelGreaterThanOrEqualTo(Integer value) {
+        public Criteria andStorageModelGreaterThanOrEqualTo(String value) {
             addCriterion("storage_model >=", value, "storageModel");
             return (Criteria) this;
         }
 
-        public Criteria andStorageModelLessThan(Integer value) {
+        public Criteria andStorageModelLessThan(String value) {
             addCriterion("storage_model <", value, "storageModel");
             return (Criteria) this;
         }
 
-        public Criteria andStorageModelLessThanOrEqualTo(Integer value) {
+        public Criteria andStorageModelLessThanOrEqualTo(String value) {
             addCriterion("storage_model <=", value, "storageModel");
             return (Criteria) this;
         }
 
-        public Criteria andStorageModelIn(List<Integer> values) {
+        public Criteria andStorageModelLike(String value) {
+            addCriterion("storage_model like", value, "storageModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andStorageModelNotLike(String value) {
+            addCriterion("storage_model not like", value, "storageModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andStorageModelIn(List<String> values) {
             addCriterion("storage_model in", values, "storageModel");
             return (Criteria) this;
         }
 
-        public Criteria andStorageModelNotIn(List<Integer> values) {
+        public Criteria andStorageModelNotIn(List<String> values) {
             addCriterion("storage_model not in", values, "storageModel");
             return (Criteria) this;
         }
 
-        public Criteria andStorageModelBetween(Integer value1, Integer value2) {
+        public Criteria andStorageModelBetween(String value1, String value2) {
             addCriterion("storage_model between", value1, value2, "storageModel");
             return (Criteria) this;
         }
 
-        public Criteria andStorageModelNotBetween(Integer value1, Integer value2) {
+        public Criteria andStorageModelNotBetween(String value1, String value2) {
             addCriterion("storage_model not between", value1, value2, "storageModel");
             return (Criteria) this;
         }
@@ -626,63 +636,73 @@ public class CableStorageExample {
             return (Criteria) this;
         }
 
-        public Criteria andStorageProvideridIsNull() {
-            addCriterion("storage_providerid is null");
+        public Criteria andStorageProviderIsNull() {
+            addCriterion("storage_provider is null");
             return (Criteria) this;
         }
 
-        public Criteria andStorageProvideridIsNotNull() {
-            addCriterion("storage_providerid is not null");
+        public Criteria andStorageProviderIsNotNull() {
+            addCriterion("storage_provider is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStorageProvideridEqualTo(Integer value) {
-            addCriterion("storage_providerid =", value, "storageProviderid");
+        public Criteria andStorageProviderEqualTo(String value) {
+            addCriterion("storage_provider =", value, "storageProvider");
             return (Criteria) this;
         }
 
-        public Criteria andStorageProvideridNotEqualTo(Integer value) {
-            addCriterion("storage_providerid <>", value, "storageProviderid");
+        public Criteria andStorageProviderNotEqualTo(String value) {
+            addCriterion("storage_provider <>", value, "storageProvider");
             return (Criteria) this;
         }
 
-        public Criteria andStorageProvideridGreaterThan(Integer value) {
-            addCriterion("storage_providerid >", value, "storageProviderid");
+        public Criteria andStorageProviderGreaterThan(String value) {
+            addCriterion("storage_provider >", value, "storageProvider");
             return (Criteria) this;
         }
 
-        public Criteria andStorageProvideridGreaterThanOrEqualTo(Integer value) {
-            addCriterion("storage_providerid >=", value, "storageProviderid");
+        public Criteria andStorageProviderGreaterThanOrEqualTo(String value) {
+            addCriterion("storage_provider >=", value, "storageProvider");
             return (Criteria) this;
         }
 
-        public Criteria andStorageProvideridLessThan(Integer value) {
-            addCriterion("storage_providerid <", value, "storageProviderid");
+        public Criteria andStorageProviderLessThan(String value) {
+            addCriterion("storage_provider <", value, "storageProvider");
             return (Criteria) this;
         }
 
-        public Criteria andStorageProvideridLessThanOrEqualTo(Integer value) {
-            addCriterion("storage_providerid <=", value, "storageProviderid");
+        public Criteria andStorageProviderLessThanOrEqualTo(String value) {
+            addCriterion("storage_provider <=", value, "storageProvider");
             return (Criteria) this;
         }
 
-        public Criteria andStorageProvideridIn(List<Integer> values) {
-            addCriterion("storage_providerid in", values, "storageProviderid");
+        public Criteria andStorageProviderLike(String value) {
+            addCriterion("storage_provider like", value, "storageProvider");
             return (Criteria) this;
         }
 
-        public Criteria andStorageProvideridNotIn(List<Integer> values) {
-            addCriterion("storage_providerid not in", values, "storageProviderid");
+        public Criteria andStorageProviderNotLike(String value) {
+            addCriterion("storage_provider not like", value, "storageProvider");
             return (Criteria) this;
         }
 
-        public Criteria andStorageProvideridBetween(Integer value1, Integer value2) {
-            addCriterion("storage_providerid between", value1, value2, "storageProviderid");
+        public Criteria andStorageProviderIn(List<String> values) {
+            addCriterion("storage_provider in", values, "storageProvider");
             return (Criteria) this;
         }
 
-        public Criteria andStorageProvideridNotBetween(Integer value1, Integer value2) {
-            addCriterion("storage_providerid not between", value1, value2, "storageProviderid");
+        public Criteria andStorageProviderNotIn(List<String> values) {
+            addCriterion("storage_provider not in", values, "storageProvider");
+            return (Criteria) this;
+        }
+
+        public Criteria andStorageProviderBetween(String value1, String value2) {
+            addCriterion("storage_provider between", value1, value2, "storageProvider");
+            return (Criteria) this;
+        }
+
+        public Criteria andStorageProviderNotBetween(String value1, String value2) {
+            addCriterion("storage_provider not between", value1, value2, "storageProvider");
             return (Criteria) this;
         }
 
@@ -746,63 +766,73 @@ public class CableStorageExample {
             return (Criteria) this;
         }
 
-        public Criteria andStorageHouseidIsNull() {
-            addCriterion("storage_houseid is null");
+        public Criteria andStorageHouseIsNull() {
+            addCriterion("storage_house is null");
             return (Criteria) this;
         }
 
-        public Criteria andStorageHouseidIsNotNull() {
-            addCriterion("storage_houseid is not null");
+        public Criteria andStorageHouseIsNotNull() {
+            addCriterion("storage_house is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStorageHouseidEqualTo(Integer value) {
-            addCriterion("storage_houseid =", value, "storageHouseid");
+        public Criteria andStorageHouseEqualTo(String value) {
+            addCriterion("storage_house =", value, "storageHouse");
             return (Criteria) this;
         }
 
-        public Criteria andStorageHouseidNotEqualTo(Integer value) {
-            addCriterion("storage_houseid <>", value, "storageHouseid");
+        public Criteria andStorageHouseNotEqualTo(String value) {
+            addCriterion("storage_house <>", value, "storageHouse");
             return (Criteria) this;
         }
 
-        public Criteria andStorageHouseidGreaterThan(Integer value) {
-            addCriterion("storage_houseid >", value, "storageHouseid");
+        public Criteria andStorageHouseGreaterThan(String value) {
+            addCriterion("storage_house >", value, "storageHouse");
             return (Criteria) this;
         }
 
-        public Criteria andStorageHouseidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("storage_houseid >=", value, "storageHouseid");
+        public Criteria andStorageHouseGreaterThanOrEqualTo(String value) {
+            addCriterion("storage_house >=", value, "storageHouse");
             return (Criteria) this;
         }
 
-        public Criteria andStorageHouseidLessThan(Integer value) {
-            addCriterion("storage_houseid <", value, "storageHouseid");
+        public Criteria andStorageHouseLessThan(String value) {
+            addCriterion("storage_house <", value, "storageHouse");
             return (Criteria) this;
         }
 
-        public Criteria andStorageHouseidLessThanOrEqualTo(Integer value) {
-            addCriterion("storage_houseid <=", value, "storageHouseid");
+        public Criteria andStorageHouseLessThanOrEqualTo(String value) {
+            addCriterion("storage_house <=", value, "storageHouse");
             return (Criteria) this;
         }
 
-        public Criteria andStorageHouseidIn(List<Integer> values) {
-            addCriterion("storage_houseid in", values, "storageHouseid");
+        public Criteria andStorageHouseLike(String value) {
+            addCriterion("storage_house like", value, "storageHouse");
             return (Criteria) this;
         }
 
-        public Criteria andStorageHouseidNotIn(List<Integer> values) {
-            addCriterion("storage_houseid not in", values, "storageHouseid");
+        public Criteria andStorageHouseNotLike(String value) {
+            addCriterion("storage_house not like", value, "storageHouse");
             return (Criteria) this;
         }
 
-        public Criteria andStorageHouseidBetween(Integer value1, Integer value2) {
-            addCriterion("storage_houseid between", value1, value2, "storageHouseid");
+        public Criteria andStorageHouseIn(List<String> values) {
+            addCriterion("storage_house in", values, "storageHouse");
             return (Criteria) this;
         }
 
-        public Criteria andStorageHouseidNotBetween(Integer value1, Integer value2) {
-            addCriterion("storage_houseid not between", value1, value2, "storageHouseid");
+        public Criteria andStorageHouseNotIn(List<String> values) {
+            addCriterion("storage_house not in", values, "storageHouse");
+            return (Criteria) this;
+        }
+
+        public Criteria andStorageHouseBetween(String value1, String value2) {
+            addCriterion("storage_house between", value1, value2, "storageHouse");
+            return (Criteria) this;
+        }
+
+        public Criteria andStorageHouseNotBetween(String value1, String value2) {
+            addCriterion("storage_house not between", value1, value2, "storageHouse");
             return (Criteria) this;
         }
 

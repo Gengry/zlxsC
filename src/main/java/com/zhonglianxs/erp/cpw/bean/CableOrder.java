@@ -8,6 +8,10 @@ public class CableOrder {
 
     private Integer orderUserId;
 
+    private String orderCode;
+
+    private Integer orderType;
+
     private Integer orderOtherId;
 
     private String orderOtherName;
@@ -42,6 +46,22 @@ public class CableOrder {
 
     public void setOrderUserId(Integer orderUserId) {
         this.orderUserId = orderUserId;
+    }
+
+    public String getOrderCode() {
+        return orderCode;
+    }
+
+    public void setOrderCode(String orderCode) {
+        this.orderCode = orderCode == null ? null : orderCode.trim();
+    }
+
+    public Integer getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(Integer orderType) {
+        this.orderType = orderType;
     }
 
     public Integer getOrderOtherId() {

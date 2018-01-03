@@ -116,10 +116,10 @@
       storage_quality, storage_color, storage_provider, 
       storage_update_time, storage_house, storage_desc, 
       storage_delete)
-    values (#{id,jdbcType=INTEGER}, #{storageUserId,jdbcType=INTEGER}, #{storageModel,jdbcType=VARCHAR},
+    values (#{id,jdbcType=INTEGER}, #{storageUserId,jdbcType=INTEGER}, #{storageModel,jdbcType=VARCHAR}, 
       #{storageSpec,jdbcType=VARCHAR}, #{storageUnit,jdbcType=VARCHAR}, #{storageNumber,jdbcType=DECIMAL}, 
-      #{storageQuality,jdbcType=VARCHAR}, #{storageColor,jdbcType=VARCHAR}, #{storageProvider,jdbcType=VARCHAR},
-      #{storageUpdateTime,jdbcType=TIMESTAMP}, #{storageHouse,jdbcType=VARCHAR}, #{storageDesc,jdbcType=VARCHAR},
+      #{storageQuality,jdbcType=VARCHAR}, #{storageColor,jdbcType=VARCHAR}, #{storageProvider,jdbcType=VARCHAR}, 
+      #{storageUpdateTime,jdbcType=TIMESTAMP}, #{storageHouse,jdbcType=VARCHAR}, #{storageDesc,jdbcType=VARCHAR}, 
       #{storageDelete,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableStorage" >

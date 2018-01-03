@@ -104,7 +104,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zhonglianxs.erp.cpw.bean.CableInfo" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insert" parameterType="com.zhonglianxs.erp.cpw.bean.CableInfo" >
     insert into cable_info (id, cable_user_id, cable_model, 
       cable_spec, cable_desc, cable_price, 
       cable_time, cable_delete)
@@ -112,7 +112,7 @@
       #{cableSpec,jdbcType=VARCHAR}, #{cableDesc,jdbcType=VARCHAR}, #{cablePrice,jdbcType=DECIMAL}, 
       #{cableTime,jdbcType=TIMESTAMP}, #{cableDelete,jdbcType=SMALLINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableInfo" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableInfo" >
     insert into cable_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

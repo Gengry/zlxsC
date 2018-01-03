@@ -4,6 +4,8 @@
   <resultMap id="BaseResultMap" type="com.zhonglianxs.erp.cpw.bean.CableOrder" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="order_user_id" property="orderUserId" jdbcType="INTEGER" />
+    <result column="order_code" property="orderCode" jdbcType="VARCHAR" />
+    <result column="order_type" property="orderType" jdbcType="INTEGER" />
     <result column="order_other_id" property="orderOtherId" jdbcType="INTEGER" />
     <result column="order_other_name" property="orderOtherName" jdbcType="VARCHAR" />
     <result column="order_other_contact" property="orderOtherContact" jdbcType="VARCHAR" />
@@ -74,9 +76,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, order_user_id, order_other_id, order_other_name, order_other_contact, order_other_tele, 
-    order_other_address, order_other_house, order_time, order_totalprice, order_desc, 
-    order_delete
+    id, order_user_id, order_code, order_type, order_other_id, order_other_name, order_other_contact, 
+    order_other_tele, order_other_address, order_other_house, order_time, order_totalprice, 
+    order_desc, order_delete
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhonglianxs.erp.cpw.bean.CableOrderExample" >
     select
@@ -109,19 +111,19 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zhonglianxs.erp.cpw.bean.CableOrder" useGeneratedKeys="true" keyProperty="id">
-    insert into cable_order (id, order_user_id, order_other_id, 
-      order_other_name, order_other_contact, order_other_tele, 
-      order_other_address, order_other_house, order_time, 
-      order_totalprice, order_desc, order_delete
-      )
-    values (#{id,jdbcType=INTEGER}, #{orderUserId,jdbcType=INTEGER}, #{orderOtherId,jdbcType=INTEGER}, 
-      #{orderOtherName,jdbcType=VARCHAR}, #{orderOtherContact,jdbcType=VARCHAR}, #{orderOtherTele,jdbcType=VARCHAR}, 
-      #{orderOtherAddress,jdbcType=VARCHAR}, #{orderOtherHouse,jdbcType=VARCHAR}, #{orderTime,jdbcType=TIMESTAMP}, 
-      #{orderTotalprice,jdbcType=DECIMAL}, #{orderDesc,jdbcType=VARCHAR}, #{orderDelete,jdbcType=INTEGER}
-      )
+  <insert id="insert" parameterType="com.zhonglianxs.erp.cpw.bean.CableOrder" >
+    insert into cable_order (id, order_user_id, order_code, 
+      order_type, order_other_id, order_other_name, 
+      order_other_contact, order_other_tele, order_other_address, 
+      order_other_house, order_time, order_totalprice, 
+      order_desc, order_delete)
+    values (#{id,jdbcType=INTEGER}, #{orderUserId,jdbcType=INTEGER}, #{orderCode,jdbcType=VARCHAR}, 
+      #{orderType,jdbcType=INTEGER}, #{orderOtherId,jdbcType=INTEGER}, #{orderOtherName,jdbcType=VARCHAR}, 
+      #{orderOtherContact,jdbcType=VARCHAR}, #{orderOtherTele,jdbcType=VARCHAR}, #{orderOtherAddress,jdbcType=VARCHAR}, 
+      #{orderOtherHouse,jdbcType=VARCHAR}, #{orderTime,jdbcType=TIMESTAMP}, #{orderTotalprice,jdbcType=DECIMAL}, 
+      #{orderDesc,jdbcType=VARCHAR}, #{orderDelete,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableOrder" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insertSelective" parameterType="com.zhonglianxs.erp.cpw.bean.CableOrder" >
     insert into cable_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -129,6 +131,12 @@
       </if>
       <if test="orderUserId != null" >
         order_user_id,
+      </if>
+      <if test="orderCode != null" >
+        order_code,
+      </if>
+      <if test="orderType != null" >
+        order_type,
       </if>
       <if test="orderOtherId != null" >
         order_other_id,
@@ -167,6 +175,12 @@
       </if>
       <if test="orderUserId != null" >
         #{orderUserId,jdbcType=INTEGER},
+      </if>
+      <if test="orderCode != null" >
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        #{orderType,jdbcType=INTEGER},
       </if>
       <if test="orderOtherId != null" >
         #{orderOtherId,jdbcType=INTEGER},
@@ -215,6 +229,12 @@
       <if test="record.orderUserId != null" >
         order_user_id = #{record.orderUserId,jdbcType=INTEGER},
       </if>
+      <if test="record.orderCode != null" >
+        order_code = #{record.orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderType != null" >
+        order_type = #{record.orderType,jdbcType=INTEGER},
+      </if>
       <if test="record.orderOtherId != null" >
         order_other_id = #{record.orderOtherId,jdbcType=INTEGER},
       </if>
@@ -254,6 +274,8 @@
     update cable_order
     set id = #{record.id,jdbcType=INTEGER},
       order_user_id = #{record.orderUserId,jdbcType=INTEGER},
+      order_code = #{record.orderCode,jdbcType=VARCHAR},
+      order_type = #{record.orderType,jdbcType=INTEGER},
       order_other_id = #{record.orderOtherId,jdbcType=INTEGER},
       order_other_name = #{record.orderOtherName,jdbcType=VARCHAR},
       order_other_contact = #{record.orderOtherContact,jdbcType=VARCHAR},
@@ -273,6 +295,12 @@
     <set >
       <if test="orderUserId != null" >
         order_user_id = #{orderUserId,jdbcType=INTEGER},
+      </if>
+      <if test="orderCode != null" >
+        order_code = #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        order_type = #{orderType,jdbcType=INTEGER},
       </if>
       <if test="orderOtherId != null" >
         order_other_id = #{orderOtherId,jdbcType=INTEGER},
@@ -310,6 +338,8 @@
   <update id="updateByPrimaryKey" parameterType="com.zhonglianxs.erp.cpw.bean.CableOrder" >
     update cable_order
     set order_user_id = #{orderUserId,jdbcType=INTEGER},
+      order_code = #{orderCode,jdbcType=VARCHAR},
+      order_type = #{orderType,jdbcType=INTEGER},
       order_other_id = #{orderOtherId,jdbcType=INTEGER},
       order_other_name = #{orderOtherName,jdbcType=VARCHAR},
       order_other_contact = #{orderOtherContact,jdbcType=VARCHAR},

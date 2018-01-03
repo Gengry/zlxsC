@@ -51,7 +51,7 @@ public class CableStorage {
     }
 
     public void setStorageModel(String storageModel) {
-        this.storageModel = storageModel;
+        this.storageModel = storageModel == null ? null : storageModel.trim();
     }
 
     public String getStorageSpec() {
@@ -99,7 +99,7 @@ public class CableStorage {
     }
 
     public void setStorageProvider(String storageProvider) {
-        this.storageProvider = storageProvider;
+        this.storageProvider = storageProvider == null ? null : storageProvider.trim();
     }
 
     public Date getStorageUpdateTime() {
@@ -115,7 +115,7 @@ public class CableStorage {
     }
 
     public void setStorageHouse(String storageHouse) {
-        this.storageHouse = storageHouse;
+        this.storageHouse = storageHouse == null ? null : storageHouse.trim();
     }
 
     public String getStorageDesc() {
