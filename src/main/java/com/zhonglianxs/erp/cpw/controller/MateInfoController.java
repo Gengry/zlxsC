@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -97,9 +98,13 @@ public class MateInfoController {
 
     @RequestMapping(value = "/cable/update/{cableInfoId}", method = RequestMethod.POST)
     @ResponseBody
-    public Object update(@PathVariable("cableInfoId") int cableInfoId, CableInfo cableInfo) {
+    public Object update(HttpSession session,@PathVariable("cableInfoId") int cableInfoId, CableInfo cableInfo) {
+        CableInfo info = cableInfoService.selectByPrimaryKey(cableInfoId);
         cableInfo.setId(cableInfoId);
-        int count = cableInfoService.updateByPrimaryKeySelective(cableInfo);
+        cableInfo.setCableUserId(info.getCableUserId());
+        cableInfo.setCableDelete((short)0);
+        cableInfo.setCableTime(info.getCableTime());
+        int count = cableInfoService.updateByPrimaryKey(cableInfo);
         return new BaseResult(ResultConstant.SUCCESS, count);
     }
 

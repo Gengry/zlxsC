@@ -134,7 +134,7 @@ var updateDialog;
 function updateAction(cableInfoId) {
     updateDialog = $.dialog({
         animationSpeed: 300,
-        title: '编辑角色',
+        title: '编辑线缆信息',
         content: 'url:${basePath}/mate/cable/update/' + cableInfoId,
         onContentReady: function () {
             initMaterialInput();
