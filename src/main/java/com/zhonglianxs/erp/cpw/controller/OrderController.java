@@ -3,16 +3,15 @@ package com.zhonglianxs.erp.cpw.controller;
 import com.zhonglianxs.erp.cpw.bean.*;
 import com.zhonglianxs.erp.cpw.service.*;
 import com.zhonglianxs.erp.cpw.util.BaseResult;
+import com.zhonglianxs.erp.cpw.util.ResultConstant;
 import com.zhonglianxs.erp.cpw.util.UnitConstant;
 import com.zhonglianxs.erp.cpw.vo.OrderInVo;
+import com.zhonglianxs.erp.cpw.vo.OrderOutVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -39,6 +38,10 @@ public class OrderController {
     private CableOrderService cableOrderService;
     @Autowired
     private CableCustomerService cableCustomerService;
+    @Autowired
+    private CableStorageService cableStorageService;
+    @Autowired
+    private CableOrderItemService cableOrderItemService;
 
     @RequestMapping("/inIndex")
     public String providerIndex(HttpSession session, ModelMap modelMap){
@@ -134,7 +137,13 @@ public class OrderController {
         cableHouseExample.createCriteria().andCableHouseUserIdEqualTo((int)session.getAttribute("userId")).andCableHouseDeleteEqualTo(0);
         List<CableHouse> cableHouses = cableHouseService.selectByExample(cableHouseExample);
         modelMap.put("cableHouses",cableHouses);
-        return "order/orderInCreate.jsp";
+        return "order/orderOutCreate.jsp";
+    }
+
+    @RequestMapping(value = "/orderOut/create",method = RequestMethod.POST)
+    @ResponseBody
+    public Object orderOut(HttpSession session,OrderOutVo orderOutVo){
+        return cableOrderService.createOutOrder(orderOutVo,(int)session.getAttribute("userId"));
     }
 
     @RequestMapping("/order/index")
@@ -155,6 +164,50 @@ public class OrderController {
         cableOrderExample.setOrderByClause("order_time desc");
         List<CableOrder> rows = cableOrderService.selectByExampleForOffsetPage(cableOrderExample, offset, limit);
         long total = cableOrderService.countByExample(cableOrderExample);
+        Map<String, Object> result = new HashMap<>();
+        result.put("rows", rows);
+        result.put("total", total);
+        return result;
+    }
+
+    @RequestMapping(value = "/order/delete/{ids}",method = RequestMethod.GET)
+    @ResponseBody
+    public Object houseDelete(@PathVariable("ids") String ids) {
+        int count = cableOrderService.deleteByPrimaryKeys(ids);
+        return new BaseResult(ResultConstant.SUCCESS, count);
+    }
+
+    @RequestMapping(value = "/getCableStorage",method = RequestMethod.GET)
+    @ResponseBody
+    public Object getCableStorage(HttpSession session,String model,String spec,String qulity,String unit,String color ,String house) {
+        CableStorageExample cableStorageExample = new CableStorageExample();
+        cableStorageExample.createCriteria().andStorageDeleteEqualTo(0).andStorageUserIdEqualTo((int)session.getAttribute("userId"))
+                .andStorageModelEqualTo(model).andStorageSpecEqualTo(spec).andStorageQualityEqualTo(qulity).andStorageUnitEqualTo(unit)
+                .andStorageColorEqualTo(color).andStorageHouseEqualTo(house);
+        List<CableStorage> cableStorages = cableStorageService.selectByExample(cableStorageExample);
+        return new BaseResult(ResultConstant.SUCCESS, cableStorages);
+    }
+
+    @RequestMapping("/order/detail/{id}")
+    public String orderDetail(HttpSession session, ModelMap modelMap,@PathVariable String id){
+        modelMap.put("id",id);
+        return "order/detailIndex.jsp";
+    }
+
+    @RequestMapping(value = "/detail/list", method = RequestMethod.GET)
+    @ResponseBody
+    public Object orderDetailList(HttpSession session,
+                            @RequestParam(required = false, defaultValue = "0", value = "offset") int offset,
+                            @RequestParam(required = false, defaultValue = "10", value = "limit") int limit,
+                                  @RequestParam(required = true, value = "orderId") String orderId,
+                            @RequestParam(required = false, value = "sort") String sort,
+                            @RequestParam(required = false, value = "order") String order) {
+        CableOrderItemExample cableOrderItemExample = new CableOrderItemExample();
+        CableOrderItemExample.Criteria criteria = cableOrderItemExample.createCriteria();
+        criteria.andItemDeleteEqualTo(0).andItemOrderIdEqualTo(Integer.parseInt(orderId));
+        cableOrderItemExample.setOrderByClause("id asc");
+        List<CableOrderItem> rows = cableOrderItemService.selectByExampleForOffsetPage(cableOrderItemExample, offset, limit);
+        long total = cableOrderItemService.countByExample(cableOrderItemExample);
         Map<String, Object> result = new HashMap<>();
         result.put("rows", rows);
         result.put("total", total);

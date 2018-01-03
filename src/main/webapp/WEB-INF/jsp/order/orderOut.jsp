@@ -19,7 +19,7 @@
 	<div id="toolbar">
 		<a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增</a>
 		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除</a>
-        <select id="selectCustomer" style="width: 150px;" data-placeholder="请选择一个供应商" onchange="getProvoderByid()">
+        <select id="selectCustomer" style="width: 150px;" data-placeholder="请选择一个客户" onchange="getCustomerByid()">
             <option></option>
             <c:forEach items="${cableCustomer}" var="item">
                 <option value="${item.id}">${item.customerName}</option>
@@ -31,6 +31,7 @@
         <tr>
             <th data-field="ck" data-checkbox="true"></th>
             <th data-field="id" data-visible="false">id</th>
+            <th data-field="storageId" data-visible="false">storageId</th>
             <th data-field="model">线缆型号</th>
             <th data-field="spec">线缆规格</th>
             <th data-field="quality">线缆质量</th>
@@ -64,10 +65,10 @@
 	</table>
     <div>
         <div class="form-group form-inline">
-            <input type="text" class="form-control" id="providerContact" placeholder="联系人">
-            <input type="text" class="form-control" id="providerTele" placeholder="联系电话">
-            <input type="text" class="form-control" id="providerAddress" placeholder="公司地址">
-            <input type="text" class="form-control" id="providerHouse" placeholder="客户仓库地址">
+            <input type="text" class="form-control" id="customerContact" placeholder="联系人">
+            <input type="text" class="form-control" id="customerTele" placeholder="联系电话">
+            <input type="text" class="form-control" id="customerAddress" placeholder="公司地址">
+            <input type="text" class="form-control" id="customerHouse" placeholder="客户仓库地址">
             <input type="number" class="form-control" id="orderPrice" placeholder="订单总金额" min="0" value="0">
         </div>
         <div class="form-group">
@@ -83,7 +84,11 @@
 
     var addIndex = 0;
     function addRow(){
-        if(isEmpty($("#modelCreate").val())||isEmpty($("#specCreate").val())||isEmpty($("#qualityCreate").val())||isEmpty($("#unitCreate").val())||isEmpty($("#colorCreate").val())||
+        if(parseFloat($("#numStorage option:selected").text())<parseFloat($("#numCreate").val())){
+            failPrompt("数量不能超过库存");
+            return false;
+        }
+        if(isEmpty($("#numStorage").val())||isEmpty($("#modelCreate").val())||isEmpty($("#specCreate").val())||isEmpty($("#qualityCreate").val())||isEmpty($("#unitCreate").val())||isEmpty($("#colorCreate").val())||
             isEmpty($("#numCreate").val())||isEmpty($("#priceCreate").val())||isEmpty($("#discountCreate").val())||isEmpty($("#countPriceCreate").val())||isEmpty($("#houseCreate").val())){
             failPrompt("请将信息填写完整。");
         }else{
@@ -91,6 +96,7 @@
                 {
                     ck:"",
                     id:addIndex++,
+                    storageId:$("#numStorage").val(),
                     model:$("#modelCreate").val(),
                     spec:$("#specCreate").val(),
                     quality:$("#qualityCreate").val(),
@@ -136,7 +142,7 @@ function createAction() {
 	createDialog = $.dialog({
 		animationSpeed: 300,
 		title: '新增线缆信息',
-		content: 'url:${basePath}/order/orderIn/create',
+		content: 'url:${basePath}/order/orderOut/create',
 		onContentReady: function () {
 			initMaterialInput();
 		}
@@ -168,7 +174,7 @@ function deleteAction() {
 
 }
 
-function getProvoderByid(){
+function getCustomerByid(){
     $.ajax({
         url: BASE_PATH + '/order/getCustomerInfoById',
         type: 'GET',
@@ -179,10 +185,10 @@ function getProvoderByid(){
             if (json.code == 1) {
                 $("#specCreate").html("");
                 var cableCustomer = json.data;
-                $("#providerContact").val(cableCustomer.customerContact);
-                $("#providerTele").val(cableCustomer.customerTele);
-                $("#providerAddress").val(cableCustomer.customerAddress);
-                $("#providerHouse").val(cableCustomer.customerWarehouse);
+                $("#customerContact").val(cableCustomer.customerContact);
+                $("#customerTele").val(cableCustomer.customerTele);
+                $("#customerAddress").val(cableCustomer.customerAddress);
+                $("#customerHouse").val(cableCustomer.customerWarehouse);
             } else {
 
             }
@@ -202,17 +208,17 @@ function submitOrder(){
         return false;
     }
     orderObj['items'] = $table.bootstrapTable("getData");
-    orderObj['providerId'] = $("#selectCustomer  option:selected").val();
-    orderObj['providerName'] = $("#selectCustomer  option:selected").text();
-    orderObj['providerContact'] = $("#providerContact").val();
-    orderObj['providerTele'] = $("#providerTele").val();
-    orderObj['providerAddress'] = $("#providerAddress").val();
-    orderObj['providerHouse'] = $("#providerHouse").val();
+    orderObj['customerId'] = $("#selectCustomer  option:selected").val();
+    orderObj['customerName'] = $("#selectCustomer  option:selected").text();
+    orderObj['customerContact'] = $("#customerContact").val();
+    orderObj['customerTele'] = $("#customerTele").val();
+    orderObj['customerAddress'] = $("#customerAddress").val();
+    orderObj['customerHouse'] = $("#customerHouse").val();
     orderObj['orderPrice'] = $("#orderPrice").val();
     orderObj['orderDesc'] = $("#orderDesc").val();
     $.ajax({
         type: 'post',
-        url: '${basePath}/order/orderIn/create',
+        url: '${basePath}/order/orderOut/create',
         data: orderObj,
         success: function(result) {
             if (result.code != 1) {

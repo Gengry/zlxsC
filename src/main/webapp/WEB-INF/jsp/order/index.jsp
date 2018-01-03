@@ -17,7 +17,6 @@
 <body>
 <div id="main">
 	<div id="toolbar" class="form-inline">
-		<a class="waves-effect waves-button" href="javascript:;" onclick="createAction()"><i class="zmdi zmdi-plus"></i> 新增颜色</a>
 		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除信息</a>
         <button type="button" class="btn btn-default" onclick="javascript:$table.bootstrapTable('refresh');">刷新列表</button>
 	</div>
@@ -50,8 +49,8 @@ $(function() {
 		columns: [
 			{field: 'ck', checkbox: true},
 			{field: 'id', title: '编号', align: 'center', visible:false},
-            {field: 'orderUserId', title: '订单单号', align: 'center'},
-			{field: 'orderUserId', title: '订单类型', align: 'center'},
+            {field: 'orderCode', title: '订单单号', align: 'center'},
+			{field: 'orderType', title: '订单类型', align: 'center',formatter:'typeFormatter'},
             {field: 'orderOtherName', title: '客户公司名', align: 'center'},
             {field: 'orderOtherContact', title: '联系人', align: 'center'},
             {field: 'orderOtherTele', title: '联系电话', align: 'center'},
@@ -74,7 +73,7 @@ function refreshInit(){
 function actionFormatter(value, row, index) {
     var id = row.id;
     return [
-		'<a class="update" href="javascript:;" onclick="orderDetail('+id+')" data-toggle="tooltip" title="Detail"><i class="glyphicon glyphicon-eye-open"></i></a>　',
+        '<a class="update" href="javascript:;" onclick="orderDetail('+id+')" data-toggle="tooltip" title="Detail"><i class="glyphicon glyphicon-eye-open"></i></a>　',
 		'<a class="delete" href="javascript:;" onclick="deleteAction('+id+')" data-toggle="tooltip" title="Remove"><i class="glyphicon glyphicon-remove"></i></a>'
     ].join('');
 }
@@ -85,43 +84,27 @@ function timeFormatter(value, row, index){
     return dateFtt("yyyy-MM-dd hh:mm:ss",date);
 }
 
-function cableFormatter(index, row) {
-    return '描述：'+row.orderDesc;
-//    var t = '仓库管理';
-//    var x = '/mate/houseIndex';
-//    return "<div type=''><table><tr><td>1</td><td>2</td><td>3</td></tr></table>" +
-//        "<a href='javascript:parent.Tab.addTab(\""+t+"\", \""+x+"\");'>123123</a></div>";
+function typeFormatter(value, row, index){
+    var type = row.orderType;
+    if(type == 1){
+        return '进货单';
+	}else{
+        return '销售单';
+	}
 }
 
 function orderDetail(id){
     parent.Tab.addTab("订单详情","/order/order/detail");
 }
 
-// 新增
-var createDialog;
-function createAction() {
-	createDialog = $.dialog({
-		animationSpeed: 300,
-		title: '新增颜色',
-		content: 'url:${basePath}/mate/color/create',
-		onContentReady: function () {
-			initMaterialInput();
-		}
-	});
+function cableFormatter(index, row) {
+    return '描述：'+row.orderDesc;
 }
 
-// 编辑
-var updateDialog;
-function updateAction(id) {
-    updateDialog = $.dialog({
-        animationSpeed: 300,
-        title: '编辑颜色',
-        content: 'url:${basePath}/mate/color/update/' + id,
-        onContentReady: function () {
-            initMaterialInput();
-        }
-    });
+function orderDetail(id){
+    parent.Tab.addTab("订单详情","/order/order/detail/"+id);
 }
+
 // 删除
 var deleteDialog;
 function deleteAction() {
@@ -156,7 +139,7 @@ function deleteAction() {
 						}
 						$.ajax({
 							type: 'get',
-							url: '${basePath}/mate/color/delete/' + ids.join("-"),
+							url: '${basePath}/order/order/delete/' + ids.join("-"),
 							success: function(result) {
 								if (result.code != 1) {
 									if (result.data instanceof Array) {
