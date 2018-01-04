@@ -18,7 +18,11 @@
 <div id="main">
 	<div id="toolbar" class="form-inline">
 		<a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除信息</a>
-        <button type="button" class="btn btn-default" onclick="javascript:$table.bootstrapTable('refresh');">刷新列表</button>
+		<div class="form-group">
+			<label class="sr-only" for="searchCode">订单单号</label>
+			<input type="text" class="form-control" id="searchCode" placeholder="订单单号">
+		</div>
+        <button type="button" class="btn btn-default" onclick="javascript:$table.bootstrapTable('refresh');">查询</button>
 	</div>
 	<table id="table"></table>
 </div>
@@ -46,6 +50,7 @@ $(function() {
 		maintainSelected: true,
 		toolbar: '#toolbar',
         onRefresh:refreshInit,
+        queryParams:queryParams,
 		columns: [
 			{field: 'ck', checkbox: true},
 			{field: 'id', title: '编号', align: 'center', visible:false},
@@ -64,6 +69,11 @@ $(function() {
 
 	});
 });
+
+function queryParams(params) {
+    params["searchCode"]=$("#searchCode").val();
+    return params;
+}
 
 function refreshInit(){
     $table.bootstrapTable("selectPage",1);

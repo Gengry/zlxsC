@@ -7,6 +7,7 @@ import com.zhonglianxs.erp.cpw.util.ResultConstant;
 import com.zhonglianxs.erp.cpw.util.UnitConstant;
 import com.zhonglianxs.erp.cpw.vo.OrderInVo;
 import com.zhonglianxs.erp.cpw.vo.OrderOutVo;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -156,11 +157,15 @@ public class OrderController {
     public Object orderList(HttpSession session,
                             @RequestParam(required = false, defaultValue = "0", value = "offset") int offset,
                             @RequestParam(required = false, defaultValue = "10", value = "limit") int limit,
+                            @RequestParam(required = false, value = "searchCode") String searchCode,
                             @RequestParam(required = false, value = "sort") String sort,
                             @RequestParam(required = false, value = "order") String order) {
         CableOrderExample cableOrderExample = new CableOrderExample();
         CableOrderExample.Criteria criteria = cableOrderExample.createCriteria();
         criteria.andOrderDeleteEqualTo(0).andOrderUserIdEqualTo((int)session.getAttribute("userId"));
+        if(StringUtils.isNotBlank(searchCode)){
+            criteria.andOrderCodeLike(searchCode+"%");
+        }
         cableOrderExample.setOrderByClause("order_time desc");
         List<CableOrder> rows = cableOrderService.selectByExampleForOffsetPage(cableOrderExample, offset, limit);
         long total = cableOrderService.countByExample(cableOrderExample);
