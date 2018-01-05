@@ -8,6 +8,17 @@ import com.zhonglianxs.erp.cpw.util.UnitConstant;
 import com.zhonglianxs.erp.cpw.vo.OrderInVo;
 import com.zhonglianxs.erp.cpw.vo.OrderOutVo;
 import org.apache.commons.lang.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.xssf.streaming.SXSSFCell;
+import org.apache.poi.xssf.streaming.SXSSFRow;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +26,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.*;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -217,5 +231,72 @@ public class OrderController {
         result.put("rows", rows);
         result.put("total", total);
         return result;
+    }
+
+
+    @RequestMapping("/download")
+    public void downloadFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        OPCPackage pkg = OPCPackage.open(new File("F:\\Open Source Project\\zlxs\\2.xlsx"));
+        XSSFWorkbook wb = new XSSFWorkbook(pkg);
+        XSSFSheet xssfSheet = wb.getSheetAt(0);
+        XSSFRow xssfRow = xssfSheet.getRow(2);
+        XSSFCell xssfCell = xssfRow.getCell(2);
+        xssfCell.setCellValue("试一试导出模板数据");
+        String fileName = "中文.xlsx";
+        response.setContentType("application/octet-stream");
+        response.setHeader("name", fileName);
+        response.setHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");
+        response.setHeader("Pragma", "public");
+        response.setDateHeader("Expires", 0);
+        response.setHeader("Content-disposition","attachment; filename=\""+ URLEncoder.encode(fileName, "UTF-8")+ "\"");
+
+        wb.write(response.getOutputStream()); // 输出流控制workbook
+
+        response.getOutputStream().flush();
+
+        response.getOutputStream().close();
+        pkg.close();
+//        File fi=new File("F:\\Open Source Project\\zlxs\\2.xlsx");
+//        if(fi.exists()){
+//        InputStream in = new FileInputStream(fi);
+//
+//
+//
+//        //读取excel模板
+//        XSSFWorkbook xwb = new XSSFWorkbook(in);
+//            SXSSFWorkbook wb = null;
+//            wb = new SXSSFWorkbook(xwb,1000);
+//
+//        //读取了模板内所有sheet内容
+//        SXSSFSheet sheet = wb.getSheetAt(0);
+//            System.out.println(sheet.getLastRowNum());
+//        //如果这行没有了，整个公式都不会有自动计算的效果的
+//        sheet.setForceFormulaRecalculation(true);
+//
+//        //在相应的单元格进行赋值
+//        SXSSFRow row = sheet.getRow(1);
+//        SXSSFCell cell = row.getCell(1);
+//        cell.setCellValue(1);
+//        SXSSFCell cell2 = sheet.getRow(11).getCell(7);
+//        cell2.setCellValue(2);
+//        sheet.getRow(12).getCell(6).setCellValue(12);
+//        sheet.getRow(12).getCell(7).setCellValue(12);
+//
+//        String fileName = "1.xls";
+//
+//        response.setContentType("application/octet-stream");
+//        response.setHeader("name", fileName);
+//        response.setHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");
+//        response.setHeader("Pragma", "public");
+//        response.setDateHeader("Expires", 0);
+//        response.setHeader("Content-disposition","attachment; filename=\""+ URLEncoder.encode(fileName, "UTF-8")+ "\"");
+//
+//        wb.write(response.getOutputStream()); // 输出流控制workbook
+//
+//        response.getOutputStream().flush();
+//
+//        response.getOutputStream().close();
+//    }}
     }
 }
