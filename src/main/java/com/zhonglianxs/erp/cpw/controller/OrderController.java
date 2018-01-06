@@ -1,35 +1,34 @@
 package com.zhonglianxs.erp.cpw.controller;
 
 import com.zhonglianxs.erp.cpw.bean.*;
+import com.zhonglianxs.erp.cpw.mapper.OrderMapper;
 import com.zhonglianxs.erp.cpw.service.*;
 import com.zhonglianxs.erp.cpw.util.BaseResult;
 import com.zhonglianxs.erp.cpw.util.ResultConstant;
 import com.zhonglianxs.erp.cpw.util.UnitConstant;
 import com.zhonglianxs.erp.cpw.vo.OrderInVo;
 import com.zhonglianxs.erp.cpw.vo.OrderOutVo;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.opc.OPCPackage;
-import org.apache.poi.xssf.streaming.SXSSFCell;
-import org.apache.poi.xssf.streaming.SXSSFRow;
-import org.apache.poi.xssf.streaming.SXSSFSheet;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.net.URLEncoder;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +56,8 @@ public class OrderController {
     private CableStorageService cableStorageService;
     @Autowired
     private CableOrderItemService cableOrderItemService;
+    @Autowired
+    private OrderMapper orderMapper;
 
     @RequestMapping("/inIndex")
     public String providerIndex(HttpSession session, ModelMap modelMap){
@@ -234,16 +235,48 @@ public class OrderController {
     }
 
 
-    @RequestMapping("/download")
-    public void downloadFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    @RequestMapping("/download/{id}")
+    public void downloadFile(HttpServletRequest request, HttpServletResponse response,@PathVariable("id") Integer id) throws Exception {
 
-        OPCPackage pkg = OPCPackage.open(new File("F:\\Open Source Project\\zlxs\\2.xlsx"));
+        FileInputStream ins = new FileInputStream("F:\\openProjectSorce\\zlxsC\\1.xlsx");
+        FileOutputStream out = new FileOutputStream("F:\\openProjectSorce\\zlxsC\\2.xlsx");
+        byte[] b = new byte[1024];
+        int n=0;
+        while((n=ins.read(b))!=-1){
+            out.write(b, 0, n);
+        }
+
+        ins.close();
+        out.close();
+
+        //通过订单id查询
+        CableOrder cableOrder = cableOrderService.selectByPrimaryKey(id);
+        List<Map<String,Object>> orderItems = orderMapper.getOrderItemByOrderId(id);
+        File tempFile = new File("F:\\openProjectSorce\\zlxsC\\2.xlsx");
+        OPCPackage pkg = OPCPackage.open(tempFile);
         XSSFWorkbook wb = new XSSFWorkbook(pkg);
         XSSFSheet xssfSheet = wb.getSheetAt(0);
+        xssfSheet.setForceFormulaRecalculation(true);
         XSSFRow xssfRow = xssfSheet.getRow(2);
         XSSFCell xssfCell = xssfRow.getCell(2);
-        xssfCell.setCellValue("试一试导出模板数据");
-        String fileName = "中文.xlsx";
+        xssfCell.setCellValue(cableOrder.getOrderOtherName());
+        xssfCell = xssfSheet.getRow(3).getCell(2);
+        xssfCell.setCellValue(cableOrder.getOrderOtherContact()+"  "+cableOrder.getOrderOtherTele());
+        NumberFormat decimalFormat = NumberFormat.getInstance();
+        for (int i=0;i<orderItems.size();i++){
+            Map<String,Object> map = orderItems.get(i);
+            xssfCell = xssfSheet.getRow(6+i).getCell(1);
+            xssfCell.setCellValue(MapUtils.getString(map,"item_model")+"、"+MapUtils.getString(map,"item_spec"));
+            xssfCell = xssfSheet.getRow(6+i).getCell(3);
+            xssfCell.setCellValue(MapUtils.getString(map,"item_unit"));
+            xssfCell = xssfSheet.getRow(6+i).getCell(4);
+            xssfCell.setCellValue(MapUtils.getString(map,"item_number"));
+            xssfCell = xssfSheet.getRow(6+i).getCell(5);
+            xssfCell.setCellValue(MapUtils.getString(map,"item_price"));
+        }
+        xssfCell = xssfSheet.getRow(17).getCell(2);
+        xssfCell.setCellValue(cableOrder.getOrderDesc());
+        String fileName = "众联芯实配送单"+cableOrder.getOrderCode()+".xlsx";
         response.setContentType("application/octet-stream");
         response.setHeader("name", fileName);
         response.setHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");
@@ -251,12 +284,15 @@ public class OrderController {
         response.setDateHeader("Expires", 0);
         response.setHeader("Content-disposition","attachment; filename=\""+ URLEncoder.encode(fileName, "UTF-8")+ "\"");
 
-        wb.write(response.getOutputStream()); // 输出流控制workbook
+        ServletOutputStream outputStream = response.getOutputStream();
 
-        response.getOutputStream().flush();
+        wb.write(outputStream); // 输出流控制workbook
 
-        response.getOutputStream().close();
+        outputStream.flush();
         pkg.close();
+        tempFile.delete();
+        outputStream.close();
+
 //        File fi=new File("F:\\Open Source Project\\zlxs\\2.xlsx");
 //        if(fi.exists()){
 //        InputStream in = new FileInputStream(fi);

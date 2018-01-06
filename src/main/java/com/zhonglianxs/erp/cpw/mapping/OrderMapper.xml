@@ -9,4 +9,8 @@
     <select id="getSpecByModel" resultType="java.lang.String">
         select cable_spec from cable_info where cable_delete = 0 and cable_user_id = #{userId} and cable_model = #{model}
     </select>
+
+    <select id="getOrderItemByOrderId" resultType="java.util.Map">
+        select item_model,item_spec,item_unit,item_color,item_number,item_price from cable_order_item where item_order_id = #{orderId}
+    </select>
 </mapper>

@@ -84,6 +84,7 @@ function actionFormatter(value, row, index) {
     var id = row.id;
     return [
         '<a class="update" href="javascript:;" onclick="orderDetail('+id+')" data-toggle="tooltip" title="Detail"><i class="glyphicon glyphicon-eye-open"></i></a>　',
+        '<a class="update" href="/order/download/'+id+'" data-toggle="tooltip" title="Detail"><i class="glyphicon glyphicon-download-alt"></i></a>　',
 		'<a class="delete" href="javascript:;" onclick="deleteAction('+id+')" data-toggle="tooltip" title="Remove"><i class="glyphicon glyphicon-remove"></i></a>'
     ].join('');
 }

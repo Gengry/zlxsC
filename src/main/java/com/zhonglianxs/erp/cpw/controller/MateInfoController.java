@@ -8,14 +8,22 @@ import com.zhonglianxs.erp.cpw.service.CableQualityService;
 import com.zhonglianxs.erp.cpw.util.BaseResult;
 import com.zhonglianxs.erp.cpw.util.ResultConstant;
 import org.apache.commons.lang.StringUtils;
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.validator.internal.constraintvalidators.hv.LengthValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -316,4 +324,39 @@ public class MateInfoController {
         return new BaseResult(ResultConstant.SUCCESS, count);
     }
 
+    @RequestMapping("/uploadIndex")
+    public String uploadIndex(){
+        return "mate/upload/index.jsp";
+    }
+
+    @RequestMapping("/uploadCable")
+    @ResponseBody
+    public String uploadCable(@RequestParam("file")MultipartFile multipartFile,HttpSession session) throws Exception{
+        OPCPackage pkg = OPCPackage.open(multipartFile.getInputStream());
+        XSSFWorkbook wb = new XSSFWorkbook(pkg);
+        XSSFSheet xssfSheet = wb.getSheetAt(0);
+        XSSFRow xssfRow;
+        int rowNum = xssfSheet.getLastRowNum();
+        Date cableTime = new Date();
+        for (int i = 0; i<= rowNum; i++){
+            xssfRow = xssfSheet.getRow(i);
+            if(xssfRow!=null&&xssfRow.getCell(1)!=null&&xssfRow.getCell(0)!=null&&StringUtils.isNotBlank(xssfRow.getCell(0).getStringCellValue())&&StringUtils.isNotBlank(xssfRow.getCell(1).getStringCellValue())){
+                CableInfo cableInfo = new CableInfo();
+                cableInfo.setCableUserId((int)session.getAttribute("userId"));
+                cableInfo.setCableModel(xssfRow.getCell(0).getStringCellValue());
+                cableInfo.setCableSpec(xssfRow.getCell(1).getStringCellValue());
+                cableInfo.setCableDesc(xssfRow.getCell(2).getStringCellValue());
+                cableInfo.setCableTime(cableTime);
+                cableInfo.setCableDelete((short)0);
+                CableInfoExample cableInfoExample = new CableInfoExample();
+                CableInfoExample.Criteria criteria = cableInfoExample.createCriteria();
+                criteria.andCableModelEqualTo(cableInfo.getCableModel()).andCableSpecEqualTo(cableInfo.getCableSpec()).andCableDeleteEqualTo((short)0);
+                int count = cableInfoService.countByExample(cableInfoExample);
+                if(count==0){
+                    cableInfoService.insert(cableInfo);
+                }
+            }
+        }
+        return "ok";
+    }
 }
