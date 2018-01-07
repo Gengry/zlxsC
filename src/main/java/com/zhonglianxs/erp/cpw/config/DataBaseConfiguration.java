@@ -22,8 +22,11 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.Properties;
 
+//生命为java配置类
 @Configuration
+//开启spring事物支持
 @EnableTransactionManagement
+//配置mybatis mapper扫描
 @MapperScan(value = "com.zhonglianxs.erp.cpw.mapper")
 public class DataBaseConfiguration implements EnvironmentAware{
 
@@ -35,6 +38,7 @@ public class DataBaseConfiguration implements EnvironmentAware{
         this.propertyResolver = new RelaxedPropertyResolver(environment,"spring.datasource.");
     }
 
+    //配置druidDataSource
     @Bean(name = "druidDataSource" ,initMethod = "init",destroyMethod = "close")
     public DruidDataSource dataSource(){
         DruidDataSource druidDataSource = new DruidDataSource();
@@ -56,11 +60,11 @@ public class DataBaseConfiguration implements EnvironmentAware{
         return druidDataSource;
     }
 
+    //配置mybatis sqlsessionFactory
     @Bean public SqlSessionFactory sqlSessionFactory(@Qualifier("druidDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
-        //mybatis分页
-//        PageHelper pageHelper = new PageHelper();
+        //配置mybatis分页插件
         Properties props = new Properties();
         props.setProperty("offsetAsPageNum", "false");
         props.setProperty("rowBoundsWithCount", "true");
@@ -69,14 +73,17 @@ public class DataBaseConfiguration implements EnvironmentAware{
         props.setProperty("params", "pageNum=pageNum;pageSize=pageSize;count=countSql;reasonable=reasonable;pageSizeZero=pageSizeZero");
         props.setProperty("supportMethodsArguments","false");
         props.setProperty("autoRuntimeDialect","true");
-//        pageHelper.setProperties(props); //添加插件
+
         PageInterceptor pageInterceptor = new PageInterceptor();
         pageInterceptor.setProperties(props);
         sqlSessionFactoryBean.setPlugins(new Interceptor[]{pageInterceptor});
+        //配置mybatis xml文件路径
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:com/zhonglianxs/erp/cpw/mapping/*.xml"));
         return sqlSessionFactoryBean.getObject();
     }
+
+    //配置spring 事物管理器
     @Bean public PlatformTransactionManager transactionManager() throws SQLException {
         return new DataSourceTransactionManager(dataSource());
     }

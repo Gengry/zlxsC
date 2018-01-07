@@ -135,7 +135,6 @@
 		<div class="content_main">
 			<div id="iframe_home" class="iframe cur">
 				<p><h3>众联芯实 线缆管理系统</h3></p>
-				<p><b>演示地址</b>：<a href="http://www.zhangshuzheng.cn/zhengAdmin" target="_blank">http://www.zhangshuzheng.cn/zhengAdmin</a></p>
 				<p><b>系统简介</b>：本系统是基于zheng框架adminUI和common,实现对线缆商品的库存管理功能。</p><br/>
 				<p><h4>系统功能概述：</h4></p>
 				<p><b>订单管理</b>：提供生成订货单和销售单、订单列表查看、订单详情功能。</p>
